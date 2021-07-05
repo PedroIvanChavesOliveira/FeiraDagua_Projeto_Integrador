@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_search_20"
+        android:title="@string/string_search_title"/>
+    <item
+        android:id="@+id/shopCart"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_shopping_cart_20"
+        android:title="@string/string_cart_title"/>
+    <item
+        android:id="@+id/profileUser"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_20"
+        android:title="@string/string_profile_title"/>
+</menu>

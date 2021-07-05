@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".view.activitys.ExtraInfosActivity"
+        android:background="@color/backgroundColor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cartShopCard"
+            style="@style/CardDefault"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/camera_icon"
+                    android:scaleType="centerCrop"
+                    app:civ_border_color="@color/backgroundColor"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvNameTitle"/>
+
+                <TextView
+                    android:id="@+id/tvNameTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_name_title"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivProfile"
+                    app:layout_constraintBottom_toTopOf="@id/tvNameValue"/>
+
+                <TextView
+                    android:id="@+id/tvNameValue"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_name_not_found"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameTitle"
+                    app:layout_constraintBottom_toTopOf="@id/tvEmailTitle"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvEmailTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_email_title"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameValue"
+                    app:layout_constraintBottom_toTopOf="@id/tvEmailValue"/>
+
+                <TextView
+                    android:id="@+id/tvEmailValue"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_email_not_found"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmailTitle"
+                    app:layout_constraintBottom_toTopOf="@id/tvCellPhoneTitle"
+                    app:layout_constraintEnd_toEndOf="@id/tvNameValue"/>
+
+                <TextView
+                    android:id="@+id/tvCellPhoneTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_cellphone_title"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmailValue"
+                    app:layout_constraintBottom_toTopOf="@id/tvCellPhoneValue"/>
+
+                <TextView
+                    android:id="@+id/tvCellPhoneValue"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_cellphone_not_found"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvCellPhoneTitle"
+                    app:layout_constraintBottom_toTopOf="@id/tvAdressTitle"
+                    app:layout_constraintEnd_toEndOf="@id/tvNameValue"/>
+
+                <TextView
+                    android:id="@+id/tvAdressTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_adress_title"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvCellPhoneValue"
+                    app:layout_constraintBottom_toTopOf="@id/tvAdressValue"/>
+
+                <TextView
+                    android:id="@+id/tvAdressValue"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_adress_not_found"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvAdressTitle"
+                    app:layout_constraintBottom_toTopOf="@id/btEditProfile"
+                    app:layout_constraintEnd_toEndOf="@id/tvNameValue"/>
+
+                <Button
+                    android:id="@+id/btEditProfile"
+                    style="@style/ButtonDefault"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/string_update_profile_button"
+                    app:layout_constraintStart_toStartOf="@id/tvNameTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvAdressValue"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

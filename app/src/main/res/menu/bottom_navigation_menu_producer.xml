@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/myOrders"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_assignment_20"
+        android:title="@string/string_my_orders_title"/>
+    <item
+        android:id="@+id/profileProducer"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_20"
+        android:title="@string/string_profile_title"/>
+</menu>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".view.activitys.ExtraInfosActivity"
+        android:background="@color/backgroundColor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cartShopCard"
+            style="@style/CardDefault"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvYourCartTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_your_cart_title"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/rvCart"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    tools:listitem="@layout/recycler_view_cart_products"
+                    tools:itemCount="2"
+                    app:layout_constraintTop_toBottomOf="@id/tvYourCartTitle"
+                    app:layout_constraintStart_toStartOf="@+id/tvYourCartTitle"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvTotalTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_total_title"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvCart"
+                    app:layout_constraintBottom_toTopOf="@id/btFinish"
+                    app:layout_constraintEnd_toStartOf="@id/tvTotalValue"/>
+
+                <TextView
+                    android:id="@+id/tvTotalValue"
+                    style="@style/TextViewTitleDefault"
+                    android:text="R$ 00,00"
+                    android:layout_marginEnd="10dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toEndOf="@id/tvTotalTitle"
+                    app:layout_constraintEnd_toEndOf="@id/rvCart"
+                    app:layout_constraintTop_toTopOf="@id/tvTotalTitle"
+                    app:layout_constraintBottom_toBottomOf="@id/tvTotalTitle"/>
+
+                <Button
+                    android:id="@+id/btFinish"
+                    style="@style/ButtonDefault"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/string_next_button"
+                    app:layout_constraintStart_toStartOf="@id/tvYourCartTitle"
+                    app:layout_constraintEnd_toEndOf="@id/rvCart"
+                    app:layout_constraintTop_toBottomOf="@id/tvTotalTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

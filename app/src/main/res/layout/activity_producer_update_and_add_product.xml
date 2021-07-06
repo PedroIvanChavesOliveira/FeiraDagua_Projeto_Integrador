@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".view.activitys.producer.ProducerUpdateAndAddProductActivity"
+        android:background="@color/backgroundColor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardUpdateAndAdd"
+            style="@style/CardDefault"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProductUpdateAndAdd"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/camera_icon"
+                    android:scaleType="centerCrop"
+                    app:civ_border_color="@color/backgroundColor"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductNameTitleUpdate"/>
+
+                <TextView
+                    android:id="@+id/tvProductNameTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/string_product_name_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivProductUpdateAndAdd"
+                    app:layout_constraintBottom_toTopOf="@id/tilProductNameUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductNameUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_product_name_hint"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvDescriptionTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietProductNameUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="phone"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvDescriptionTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_product_description_title_update"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductNameUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilDescriptionUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilDescriptionUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_product_description_hint"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvDescriptionTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductValueTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietDescriptionUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="phone"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvProductValueTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_product_price_title_update"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilDescriptionUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilProductValueUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilProductValueUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_product_price_hint"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductValueTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/btConfirmUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietProductValueUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="phone"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btConfirmUpdate"
+                    style="@style/ButtonDefault"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/string_update_data"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilProductNameUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductValueUpdate"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

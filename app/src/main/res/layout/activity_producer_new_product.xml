@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activitys.producer.ProducerNewProductActivity"
+        android:background="@color/backgroundColor">
+
+        <Button
+            android:id="@+id/btNewProduct"
+            style="@style/ButtonDefault"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/string_new_product"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rvNewProducts"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNewProducts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            tools:listitem="@layout/recycler_view_products_update"
+            tools:itemCount="2"
+            app:layout_constraintTop_toBottomOf="@id/btNewProduct"
+            app:layout_constraintStart_toStartOf="@+id/btNewProduct"
+            app:layout_constraintEnd_toEndOf="@+id/btNewProduct"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

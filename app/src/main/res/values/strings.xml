@@ -71,4 +71,13 @@
     <string name="string_product_name_title">Nome do Produto</string>
     <string name="string_add_to_cart_button">Adicionar ao Carrinho</string>
     <string name="string_update_data">Atualizar Dados</string>
+    <string name="string_client_title">Cliente</string>
+    <string name="string_accept_order_button">Aceitar Pedido</string>
+    <string name="string_delivery_title_order_details">Entrega</string>
+    <string name="string_new_product">Novo Produto</string>
+    <string name="string_product_name_hint">Digite o nome do produto</string>
+    <string name="string_product_description_title_update">Descrição do produto</string>
+    <string name="string_product_description_hint">Digite a descrição do produto</string>
+    <string name="string_product_price_title_update">Preço do Produto</string>
+    <string name="string_product_price_hint">Digite o preço do produto</string>
 </resources>

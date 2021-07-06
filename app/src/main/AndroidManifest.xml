@@ -9,19 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FeiraDagua">
-        <activity android:name=".view.activitys.ProducerMenuActivity">
+        <activity android:name=".view.activitys.user.UserProductInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activitys.ExtraInfosProducerActivity">
+        <activity android:name=".view.activitys.user.UserUpdateProfileActivity" />
+        <activity android:name=".view.activitys.user.UserStoreInfosActivity" >
         </activity>
-        <activity android:name=".view.activitys.UserMenuActivity">
+        <activity android:name=".view.activitys.producer.ProducerMenuActivity">
         </activity>
-        <activity android:name=".view.activitys.ExtraInfosActivity" />
-        <activity android:name=".view.activitys.LoginActivity" />
-        <activity android:name=".view.activitys.SplashActivity" />
+        <activity android:name=".view.activitys.producer.ExtraInfosProducerActivity" />
+        <activity android:name=".view.activitys.user.UserMenuActivity" />
+        <activity android:name=".view.activitys.both.ExtraInfosActivity" />
+        <activity android:name=".view.activitys.both.LoginActivity" />
+        <activity android:name=".view.activitys.both.SplashActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".view.activitys.user.UserProductInfoActivity"
+        android:background="@color/backgroundColor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cartShopCard"
+            style="@style/CardProducts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/logo_feira_dagua_remove"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductNameTitle"/>
+
+                <TextView
+                    android:id="@+id/tvProductNameTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_product_name_title"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivProduct"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductNameValue"/>
+
+                <TextView
+                    android:id="@+id/tvProductNameValue"
+                    style="@style/TextViewSubTitleDefault"
+                    android:text="@string/string_product_description_not_found"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvProductNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductNameTitle"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductValue"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvProductValue"
+                    style="@style/TextViewTitleDefault"
+                    android:layout_width="wrap_content"
+                    android:text="R$ 00,00"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductNameValue"
+                    />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/productCountCard"
+                    style="@style/CardProductsCount"
+                    app:layout_constraintTop_toTopOf="@id/tvProductValue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/tvProductValue">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/tbSub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_horizontal_rule_24"
+                            android:background="@color/white"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvProductNumberValue"/>
+
+                        <TextView
+                            android:id="@+id/tvProductNumberValue"
+                            style="@style/TextViewSubTitleDefault"
+                            android:layout_width="wrap_content"
+                            android:text="0"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toEndOf="@+id/tbSub"
+                            app:layout_constraintTop_toTopOf="@id/tbSub"
+                            app:layout_constraintBottom_toBottomOf="@id/tbSub"
+                            app:layout_constraintEnd_toStartOf="@id/tbAdd"/>
+
+                        <ImageButton
+                            android:id="@+id/tbAdd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/ic_baseline_add_24"
+                            android:background="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/tvProductNumberValue"
+                            app:layout_constraintTop_toTopOf="@id/tvProductNumberValue"
+                            app:layout_constraintBottom_toBottomOf="@id/tvProductNumberValue"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <Button
+                    android:id="@+id/btAddToCart"
+                    style="@style/ButtonDefault"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/string_add_to_cart_button"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductValue"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

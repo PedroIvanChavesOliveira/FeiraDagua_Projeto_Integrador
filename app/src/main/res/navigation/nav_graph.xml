@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/splashActivity"
-        android:name="com.feiradagua.feiradagua.view.activitys.SplashActivity"
+        android:name="com.feiradagua.feiradagua.view.activitys.both.SplashActivity"
         android:label="activity_splash"
         tools:layout="@layout/activity_splash" />
 </navigation>

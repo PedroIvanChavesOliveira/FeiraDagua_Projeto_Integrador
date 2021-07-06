@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/backgroundColor"
-        tools:context=".view.activitys.ExtraInfosProducerActivity">
+        tools:context=".view.activitys.producer.ExtraInfosProducerActivity">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"

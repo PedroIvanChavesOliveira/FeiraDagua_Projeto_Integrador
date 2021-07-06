@@ -1,4 +1,4 @@
-package com.feiradagua.feiradagua.view.activitys
+package com.feiradagua.feiradagua.view.activitys.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.feiradagua.feiradagua">
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_feira_dagua_remove"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_feira_dagua_remove"
         android:supportsRtl="true"
         android:theme="@style/Theme.FeiraDagua">
-        <activity android:name=".view.activitys.ProducerMenuActivity">
+        <activity android:name=".view.activitys.both.CameraAndGalleryActivity"></activity>
+        <activity android:name=".view.activitys.producer.ProducerUpdateProfileActivity" />
+        <activity android:name=".view.activitys.producer.ProducerUpdateAndAddProductActivity" />
+        <activity android:name=".view.activitys.producer.ProducerNewProductActivity" />
+        <activity android:name=".view.activitys.producer.ProducerOrderDetailsActivity" />
+        <activity android:name=".view.activitys.user.UserProductInfoActivity" />
+        <activity android:name=".view.activitys.user.UserUpdateProfileActivity" />
+        <activity android:name=".view.activitys.user.UserStoreInfosActivity" />
+        <activity android:name=".view.activitys.producer.ProducerMenuActivity" />
+        <activity android:name=".view.activitys.producer.ExtraInfosProducerActivity" />
+        <activity android:name=".view.activitys.user.UserMenuActivity" />
+        <activity android:name=".view.activitys.both.ExtraInfosActivity"></activity>
+        <activity android:name=".view.activitys.both.LoginActivity" />
+        <activity android:name=".view.activitys.both.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activitys.ExtraInfosProducerActivity">
-        </activity>
-        <activity android:name=".view.activitys.UserMenuActivity">
-        </activity>
-        <activity android:name=".view.activitys.ExtraInfosActivity" />
-        <activity android:name=".view.activitys.LoginActivity" />
-        <activity android:name=".view.activitys.SplashActivity" />
     </application>
 
 </manifest>

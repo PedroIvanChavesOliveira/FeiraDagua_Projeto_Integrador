@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/backgroundColor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardUpdateProducerProfile"
+            style="@style/CardDefault"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfileUpdateProducer"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/camera_icon"
+                    android:scaleType="centerCrop"
+                    app:civ_border_color="@color/backgroundColor"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvCellTitleUpdateProducer"/>
+
+                <TextView
+                    android:id="@+id/tvCellTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/string_whatsapp_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivProfileUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilCellNumberUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCellNumberUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_whatsapp_number_hint"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvCepTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCellNumberUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="phone"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvCepTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_cep"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilCepUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCepUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_cep_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvCepTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvStreetTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCepUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvStreetTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_street_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilCepUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilStreetUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilStreetUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_street_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvStreetTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvDistrictTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietStreetUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvDistrictTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_district_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilStreetUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilDistrictUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilDistrictUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_district_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvDistrictTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvNumberTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietDistrictUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvNumberTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_number_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilDistrictUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilNumberUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNumberUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_number_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvNumberTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvComplementTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietNumberUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvComplementTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_complement_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilComplementUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilComplementUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_complement_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvComplementTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvCityTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietComplementUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvCityTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_city_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilComplementUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilCityUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCityUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_city_hint"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvCityTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvPresentationTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCityUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvPresentationTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_presentation_title"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@+id/tilCityUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilPresentationUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPresentationUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_presentation_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvPresentationTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietPresentationPresentationUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvDeliveryTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_delivery_title"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilPresentationUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/chipGroupDeliveryAreaUpdateProducer"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupDeliveryAreaUpdateProducer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvDeliveryTitleUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvPaymentTitleUpdateProducer">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisNorth"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_north"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisCenter"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_center"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisSouth"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_south"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisEast"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_east"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPalhoca"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_palhoca"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBiguacu"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_biguacu"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipImbituba"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_imbituba"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipGaropaba"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_garopaba"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:id="@+id/tvPaymentTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_payment_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupDeliveryAreaUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/chipGroupPaymentUpdateProducer"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupPaymentUpdateProducer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvPaymentTitleUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryPeriodTitleUpdateProducer">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPix"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_pix"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDebitCard"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_debit_card"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCreditCard"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_credit_card"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBankTransfer"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_bank_transfer"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:id="@+id/tvDeliveryPeriodTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_delivery_period_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupPaymentUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/chipGroupDeliveryPeriodUpdateProducer"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupDeliveryPeriodUpdateProducer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvDeliveryPeriodTitleUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/btContinueUpdateProducer">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSunday"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_d"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipMonday"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_s"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipThursday"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_t"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipWednesday"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_q"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTuesday"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_q"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFriday"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_s"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipWSaturday"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_s"/>
+                </com.google.android.material.chip.ChipGroup>
+
+                <Button
+                    android:id="@+id/btContinueUpdateProducer"
+                    style="@style/ButtonDefault"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/string_update_data"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupDeliveryPeriodUpdateProducer"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

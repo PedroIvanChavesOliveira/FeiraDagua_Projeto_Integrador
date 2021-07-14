@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/CardDefault"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/ibDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_baseline_delete_30"
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageButton
+                android:id="@+id/ibUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/ic_baseline_create_30"
+                android:background="@color/white"
+                app:layout_constraintStart_toEndOf="@id/ibDelete"
+                app:layout_constraintTop_toTopOf="@id/ibDelete"
+                app:layout_constraintBottom_toBottomOf="@id/ibDelete"
+                app:layout_constraintEnd_toStartOf="@id/tvProducerNameTitle"/>
+
+            <TextView
+                android:id="@+id/tvProducerNameTitle"
+                style="@style/TextViewTitleRecyclerView"
+                android:text="Empresa sem nome"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/ibUpdate"
+                app:layout_constraintTop_toTopOf="@id/ivStore"
+                app:layout_constraintBottom_toTopOf="@id/tvProducerCategoryTitle"/>
+
+            <TextView
+                android:id="@+id/tvProducerCategoryTitle"
+                style="@style/TextViewTitleRecyclerView"
+                android:text="Sem categorias"
+                app:layout_constraintStart_toStartOf="@id/tvProducerNameTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvProducerNameTitle"
+                app:layout_constraintBottom_toBottomOf="@id/ivStore"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivStore"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/logo_feira_dagua_remove"
+                android:scaleType="centerCrop"
+                app:civ_border_color="@color/backgroundColor"
+                app:civ_border_width="1dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

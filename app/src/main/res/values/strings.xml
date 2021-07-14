@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FeiraDagua</string>
+    <string name="app_name">Feira D\'água</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="string_client">Cliente</string>
@@ -65,4 +65,35 @@
     <string name="string_delivery_area_title">Área de Entrega</string>
     <string name="string_update_products">Atualizar Produtos</string>
     <string name="string_pending_orders_title">Pedidos Pendentes</string>
+    <string name="string_products_tabLayout">Produtos</string>
+    <string name="string_about_us_tabLayout">Sobre Nós</string>
+    <string name="string_product_description_not_found">Descrição do produto não encontrada</string>
+    <string name="string_product_name_title">Nome do Produto</string>
+    <string name="string_add_to_cart_button">Adicionar ao Carrinho</string>
+    <string name="string_update_data">Atualizar Dados</string>
+    <string name="string_client_title">Cliente</string>
+    <string name="string_accept_order_button">Aceitar Pedido</string>
+    <string name="string_delivery_title_order_details">Entrega</string>
+    <string name="string_new_product">Novo Produto</string>
+    <string name="string_product_name_hint">Digite o nome do produto</string>
+    <string name="string_product_description_title_update">Descrição do produto</string>
+    <string name="string_product_description_hint">Digite a descrição do produto</string>
+    <string name="string_product_price_title_update">Preço do Produto</string>
+    <string name="string_product_price_hint">Digite o preço do produto</string>
+
+    <string name="string_mask_cep">#####-###</string>
+    <string name="string_mask_cellphone">(##) #####-####</string>
+    <string name="string_mask_uf">##</string>
+    <string name="string_error_message">O campo %1$s é obrigatório</string>
+    <string name="string_cellphone">Celular</string>
+    <string name="string_cep_error">CEP</string>
+    <string name="string_city">Cidade</string>
+    <string name="string_district">Bairro</string>
+    <string name="string_number">Número</string>
+    <string name="string_street">Logradouro</string>
+    <string name="string_uf_title">Qual a UF do seu Estado?</string>
+    <string name="string_uf_hint">Informe a UF do seu Estado</string>
+    <string name="string_uf">UF</string>
+    <string name="string_gallery">Galeria</string>
+    <string name="string_take_photo">Tirar Foto</string>
 </resources>

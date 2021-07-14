@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".view.activitys.producer.ProducerOrderDetailsActivity"
+        android:background="@color/backgroundColor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/orderDetailsCard"
+            style="@style/CardDefault"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivClient"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/camera_icon"
+                    android:scaleType="centerCrop"
+                    app:civ_border_color="@color/backgroundColor"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvClientTitle"/>
+
+                <TextView
+                    android:id="@+id/tvClientTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_client_title"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivClient"
+                    app:layout_constraintBottom_toTopOf="@id/tvClientValue"/>
+
+                <TextView
+                    android:id="@+id/tvClientValue"
+                    style="@style/TextViewSubTitleDefault"
+                    android:text="Nome do Cliente"
+                    app:layout_constraintStart_toStartOf="@id/tvClientTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvClientTitle"
+                    app:layout_constraintBottom_toTopOf="@id/rvOrderDetails"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOrderDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    tools:listitem="@layout/recycler_view_cart_products"
+                    tools:itemCount="2"
+                    app:layout_constraintTop_toBottomOf="@id/tvClientValue"
+                    app:layout_constraintStart_toStartOf="@+id/tvClientTitle"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvTotalTitleOrderDetails"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_total_title"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvOrderDetails"
+                    app:layout_constraintBottom_toTopOf="@id/tvTotalTitleOrderDetails"
+                    app:layout_constraintEnd_toStartOf="@id/tvTotalValueOrderDetails"/>
+
+                <TextView
+                    android:id="@+id/tvTotalValueOrderDetails"
+                    style="@style/TextViewTitleDefault"
+                    android:text="R$ 00,00"
+                    android:layout_marginEnd="10dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toEndOf="@id/tvTotalTitleOrderDetails"
+                    app:layout_constraintEnd_toEndOf="@id/rvOrderDetails"
+                    app:layout_constraintTop_toTopOf="@id/tvTotalTitleOrderDetails"
+                    app:layout_constraintBottom_toBottomOf="@id/tvTotalTitleOrderDetails"/>
+
+                <TextView
+                    android:id="@+id/tvDateTitleOrderDetails"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_delivery_title_order_details"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTotalTitleOrderDetails"
+                    app:layout_constraintBottom_toTopOf="@id/btAcceptOrder"
+                    app:layout_constraintEnd_toStartOf="@id/tvDateValueOrderDetails"/>
+
+                <TextView
+                    android:id="@+id/tvDateValueOrderDetails"
+                    style="@style/TextViewTitleDefault"
+                    android:text="28/05/21"
+                    android:layout_marginEnd="10dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toEndOf="@id/tvDateTitleOrderDetails"
+                    app:layout_constraintEnd_toEndOf="@id/rvOrderDetails"
+                    app:layout_constraintTop_toTopOf="@id/tvDateTitleOrderDetails"
+                    app:layout_constraintBottom_toBottomOf="@id/tvDateTitleOrderDetails"/>
+
+                <Button
+                    android:id="@+id/btAcceptOrder"
+                    style="@style/ButtonDefault"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/string_accept_order_button"
+                    app:layout_constraintStart_toStartOf="@id/tvClientTitle"
+                    app:layout_constraintEnd_toEndOf="@id/rvOrderDetails"
+                    app:layout_constraintTop_toBottomOf="@id/tvDateTitleOrderDetails"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".view.activitys.ExtraInfosActivity"
+        tools:context=".view.activitys.both.ExtraInfosActivity"
         android:background="@color/backgroundColor">
 
         <com.google.android.material.card.MaterialCardView
@@ -52,7 +52,7 @@
 
                 <TextView
                     android:id="@+id/tvNameValue"
-                    style="@style/TextViewTitleDefault"
+                    style="@style/TextViewSubTitleDefault"
                     android:text="@string/string_name_not_found"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
@@ -72,7 +72,7 @@
 
                 <TextView
                     android:id="@+id/tvEmailValue"
-                    style="@style/TextViewTitleDefault"
+                    style="@style/TextViewSubTitleDefault"
                     android:text="@string/string_email_not_found"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
@@ -91,7 +91,7 @@
 
                 <TextView
                     android:id="@+id/tvCellPhoneValue"
-                    style="@style/TextViewTitleDefault"
+                    style="@style/TextViewSubTitleDefault"
                     android:text="@string/string_cellphone_not_found"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
@@ -110,7 +110,7 @@
 
                 <TextView
                     android:id="@+id/tvAdressValue"
-                    style="@style/TextViewTitleDefault"
+                    style="@style/TextViewSubTitleDefault"
                     android:text="@string/string_adress_not_found"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/tvNameTitle"

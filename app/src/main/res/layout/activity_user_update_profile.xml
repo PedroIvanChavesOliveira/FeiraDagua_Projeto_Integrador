@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".view.activitys.both.ExtraInfosActivity"
+        android:background="@color/backgroundColor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            style="@style/CardDefault"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfileUpdate"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/camera_icon"
+                    android:scaleType="centerCrop"
+                    app:civ_border_color="@color/backgroundColor"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvCellTitleUpdate"/>
+
+                <TextView
+                    android:id="@+id/tvCellTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/string_whatsapp_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivProfileUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilCellNumberUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCellNumberUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_whatsapp_number_hint"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvCepTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCellNumberUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="phone"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvCepTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_cep"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilCepUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCepUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_cep_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvCepTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tvStreetTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCepUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvStreetTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_street_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilCepUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilStreetUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilStreetUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_street_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvStreetTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tvDistrictTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietStreetUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvDistrictTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_district_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilStreetUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilDistrictUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilDistrictUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_district_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvDistrictTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tvNumberTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietDistrictUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvNumberTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_number_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilDistrictUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilNumberUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNumberUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_number_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvNumberTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tvComplementTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietNumberUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvComplementTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_complement_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilComplementUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilComplementUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_complement_hint"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvComplementTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tvCityTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietComplementUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvCityTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_city_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilComplementUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilCityUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCityUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_city_hint"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvCityTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/btContinueUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCityUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btContinueUpdate"
+                    style="@style/ButtonDefault"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/string_update_data"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilCityUpdate"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

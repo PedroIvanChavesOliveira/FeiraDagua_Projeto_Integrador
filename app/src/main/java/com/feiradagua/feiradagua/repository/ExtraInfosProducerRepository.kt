@@ -1,0 +1,4 @@
+package com.feiradagua.feiradagua.repository
+
+class ExtraInfosProducerRepository {
+}

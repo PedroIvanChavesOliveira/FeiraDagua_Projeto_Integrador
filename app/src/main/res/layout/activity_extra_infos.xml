@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:checkedButton="@+id/rbUser"
+                    android:checkedButton="@id/rbUser"
                     app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
                     app:layout_constraintTop_toBottomOf="@id/tvOptionTitle"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -108,6 +108,7 @@
                         android:id="@+id/tietCellNumber"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="phone"
+                        android:tag="@string/string_whatsapp_number_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,6 +134,7 @@
                         android:id="@+id/tietCep"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
+                        android:tag="@string/string_cep_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -158,6 +160,7 @@
                         android:id="@+id/tietStreet"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
+                        android:tag="@string/string_street_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -183,6 +186,7 @@
                         android:id="@+id/tietDistrict"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
+                        android:tag="@string/string_district_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,6 +212,7 @@
                         android:id="@+id/tietNumber"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
+                        android:tag="@string/string_number_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -252,12 +257,39 @@
                     app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
                     app:layout_constraintTop_toBottomOf="@id/tvCityTitle"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumber"
-                    app:layout_constraintBottom_toTopOf="@id/btContinue">
+                    app:layout_constraintBottom_toTopOf="@id/tvUfTitle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietCity"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
+                        android:tag="@string/string_city_hint"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvUfTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_uf_title"
+                    app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tilCity"
+                    app:layout_constraintBottom_toTopOf="@id/tilUf"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUf"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_uf_hint"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvUfTitle"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumber"
+                    app:layout_constraintBottom_toTopOf="@id/btContinue">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietUf"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        android:tag="@string/string_uf_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -266,9 +298,10 @@
                     style="@style/ButtonDefault"
                     android:layout_marginBottom="30dp"
                     android:text="@string/string_next_button"
+                    android:enabled="false"
                     app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumber"
-                    app:layout_constraintTop_toBottomOf="@id/tilCity"
+                    app:layout_constraintTop_toBottomOf="@id/tilUf"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

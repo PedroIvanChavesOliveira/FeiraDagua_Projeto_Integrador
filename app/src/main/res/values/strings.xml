@@ -96,4 +96,5 @@
     <string name="string_uf">UF</string>
     <string name="string_gallery">Galeria</string>
     <string name="string_take_photo">Tirar Foto</string>
+    <string name="string_log_out_button">Sair</string>
 </resources>

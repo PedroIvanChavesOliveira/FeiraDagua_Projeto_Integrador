@@ -8,8 +8,8 @@ class Producer (
     var type: Int? = 0,
     var adress: String = "",
     var description: String = "",
-    var deliveryDate: String = "",
-    var deliveryLocation: String = "",
-    var payment: String = "",
-    var products: MutableList<Products> = mutableListOf()
+    var deliveryDate: MutableList<String> = mutableListOf(),
+    var deliveryLocation: MutableList<String> = mutableListOf(),
+    var payment: MutableList<String> = mutableListOf(),
+    var products: MutableList<Products>? = mutableListOf()
 )

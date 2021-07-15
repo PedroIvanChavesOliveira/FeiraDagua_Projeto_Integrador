@@ -18,6 +18,7 @@ class Constants {
 
     object Intents {
         const val POSITION = "Position"
+        const val EXTRA_INFOS = "Extra Infos"
     }
 
     object CameraX {

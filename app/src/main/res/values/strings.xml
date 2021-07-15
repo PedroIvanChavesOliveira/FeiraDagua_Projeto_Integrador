@@ -97,4 +97,5 @@
     <string name="string_gallery">Galeria</string>
     <string name="string_take_photo">Tirar Foto</string>
     <string name="string_log_out_button">Sair</string>
+    <string name="string_delivery_days_title">Dias de Entrega</string>
 </resources>

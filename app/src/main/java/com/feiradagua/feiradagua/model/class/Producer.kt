@@ -1,6 +1,7 @@
 package com.feiradagua.feiradagua.model.`class`
 
 class Producer (
+    var uid: String = "",
     var name: String? = "",
     val email: String? = "",
     var phone: String? = "",
@@ -11,5 +12,6 @@ class Producer (
     var deliveryDate: MutableList<String> = mutableListOf(),
     var deliveryLocation: MutableList<String> = mutableListOf(),
     var payment: MutableList<String> = mutableListOf(),
-    var products: MutableList<Products>? = mutableListOf()
+    var products: MutableList<String>? = mutableListOf(),
+    var orders: MutableList<String> = mutableListOf()
 )

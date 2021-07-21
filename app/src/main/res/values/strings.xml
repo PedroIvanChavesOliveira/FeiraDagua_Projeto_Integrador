@@ -98,4 +98,5 @@
     <string name="string_take_photo">Tirar Foto</string>
     <string name="string_log_out_button">Sair</string>
     <string name="string_delivery_days_title">Dias de Entrega</string>
+    <string name="string_order_not_found">Nenhum Pedido Registrado</string>
 </resources>

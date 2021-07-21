@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityProducerMenuBinding
+import com.feiradagua.feiradagua.model.`class`.Order
 import com.feiradagua.feiradagua.model.`class`.Producer
+import com.feiradagua.feiradagua.model.`class`.Products
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerMyOrdersFragment
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerProfileFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserProfileFragment
@@ -20,6 +22,8 @@ class ProducerMenuActivity : AppCompatActivity() {
 
     companion object {
         lateinit var PRODUCER: Producer
+        var PRODUCTS: MutableList<Products>? = null
+        var ORDERS: MutableList<Order>? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +38,19 @@ class ProducerMenuActivity : AppCompatActivity() {
 
     private fun setProducerInfos() {
         viewModelProducerMenu.getProducerDB()
+        viewModelProducerMenu.getOrdersDB()
+        viewModelProducerMenu.getProductsDB()
         viewModelProducerMenu.producerInfo.observe(this) { producer ->
             producer?.let {
                 PRODUCER = it
-                initFragments(ProducerMyOrdersFragment())
-                startNavBar()
+                viewModelProducerMenu.products.observe(this) { products ->
+                    PRODUCTS = products
+                    viewModelProducerMenu.orders.observe(this) { orders ->
+                        ORDERS = orders
+                        initFragments(ProducerMyOrdersFragment())
+                        startNavBar()
+                    }
+                }
             }
         }
     }

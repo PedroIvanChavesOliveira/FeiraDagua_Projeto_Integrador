@@ -6,6 +6,7 @@ import com.feiradagua.feiradagua.databinding.ActivityProducerUpdateProfileBindin
 
 class ProducerUpdateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProducerUpdateProfileBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProducerUpdateProfileBinding.inflate(layoutInflater)

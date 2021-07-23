@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityProducerOrderDetailsBinding
 import com.feiradagua.feiradagua.model.`class`.Order
 import com.feiradagua.feiradagua.model.`class`.Products
@@ -35,7 +36,7 @@ class ProducerOrderDetailsActivity : AppCompatActivity() {
                 }
             }
 
-            Glide.with(this).load(infos.userPhoto).into(binding.ivClient)
+            Glide.with(this).load(infos.userPhoto).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivClient)
             binding.tvClientValue.text = infos.username
             binding.tvDateValueOrderDetails.text = infos.deliveryDate
             binding.tvTotalValueOrderDetails.text = infos.totalPrice.toString()

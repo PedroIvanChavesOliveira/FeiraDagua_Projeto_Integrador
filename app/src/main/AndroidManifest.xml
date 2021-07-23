@@ -14,7 +14,6 @@
         <activity android:name=".view.activitys.both.CameraAndGalleryActivity" />
         <activity android:name=".view.activitys.producer.ProducerUpdateProfileActivity" />
         <activity android:name=".view.activitys.producer.ProducerUpdateAndAddProductActivity" />
-        <activity android:name=".view.activitys.producer.ProducerNewProductActivity" />
         <activity android:name=".view.activitys.producer.ProducerOrderDetailsActivity" />
         <activity android:name=".view.activitys.user.UserProductInfoActivity" />
         <activity android:name=".view.activitys.user.UserUpdateProfileActivity" />

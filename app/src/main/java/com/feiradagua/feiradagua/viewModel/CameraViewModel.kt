@@ -18,4 +18,10 @@ class CameraViewModel: ViewModel() {
             getUri.postValue(repository.putFileToStorage(uri))
         }
     }
+
+    fun putFileToStorageProducts(uri: Uri, id: String) {
+        viewModelScope.launch {
+            getUri.postValue(repository.putFileToStorageProducts(uri, id))
+        }
+    }
 }

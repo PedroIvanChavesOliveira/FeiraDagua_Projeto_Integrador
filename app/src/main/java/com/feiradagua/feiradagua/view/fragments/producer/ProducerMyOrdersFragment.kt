@@ -35,15 +35,19 @@ class ProducerMyOrdersFragment : Fragment() {
 
     private fun setUpOrdersRecyclerView() {
         ProducerMenuActivity.ORDERS?.let { orders ->
-            binding.rvStoreHome.apply {
-                layoutManager = LinearLayoutManager(activity)
-                activity?.let {
-                    adapter = ProducerOrdersMainAdapter(orders) { orderInfo ->
-                        startProducerOrdersDetails(orderInfo)
+            if(orders.isNotEmpty()) {
+                binding.rvStoreHome.apply {
+                    layoutManager = LinearLayoutManager(activity)
+                    activity?.let {
+                        adapter = ProducerOrdersMainAdapter(orders) { orderInfo ->
+                            startProducerOrdersDetails(orderInfo)
+                        }
                     }
                 }
+                binding.tvOrderNotFound.isVisible = false
+            }else {
+                binding.rvStoreHome.isVisible = false
             }
-            binding.tvOrderNotFound.isVisible = false
         }?: run {
             binding.rvStoreHome.isVisible = false
         }

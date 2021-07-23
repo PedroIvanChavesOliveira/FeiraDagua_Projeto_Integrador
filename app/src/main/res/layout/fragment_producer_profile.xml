@@ -331,29 +331,30 @@
                     app:layout_constraintStart_toStartOf="@id/tvContactTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/chipGroupDeliveryPeriod"
-                    app:layout_constraintBottom_toTopOf="@id/btEditProducts"/>
-
-                <Button
-                    android:id="@+id/btEditProducts"
-                    style="@style/ButtonDefault"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="@string/string_update_products"
-                    app:layout_constraintStart_toStartOf="@id/tvContactTitle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btEditProfile"
                     app:layout_constraintBottom_toTopOf="@id/btLogOutProfile"/>
+
+<!--                <Button-->
+<!--                    android:id="@+id/btEditProducts"-->
+<!--                    style="@style/ButtonDefault"-->
+<!--                    android:layout_marginBottom="20dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:text="@string/string_update_products"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/tvContactTitle"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/btEditProfile"-->
+<!--                    app:layout_constraintBottom_toTopOf="@id/btLogOutProfile"/>-->
 
                 <Button
                     android:id="@+id/btLogOutProfile"
                     style="@style/ButtonDefault"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:layout_marginEnd="10dp"
                     android:text="@string/string_log_out_button"
                     app:layout_constraintStart_toStartOf="@id/tvContactTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btEditProducts"
+                    app:layout_constraintTop_toBottomOf="@id/btEditProfile"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

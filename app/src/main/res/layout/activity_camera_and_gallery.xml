@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".view.activitys.both.CameraAndGalleryActivity">
 
+    <ImageButton
+        android:id="@+id/ibChangeCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_cameraswitch_24"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/cameraCaptureButton"
+        app:layout_constraintBottom_toBottomOf="@id/cameraCaptureButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cameraCaptureButton"
+        />
     <Button
         android:id="@+id/cameraCaptureButton"
         style="@style/ButtonDefault"
@@ -14,7 +26,7 @@
         android:layout_marginStart="20dp"
         android:scaleType="fitCenter"
         android:text="@string/string_take_photo"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ibChangeCamera"
         app:layout_constraintEnd_toStartOf="@+id/btGallery"
         app:layout_constraintBottom_toBottomOf="parent"
         android:elevation="2dp" />

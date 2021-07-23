@@ -60,7 +60,7 @@ class ExtraInfosActivity : AppCompatActivity() {
         viewModelExtraInfos.getUserPhoto()
         viewModelExtraInfos.userPhoto.observe(this) {
             it?.let {
-                Glide.with(this).load(it).into(binding.ivProfile)
+                Glide.with(this).load(it).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProfile)
             }
         }
     }

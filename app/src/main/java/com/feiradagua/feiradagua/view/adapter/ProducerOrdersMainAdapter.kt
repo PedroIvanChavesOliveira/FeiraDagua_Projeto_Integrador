@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.RecyclerViewPendingsOrdersBinding
 import com.feiradagua.feiradagua.model.`class`.Order
 
@@ -27,7 +28,7 @@ class ProducerOrdersMainAdapter(
 
     class ViewHolder(val binding: RecyclerViewPendingsOrdersBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order, onCardClick: (Order) -> Unit) {
-            Glide.with(itemView).load(order.userPhoto).into(binding.ivUser)
+            Glide.with(itemView).load(order.userPhoto).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivUser)
             binding.tvProducerNameTitle.text = order.username
             binding.tvDeliveryDateTitle.text = order.deliveryDate
             binding.tvValueTitle.text = order.totalPrice.toString()

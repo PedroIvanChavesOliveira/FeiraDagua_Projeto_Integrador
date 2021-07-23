@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.FragmentProducerProfileBinding
 import com.feiradagua.feiradagua.utils.checkByTag
 import com.feiradagua.feiradagua.view.activitys.both.LoginActivity
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
+import com.feiradagua.feiradagua.view.activitys.producer.ProducerUpdateProfileActivity
 import com.feiradagua.feiradagua.viewModel.ProducerProfileViewModel
 
 class ProducerProfileFragment : Fragment() {
@@ -36,6 +36,14 @@ class ProducerProfileFragment : Fragment() {
         binding.btLogOutProfile.setOnClickListener {
             viewModelProducerProfile.signOut()
             startActivity(Intent(activity, LoginActivity::class.java))
+        }
+
+//        binding.btEditProducts.setOnClickListener {
+//            startActivity(Intent(activity, ProducerNewProductActivity::class.java))
+//        }
+
+        binding.btEditProfile.setOnClickListener {
+            startActivity(Intent(activity, ProducerUpdateProfileActivity::class.java))
         }
     }
 

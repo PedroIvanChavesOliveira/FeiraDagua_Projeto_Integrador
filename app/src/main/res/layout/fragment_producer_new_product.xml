@@ -6,12 +6,10 @@
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.activitys.producer.ProducerNewProductActivity"
+        android:layout_height="wrap_content"
         android:background="@color/backgroundColor">
 
         <Button
@@ -25,6 +23,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/rvNewProducts"/>
+
+        <TextView
+            android:id="@+id/tvProductNotFound"
+            style="@style/TextViewTitleDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_product_not_found"
+            android:textColor="@color/white"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="@id/btNewProduct"
+            app:layout_constraintTop_toBottomOf="@id/btNewProduct"
+            app:layout_constraintEnd_toEndOf="@id/btNewProduct"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNewProducts"

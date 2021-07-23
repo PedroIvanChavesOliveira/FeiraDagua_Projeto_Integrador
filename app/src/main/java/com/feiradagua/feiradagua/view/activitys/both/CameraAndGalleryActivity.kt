@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -19,10 +20,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityCameraAndGalleryBinding
+import com.feiradagua.feiradagua.utils.Constants
 import com.feiradagua.feiradagua.utils.Constants.CameraX.PHOTO_URI
 import com.feiradagua.feiradagua.utils.Constants.CameraX.REQUEST_CODE_PERMISSIONS
 import com.feiradagua.feiradagua.utils.Constants.CameraX.REQUIRED_PERMISSIONS
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
+import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_ID
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerUpdateAndAddProductActivity
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerUpdateProfileActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserUpdateProfileActivity
@@ -38,6 +41,8 @@ class CameraAndGalleryActivity : AppCompatActivity() {
     private var viewModelCamera = CameraViewModel()
     private var position: Int = 0
     private var imageCapture: ImageCapture? = null
+    private var cameraChange = 0
+    private var getProductId = ""
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
 
@@ -48,7 +53,12 @@ class CameraAndGalleryActivity : AppCompatActivity() {
 
         viewModelCamera = ViewModelProvider(this).get(CameraViewModel::class.java)
         position = intent.getIntExtra(POSITION, 0)
+        getProductId = intent.getStringExtra(PRODUCT_ID).toString()
 
+        binding.ibChangeCamera.setOnClickListener {
+            cameraChange = if(cameraChange == 0) { 1 } else { 0 }
+            startCamera()
+        }
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -63,6 +73,21 @@ class CameraAndGalleryActivity : AppCompatActivity() {
         binding.btGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, 0)
+//            val resultLaunch = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result ->
+//                val data: Intent? = result.data
+//                val targetUri = data?.data
+//                if (result.resultCode == Activity.RESULT_OK) {
+//                    try {
+//                        targetUri?.let {
+//                            addingPhotoToDB(it)
+//                        }
+//                    } catch (exception: FileNotFoundException) {
+//                        exception.printStackTrace()
+//                    }
+//                }
+//            }
+//
+//            resultLaunch.launch(intent)
         }
         outputDirectory = getOutputDirectory()
 
@@ -75,7 +100,10 @@ class CameraAndGalleryActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             try {
                 targetUri?.let {
-                    addingPhotoToDB(it)
+                    when(position) {
+                        1 -> { addingPhotoToDB(it) }
+                        2 -> { addingPhotoToProductsDB(it) }
+                    }
                 }
             } catch (exception: FileNotFoundException) {
                 exception.printStackTrace()
@@ -88,10 +116,7 @@ class CameraAndGalleryActivity : AppCompatActivity() {
         val imageCapture = imageCapture ?: return
 
         // Create time-stamped output file to hold the image
-        val photoFile = File(
-            outputDirectory,
-            "profilePhoto.jpg")
-
+        val photoFile = File(outputDirectory,"profilePhoto.jpg")
         // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
@@ -105,7 +130,11 @@ class CameraAndGalleryActivity : AppCompatActivity() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
-                    addingPhotoToDB(savedUri)
+                    when(position) {
+                        1 -> { addingPhotoToDB(savedUri) }
+                        2 -> { addingPhotoToProductsDB(savedUri) }
+                    }
+//                    addingPhotoToDB(savedUri)
 //                    Log.d(TAG, msg)
                 }
             })
@@ -113,7 +142,6 @@ class CameraAndGalleryActivity : AppCompatActivity() {
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
         cameraProviderFuture.addListener(Runnable {
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -129,18 +157,34 @@ class CameraAndGalleryActivity : AppCompatActivity() {
                 .build()
 
             // Select back camera as a default
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            if(cameraChange == 0) {
+                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-            try {
-                // Unbind use cases before rebinding
-                cameraProvider.unbindAll()
+                try {
+                    // Unbind use cases before rebinding
+                    cameraProvider.unbindAll()
 
-                // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture)
+                    // Bind use cases to camera
+                    cameraProvider.bindToLifecycle(
+                        this, cameraSelector, preview, imageCapture)
 
-            } catch(exc: Exception) {
+                } catch(exc: Exception) {
 //                Log.e(TAG, "Use case binding failed", exc)
+                }
+            }else {
+                val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+
+                try {
+                    // Unbind use cases before rebinding
+                    cameraProvider.unbindAll()
+
+                    // Bind use cases to camera
+                    cameraProvider.bindToLifecycle(
+                        this, cameraSelector, preview, imageCapture)
+
+                } catch(exc: Exception) {
+//                Log.e(TAG, "Use case binding failed", exc)
+                }
             }
 
         }, ContextCompat.getMainExecutor(this))
@@ -161,6 +205,7 @@ class CameraAndGalleryActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
         IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 startCamera()
@@ -182,6 +227,22 @@ class CameraAndGalleryActivity : AppCompatActivity() {
         val msg = "Foto salva com Sucesso!! Aguarde..."
 
         viewModelCamera.putFileToStorage(uri)
+        viewModelCamera.getUri.observe(this@CameraAndGalleryActivity) {
+//            when(position) {
+////                1 -> { startExtraInfos(uri) }
+//                2 -> { startUpdateUserProfile(uri) }
+//                3 -> { startUpdateProduct(uri) }
+//                4 -> { startUpdateProducerProfile(uri) }
+//            }
+            finish()
+        }
+        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun addingPhotoToProductsDB(uri: Uri) {
+        val msg = "Foto salva com Sucesso!! Aguarde..."
+
+        viewModelCamera.putFileToStorageProducts(uri, getProductId)
         viewModelCamera.getUri.observe(this@CameraAndGalleryActivity) {
 //            when(position) {
 ////                1 -> { startExtraInfos(uri) }

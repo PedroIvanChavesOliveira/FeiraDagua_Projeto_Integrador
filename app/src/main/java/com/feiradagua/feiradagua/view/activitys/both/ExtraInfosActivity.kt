@@ -148,15 +148,16 @@ class ExtraInfosActivity : AppCompatActivity() {
 
     private fun activatingButton(): Boolean {
         val isOk: Boolean
+        val cepValue = Mask.unmask(binding.tietCep.text.toString())
         if (isCellphoneOk && isCepOk && isStreetOk && isDistrictOk && isNumberOk && isCityOk && isUfOk) {
             binding.btContinue.isEnabled = true
             completedAdress = if(!binding.tietComplement.text.isNullOrEmpty()) {
                 "${binding.tietStreet.text}, ${binding.tietNumber.text}," +
                         " ${binding.tietComplement.text}, ${binding.tietDistrict.text}," +
-                        " ${binding.tietCity.text} - ${binding.tietUf.text}"
+                        " ${binding.tietCity.text} - ${binding.tietUf.text} - $cepValue"
             }else {
                 "${binding.tietStreet.text}, ${binding.tietNumber.text}," +
-                        " ${binding.tietDistrict.text}, ${binding.tietCity.text} - ${binding.tietUf.text}"
+                        " ${binding.tietDistrict.text}, ${binding.tietCity.text} - ${binding.tietUf.text} - $cepValue"
             }
             isOk = true
         } else {

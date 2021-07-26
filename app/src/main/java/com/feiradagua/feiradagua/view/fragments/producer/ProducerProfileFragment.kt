@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.FragmentProducerProfileBinding
 import com.feiradagua.feiradagua.utils.checkByTag
 import com.feiradagua.feiradagua.view.activitys.both.LoginActivity
@@ -17,7 +19,7 @@ import com.feiradagua.feiradagua.viewModel.ProducerProfileViewModel
 
 class ProducerProfileFragment : Fragment() {
     private lateinit var binding: FragmentProducerProfileBinding
-    private var viewModelProducerProfile = ProducerProfileViewModel()
+    private val viewModelProducerProfile: ProducerProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +31,6 @@ class ProducerProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelProducerProfile = ViewModelProvider(this).get(ProducerProfileViewModel::class.java)
 
         setProducerInfos()
 
@@ -38,19 +39,22 @@ class ProducerProfileFragment : Fragment() {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
 
-//        binding.btEditProducts.setOnClickListener {
-//            startActivity(Intent(activity, ProducerNewProductActivity::class.java))
-//        }
-
         binding.btEditProfile.setOnClickListener {
             startActivity(Intent(activity, ProducerUpdateProfileActivity::class.java))
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setChipsToFalse()
+        setProducerInfos()
+    }
+
     private fun setProducerInfos() {
         val producer = ProducerMenuActivity.PRODUCER
 
-        Glide.with(this).load(producer.photo).into(binding.ivProfile)
+        Glide.with(this).load(producer.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProfile)
+        binding.tvNameTitle.text = getString(R.string.string_name_title_profile, producer.name)
         binding.tvContactValue.text = producer.phone
         binding.tvAdressValue.text = producer.adress
         binding.tvPresentationValue.text = producer.description
@@ -63,6 +67,28 @@ class ProducerProfileFragment : Fragment() {
         producer.payment.forEach { loc ->
             getChipTagPayment(loc)
         }
+    }
+
+    private fun setChipsToFalse() {
+        binding.chipFlorianopolisCenter.isChecked = false
+        binding.chipFlorianopolisEast.isChecked = false
+        binding.chipFlorianopolisNorth.isChecked = false
+        binding.chipFlorianopolisSouth.isChecked = false
+        binding.chipBiguacu.isChecked = false
+        binding.chipPalhoca.isChecked = false
+        binding.chipGaropaba.isChecked = false
+        binding.chipImbituba.isChecked = false
+        binding.chipSunday.isChecked = false
+        binding.chipMonday.isChecked = false
+        binding.chipTuesday.isChecked = false
+        binding.chipWednesday.isChecked = false
+        binding.chipThursday.isChecked = false
+        binding.chipFriday.isChecked = false
+        binding.chipSaturday.isChecked = false
+        binding.chipPix.isChecked = false
+        binding.chipBankTransfer.isChecked = false
+        binding.chipDebitCard.isChecked = false
+        binding.chipCreditCard.isChecked = false
     }
 
     private fun getChipTagDeliveryLocation(tag: String) {

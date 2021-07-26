@@ -95,6 +95,7 @@
     <string name="string_uf_title">Qual a UF do seu Estado?</string>
     <string name="string_uf_hint">Informe a UF do seu Estado</string>
     <string name="string_uf">UF</string>
+    <string name="string_description">Descrição</string>
     <string name="string_gallery">Galeria</string>
     <string name="string_take_photo">Tirar Foto</string>
     <string name="string_log_out_button">Sair</string>
@@ -108,4 +109,7 @@
     <string name="string_snackbar_delete_done">Produto excluído com sucesso</string>
     <string name="string_my_products">Meus Produtos</string>
     <string name="string_product_not_found">Nenhum Produto Cadastrado!</string>
+    <string name="string_name_title_update">Qual o nome da sua empresa?</string>
+    <string name="string_name_hint">Digite o nome da sua empresa</string>
+    <string name="string_name_title_profile">Olá, %1$s!</string>
 </resources>

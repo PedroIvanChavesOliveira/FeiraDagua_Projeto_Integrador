@@ -46,6 +46,11 @@ class CameraAndGalleryActivity : AppCompatActivity() {
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
 
+    companion object {
+        var USER_PHOTO: String? = null
+        var PRODUCTS_PHOTO: String? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraAndGalleryBinding.inflate(layoutInflater)
@@ -228,6 +233,7 @@ class CameraAndGalleryActivity : AppCompatActivity() {
 
         viewModelCamera.putFileToStorage(uri)
         viewModelCamera.getUri.observe(this@CameraAndGalleryActivity) {
+            USER_PHOTO = it.toString()
 //            when(position) {
 ////                1 -> { startExtraInfos(uri) }
 //                2 -> { startUpdateUserProfile(uri) }
@@ -244,6 +250,7 @@ class CameraAndGalleryActivity : AppCompatActivity() {
 
         viewModelCamera.putFileToStorageProducts(uri, getProductId)
         viewModelCamera.getUri.observe(this@CameraAndGalleryActivity) {
+            PRODUCTS_PHOTO = it.toString()
 //            when(position) {
 ////                1 -> { startExtraInfos(uri) }
 //                2 -> { startUpdateUserProfile(uri) }

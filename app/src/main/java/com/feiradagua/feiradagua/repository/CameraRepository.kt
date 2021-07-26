@@ -1,5 +1,6 @@
 package com.feiradagua.feiradagua.repository
 
+import android.content.Context
 import android.net.Uri
 import com.feiradagua.feiradagua.model.`class`.Products
 import com.feiradagua.feiradagua.utils.Constants
@@ -10,7 +11,11 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import id.zelory.compressor.Compressor
 import kotlinx.coroutines.tasks.await
+import java.io.File
+import java.net.URI
+import kotlin.coroutines.coroutineContext
 
 class CameraRepository {
     private val firebaseStorageRef by lazy {
@@ -54,9 +59,5 @@ class CameraRepository {
                 productDB.document(id).set(product, SetOptions.merge()).await()
             }
         }
-//        }?: run {
-//            val product = Products(id = id, photo = uri.toString())
-//            productDB.document(id).set(product, SetOptions.merge()).await()
-//        }
     }
 }

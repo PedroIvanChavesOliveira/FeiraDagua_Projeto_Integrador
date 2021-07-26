@@ -5,6 +5,8 @@ import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.Products
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
+import java.io.File
+import java.io.InputStream
 import java.util.*
 
 fun generateRandomUUID(): String {

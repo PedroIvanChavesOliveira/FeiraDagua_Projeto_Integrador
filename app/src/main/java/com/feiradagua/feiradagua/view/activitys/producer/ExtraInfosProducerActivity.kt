@@ -36,7 +36,7 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
             viewModelExtraInfosProducer.setExtraInfosDB(
                     presentationMessage(), deliveryDateArray, deliveryLocationArray, paymentArray
             )
-            startProducerMenu()
+//            startProducerMenu()
         }
     }
 
@@ -47,12 +47,13 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
             binding.tietPresentationPresentation.text.toString()
         }
     }
-    private fun startProducerMenu() {
-        val intent = Intent(this, ProducerNewProductActivity::class.java)
-        intent.putExtra(EXTRA_INFOS, 1)
-        startActivity(intent)
-        finish()
-    }
+
+//    private fun startProducerMenu() {
+//        val intent = Intent(this, ProducerMenuActivity::class.java)
+//        intent.putExtra(EXTRA_INFOS, 1)
+//        startActivity(intent)
+//        finish()
+//    }
 
     private fun chipDeliveryDateSelection() {
         binding.chipSunday.setOnCheckedChangeListener { buttonView, isChecked ->

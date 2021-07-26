@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                         if(user.photoUrl != null) {
                             photo = user.photoUrl.toString()
                         }
-                        val setUser = User(user.displayName, user.email, user.phoneNumber, photo)
+                        val setUser = User(user.uid, user.displayName, user.email, user.phoneNumber, photo)
                         viewModelLogin.dbOk.observe(this) {doc ->
                             if(!doc.exists()) {
                                 viewModelLogin.addUserOnDataBase(setUser)

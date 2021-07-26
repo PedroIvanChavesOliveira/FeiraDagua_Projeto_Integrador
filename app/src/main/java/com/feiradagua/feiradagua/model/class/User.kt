@@ -1,6 +1,7 @@
 package com.feiradagua.feiradagua.model.`class`
 
 class User (
+    var uid: String = "",
     var name: String? = "",
     val email: String? = "",
     var phone: String? = "",

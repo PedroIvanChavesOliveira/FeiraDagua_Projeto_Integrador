@@ -64,7 +64,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietProductNameUpdate"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="phone"
+                        android:inputType="text"
+                        android:tag="@string/string_product_name_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +91,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietDescriptionUpdate"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="phone"
+                        android:inputType="text"
+                        android:tag="@string/string_product_description_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,7 +118,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietProductValueUpdate"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="phone"
+                        android:inputType="numberDecimal"
+                        android:tag="@string/string_product_price_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 

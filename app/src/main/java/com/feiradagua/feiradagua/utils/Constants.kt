@@ -10,6 +10,8 @@ class Constants {
     object Firebase {
         const val USER_COLLECTION = "Users"
         const val REGISTERED_COLLECTION = "Registered"
+        const val ORDERS_COLLECTION = "Orders"
+        const val PRODUCTS_COLLECTION = "Products"
     }
 
     object BuscaCepAPI {
@@ -18,7 +20,11 @@ class Constants {
 
     object Intents {
         const val POSITION = "Position"
-        const val EXTRA_INFOS = "Extra Infos"
+        const val EXTRA_INFOS = "ExtraInfos"
+        const val ORDER_DETAILS = "OrderDetails"
+        const val PRODUCT_UPDATE = "ProductUpdate"
+        const val PRODUCT_INFO = "ProductInfo"
+        const val PRODUCT_ID = "ProductId"
     }
 
     object CameraX {

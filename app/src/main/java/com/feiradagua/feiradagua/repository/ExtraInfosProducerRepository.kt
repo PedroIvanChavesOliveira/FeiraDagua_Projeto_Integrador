@@ -19,6 +19,6 @@ class ExtraInfosProducerRepository {
     }
 
     suspend fun setExtraInfosDB(description: String, deliveryDate: MutableList<String>, deliveryLocation: MutableList<String>, payment: MutableList<String>) {
-        userDB.update(mapOf("description" to description, "deliveryDate" to deliveryDate, "deliveryLocation" to deliveryLocation, "payment" to payment, "products" to mutableListOf(Products()))).await()
+        userDB.update(mapOf("description" to description, "deliveryDate" to deliveryDate, "deliveryLocation" to deliveryLocation, "payment" to payment)).await()
     }
 }

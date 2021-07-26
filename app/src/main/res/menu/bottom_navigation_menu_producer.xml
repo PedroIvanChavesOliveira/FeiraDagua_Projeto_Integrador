@@ -6,6 +6,12 @@
         android:icon="@drawable/ic_baseline_assignment_20"
         android:title="@string/string_my_orders_title"/>
     <item
+        android:id="@+id/myProducts"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_shopping_bag_20"
+        android:title="@string/string_my_products"
+        />
+    <item
         android:id="@+id/profileProducer"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_20"

@@ -46,19 +46,22 @@
             <TextView
                 android:id="@+id/tvProducerNameTitle"
                 style="@style/TextViewTitleRecyclerView"
-                android:text="Empresa sem nome"
+                android:text="Nome do Produto"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintStart_toEndOf="@id/ibUpdate"
                 app:layout_constraintTop_toTopOf="@id/ivStore"
-                app:layout_constraintBottom_toTopOf="@id/tvProducerCategoryTitle"/>
+                app:layout_constraintBottom_toTopOf="@id/tvProducerCategoryTitle"
+                app:layout_constraintEnd_toStartOf="@id/ivStore"/>
 
             <TextView
                 android:id="@+id/tvProducerCategoryTitle"
-                style="@style/TextViewTitleRecyclerView"
-                android:text="Sem categorias"
+                style="@style/TextViewSubTitleRecyclerView"
+                android:text="Preço do Produto"
                 app:layout_constraintStart_toStartOf="@id/tvProducerNameTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvProducerNameTitle"
-                app:layout_constraintBottom_toBottomOf="@id/ivStore"/>
+                app:layout_constraintBottom_toBottomOf="@id/ivStore"
+                app:layout_constraintEnd_toEndOf="@id/tvProducerNameTitle"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivStore"

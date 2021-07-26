@@ -38,7 +38,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/tvCellTitleUpdateProducer"/>
+                    app:layout_constraintBottom_toTopOf="@id/tvNameTitleUpdateProducer"/>
+
+                <TextView
+                    android:id="@+id/tvNameTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/string_name_title_update"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivProfileUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilNameUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNameUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_name_hint"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvCellTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietNameUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        android:tag="@string/string_name_hint"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/tvCellTitleUpdateProducer"
@@ -46,7 +73,7 @@
                     android:layout_marginStart="10dp"
                     android:text="@string/string_whatsapp_title"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivProfileUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilNameUpdateProducer"
                     app:layout_constraintBottom_toTopOf="@id/tilCellNumberUpdateProducer"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +91,7 @@
                         android:id="@+id/tietCellNumberUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="phone"
-                        />
+                        android:tag="@string/string_whatsapp_number_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -89,7 +116,7 @@
                         android:id="@+id/tietCepUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
-                        />
+                        android:tag="@string/string_cep_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -114,7 +141,7 @@
                         android:id="@+id/tietStreetUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
-                        />
+                        android:tag="@string/string_street_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -139,7 +166,7 @@
                         android:id="@+id/tietDistrictUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
-                        />
+                        android:tag="@string/string_district_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -164,7 +191,7 @@
                         android:id="@+id/tietNumberUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
-                        />
+                        android:tag="@string/string_number_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -189,7 +216,7 @@
                         android:id="@+id/tietComplementUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
-                        />
+                        android:tag="@string/string_complement_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -208,12 +235,38 @@
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tvCityTitleUpdateProducer"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
-                    app:layout_constraintBottom_toTopOf="@id/tvPresentationTitleUpdateProducer">
+                    app:layout_constraintBottom_toTopOf="@id/tvUfTitleUpdateProducer">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietCityUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
+                        android:tag="@string/string_city_hint"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvUfTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_uf_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tilCityUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tilUfUpdateProducer"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUfUpdateProducer"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_uf_hint"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvUfTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvPresentationTitleUpdateProducer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietUfUpdateProducer"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        android:tag="@string/string_uf_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -224,7 +277,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
-                    app:layout_constraintTop_toBottomOf="@+id/tilCityUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@+id/tilUfUpdateProducer"
                     app:layout_constraintBottom_toTopOf="@id/tilPresentationUpdateProducer"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -238,7 +291,7 @@
                     app:layout_constraintBottom_toTopOf="@id/tvDeliveryTitleUpdateProducer">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tietPresentationPresentationUpdateProducer"
+                        android:id="@+id/tietPresentationUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
                         />
@@ -268,42 +321,50 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipFlorianopolisNorth"
                         style="@style/ChipDefault"
-                        android:text="@string/string_florianopolis_north"/>
+                        android:text="@string/string_florianopolis_north"
+                        android:tag="@string/string_florianopolis_north"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipFlorianopolisCenter"
                         style="@style/ChipDefault"
-                        android:text="@string/string_florianopolis_center"/>
+                        android:text="@string/string_florianopolis_center"
+                        android:tag="@string/string_florianopolis_center"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipFlorianopolisSouth"
                         style="@style/ChipDefault"
-                        android:text="@string/string_florianopolis_south"/>
+                        android:text="@string/string_florianopolis_south"
+                        android:tag="@string/string_florianopolis_south"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipFlorianopolisEast"
                         style="@style/ChipDefault"
-                        android:text="@string/string_florianopolis_east"/>
+                        android:text="@string/string_florianopolis_east"
+                        android:tag="@string/string_florianopolis_east"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPalhoca"
                         style="@style/ChipDefault"
-                        android:text="@string/string_palhoca"/>
+                        android:text="@string/string_palhoca"
+                        android:tag="@string/string_palhoca"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipBiguacu"
                         style="@style/ChipDefault"
-                        android:text="@string/string_biguacu"/>
+                        android:text="@string/string_biguacu"
+                        android:tag="@string/string_biguacu"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipImbituba"
                         style="@style/ChipDefault"
-                        android:text="@string/string_imbituba"/>
+                        android:text="@string/string_imbituba"
+                        android:tag="@string/string_imbituba"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipGaropaba"
                         style="@style/ChipDefault"
-                        android:text="@string/string_garopaba"/>
+                        android:text="@string/string_garopaba"
+                        android:tag="@string/string_garopaba"/>
 
                 </com.google.android.material.chip.ChipGroup>
 
@@ -330,22 +391,26 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPix"
                         style="@style/ChipDefault"
-                        android:text="@string/string_pix"/>
+                        android:text="@string/string_pix"
+                        android:tag="@string/string_pix"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipDebitCard"
                         style="@style/ChipDefault"
-                        android:text="@string/string_debit_card"/>
+                        android:text="@string/string_debit_card"
+                        android:tag="@string/string_debit_card"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipCreditCard"
                         style="@style/ChipDefault"
-                        android:text="@string/string_credit_card"/>
+                        android:text="@string/string_credit_card"
+                        android:tag="@string/string_credit_card"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipBankTransfer"
                         style="@style/ChipDefault"
-                        android:text="@string/string_bank_transfer"/>
+                        android:text="@string/string_bank_transfer"
+                        android:tag="@string/string_bank_transfer"/>
 
                 </com.google.android.material.chip.ChipGroup>
 
@@ -374,37 +439,44 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipSunday"
                         style="@style/ChipDefault"
-                        android:text="@string/string_d"/>
+                        android:text="@string/string_d"
+                        android:tag="Domingo"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipMonday"
                         style="@style/ChipDefault"
-                        android:text="@string/string_s"/>
+                        android:text="@string/string_s"
+                        android:tag="Segunda"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipThursday"
                         style="@style/ChipDefault"
-                        android:text="@string/string_t"/>
+                        android:text="@string/string_t"
+                        android:tag="Terça"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipWednesday"
                         style="@style/ChipDefault"
-                        android:text="@string/string_q"/>
+                        android:text="@string/string_q"
+                        android:tag="Quarta"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipTuesday"
                         style="@style/ChipDefault"
-                        android:text="@string/string_q"/>
+                        android:text="@string/string_q"
+                        android:tag="Quinta"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipFriday"
                         style="@style/ChipDefault"
-                        android:text="@string/string_s"/>
+                        android:text="@string/string_s"
+                        android:tag="Sexta"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chipWSaturday"
+                        android:id="@+id/chipSaturday"
                         style="@style/ChipDefault"
-                        android:text="@string/string_s"/>
+                        android:text="@string/string_s"
+                        android:tag="Sábado"/>
                 </com.google.android.material.chip.ChipGroup>
 
                 <Button

@@ -26,6 +26,7 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
     private var nameOk = false
     private var descriptionOk = false
     private var priceOk = false
+    private var photo: String? = null
     private var id = generateRandomUUID()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,50 +79,30 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-
-        getProducts?.let {
-            viewModelUpdateAndAddProduct.getPhoto(it.id)
-            viewModelUpdateAndAddProduct.photo.observe(this) {
-                Glide.with(this).load(it).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProductUpdateAndAdd)
-            }
-        }?: run {
-            viewModelUpdateAndAddProduct.getPhoto(id)
-            viewModelUpdateAndAddProduct.photo.observe(this) {
-                Glide.with(this).load(it).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProductUpdateAndAdd)
-            }
-        }
+        photo = CameraAndGalleryActivity.PRODUCTS_PHOTO
+        Glide.with(this).load(CameraAndGalleryActivity.PRODUCTS_PHOTO).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProductUpdateAndAdd)
     }
 
     private fun confirmUpdate(product: Products?) {
         product?.let {
             binding.btConfirmUpdate.setOnClickListener {
-                viewModelUpdateAndAddProduct.getPhoto(product.id)
-                viewModelUpdateAndAddProduct.photo.observe(this) {photo ->
-                    val setProduct = Products(product.id,
-                        binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
-                        binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:"")
-                    // Falta inserir a foto
+                val setProduct = Products(product.id,
+                    binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
+                    binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:product.photo)
 //                    ProducerMenuActivity.PRODUCTS?.forEachIndexed { index, products ->
 //                        if(products.id == setProduct.id) {
 //                            ProducerMenuActivity.PRODUCTS?.set(index, setProduct)
 //                        }
-//                    }
-                    viewModelUpdateAndAddProduct.addAndUpdateProduct(product.id, setProduct)
-                    finish()
-                }
+                viewModelUpdateAndAddProduct.addAndUpdateProduct(product.id, setProduct)
+                finish()
             }
         }?: run {
             binding.btConfirmUpdate.setOnClickListener {
-                viewModelUpdateAndAddProduct.getPhoto(id)
-                viewModelUpdateAndAddProduct.photo.observe(this) { photo ->
-                    val setProduct = Products(id,
-                        binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
-                        binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:"")
-                    // Falta inserir a foto
-//                    ProducerMenuActivity.PRODUCTS?.add(setProduct)
-                    viewModelUpdateAndAddProduct.addAndUpdateProduct(id, setProduct)
-                    finish()
-                }
+                val setProduct = Products(id,
+                    binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
+                    binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:"")
+                viewModelUpdateAndAddProduct.addAndUpdateProduct(id, setProduct)
+                finish()
             }
         }
     }

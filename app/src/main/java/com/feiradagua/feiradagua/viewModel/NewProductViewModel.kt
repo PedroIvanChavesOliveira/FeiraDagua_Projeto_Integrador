@@ -12,9 +12,9 @@ class NewProductViewModel: ViewModel() {
         NewProductRepository()
     }
 
-    fun deleteById(id: String) {
+    fun deleteById(id: String, photo: String) {
         viewModelScope.launch {
-            deleteDone.postValue(repository.deleteById(id))
+            deleteDone.postValue(repository.deleteById(id, photo))
         }
     }
 }

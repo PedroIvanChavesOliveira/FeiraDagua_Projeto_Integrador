@@ -48,7 +48,6 @@ class ProducerNewProductFragment : Fragment() {
         setUpRecyclerView()
     }
 
-
     private fun setUpRecyclerView() {
         ProducerMenuActivity.PRODUCTS?.let { products ->
             if(products.isNotEmpty()) {
@@ -64,7 +63,7 @@ class ProducerNewProductFragment : Fragment() {
                                 dialog.dismiss()
                             }
                             .setNegativeButton(resources.getString(R.string.string_dialog_delete)) { _, _ ->
-                                viewModelNewProduct.deleteById(product.id)
+                                viewModelNewProduct.deleteById(product.id, product.photo)
                                 viewModelNewProduct.deleteDone.observe(viewLifecycleOwner) {
                                     if(it) {
                                         Snackbar.make(this, R.string.string_snackbar_delete_done, Snackbar.LENGTH_SHORT)

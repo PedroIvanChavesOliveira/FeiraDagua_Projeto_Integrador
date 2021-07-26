@@ -22,8 +22,10 @@ class NewProductRepository {
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
     }
 
-    suspend fun deleteById(id: String): Boolean {
-        firebaseStorageRef.child("${(firebaseAuth.currentUser?.uid ?: "")}/product-${id}.jpg").delete().await()
+    suspend fun deleteById(id: String, photo: String): Boolean {
+        if(photo.isNotEmpty()) {
+            firebaseStorageRef.child("${(firebaseAuth.currentUser?.uid ?: "")}/product-${id}.jpg").delete().await()
+        }
         productDB.document(id).delete().await()
         ProducerMenuActivity.PRODUCTS?.deleteProduct(id)
         return true

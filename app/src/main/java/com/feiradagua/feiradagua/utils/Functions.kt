@@ -69,11 +69,7 @@ fun Producer.updateProducer(producer: Producer) {
 }
 
 fun MutableList<Products>.deleteProduct(id: String) {
-    this.forEach {products ->
-        if(products.id == id) {
-            this.remove(products)
-        }
-    }
+    this.removeAll { it.id == id }
 }
 
 fun TextInputEditText.splitAdress(text: String) {

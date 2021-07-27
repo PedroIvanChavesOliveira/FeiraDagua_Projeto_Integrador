@@ -5,13 +5,13 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class Order (
-    val id: Int = 0,
-    val products: MutableList<String> = mutableListOf(),
+    val id: String = "",
+    val products: MutableList<ProductOrder> = mutableListOf(),
     val username: String = "",
     val userPhoto: String = "",
     val totalPrice: Double = 0.0,
     val deliveryDate: String = "",
     val confirmation: Int = 0,
-    val producerId: String = "",
+    val producerId: MutableList<String> = mutableListOf(),
     val userId: String = ""
 ): Parcelable

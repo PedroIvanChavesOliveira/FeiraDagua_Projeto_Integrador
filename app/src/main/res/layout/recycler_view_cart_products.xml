@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageButton
+        android:id="@+id/ibDeleteCart"
+        android:src="@drawable/ic_baseline_delete_30"
+        android:background="@color/white"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvProducerNameTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvProducerNameTitle"
+        app:layout_constraintBottom_toTopOf="@id/tvProducerCategoryTitle"/>
     <TextView
         android:id="@+id/tvProducerNameTitle"
         style="@style/TextViewTitleRecyclerView"
         android:text="Empresa sem nome"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ibDeleteCart"
         app:layout_constraintTop_toTopOf="@id/ivStore"
         app:layout_constraintBottom_toTopOf="@id/tvProducerCategoryTitle"
         app:layout_constraintEnd_toStartOf="@id/ivStore"/>

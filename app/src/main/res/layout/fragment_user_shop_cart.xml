@@ -36,6 +36,35 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/rvCart"/>
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationCart"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="10dp"
+                    app:lottie_rawRes="@raw/lottie_cart_animation"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:layout_constraintStart_toStartOf="@id/tvYourCartTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvYourCartTitle"
+                    app:layout_constraintBottom_toTopOf="@id/tvOrderNotFound"/>
+
+                <TextView
+                    android:id="@+id/tvOrderNotFound"
+                    style="@style/TextViewSubTitleDefault"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:textAlignment="center"
+                    android:text="@string/string_product_not_found_order"
+                    app:layout_constraintStart_toStartOf="@id/tvYourCartTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/animationCart"
+                    app:layout_constraintBottom_toTopOf="@id/tvTotalTitle"
+                    />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCart"
                     android:layout_width="0dp"
@@ -75,7 +104,8 @@
                     android:id="@+id/btFinish"
                     style="@style/ButtonDefault"
                     android:layout_marginBottom="30dp"
-                    android:text="@string/string_next_button"
+                    android:text="@string/string_finish_order"
+                    android:enabled="false"
                     app:layout_constraintStart_toStartOf="@id/tvYourCartTitle"
                     app:layout_constraintEnd_toEndOf="@id/rvCart"
                     app:layout_constraintTop_toBottomOf="@id/tvTotalTitle"

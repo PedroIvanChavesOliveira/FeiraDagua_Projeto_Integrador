@@ -1,7 +1,9 @@
 package com.feiradagua.feiradagua.utils
 
 import com.feiradagua.feiradagua.R
+import com.feiradagua.feiradagua.model.`class`.Cart
 import com.feiradagua.feiradagua.model.`class`.Producer
+import com.feiradagua.feiradagua.model.`class`.ProductOrder
 import com.feiradagua.feiradagua.model.`class`.Products
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
@@ -68,6 +70,53 @@ fun Producer.updateProducer(producer: Producer) {
     this.phone = producer.phone
     this.email = producer.email
     this.type = producer.type
+}
+
+fun MutableList<Cart>.updateCartList(item: Cart) {
+    this.forEachIndexed { index, cart ->
+        if(item.id == cart.id) {
+            cart.totalPrice = item.totalPrice
+        }
+    }
+}
+
+fun MutableList<Cart>.deleteItemFromCartList(item: Cart) {
+    this.removeAll {it.id == item.id}
+}
+
+fun MutableList<Cart>.getTotalPrice(): String {
+    var totalValue = 0.0
+    this.forEach { item ->
+        totalValue += item.totalPrice
+    }
+    return "R$ $totalValue"
+}
+
+fun MutableList<Cart>.getTotalPriceValue(): Double {
+    var totalValue = 0.0
+    this.forEach { item ->
+        totalValue += item.totalPrice
+    }
+    return totalValue
+}
+
+fun MutableList<Cart>.getProducersIdsList(): MutableList<String> {
+    val list = mutableListOf<String>()
+    this.forEach {
+        if(!list.contains(it.producerId)) {
+            list.add(it.producerId)
+        }
+    }
+    return list
+}
+
+fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {
+    val list = mutableListOf<ProductOrder>()
+    this.forEach {
+        val productOrder = ProductOrder(it.id, it.totalPrice)
+        list.add(productOrder)
+    }
+    return list
 }
 
 fun MutableList<Products>.deleteProduct(id: String) {

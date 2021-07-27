@@ -20,6 +20,7 @@
     <string name="string_city_title">Qual a sua cidade?</string>
     <string name="string_city_hint">Informe a sua cidade</string>
     <string name="string_next_button">Avançar</string>
+    <string name="string_finish_order">Finalizar Pedido</string>
     <string name="string_presentation_title">Diga um pouco mais sobre vocês!!</string>
     <string name="string_presentation_hint">Insira uma apresentação</string>
     <string name="string_delivery_title">Diga-nos sua área de entrega</string>
@@ -106,10 +107,13 @@
     <string name="string_dialog_delete">Deletar</string>
     <string name="string_dialog_title">Deletar Produto</string>
     <string name="string_dialog_message">Deseja excluir esse produto?</string>
+    <string name="string_dialog_message_cart">Deseja excluir esse produto do carrinho?</string>
     <string name="string_snackbar_delete_done">Produto excluído com sucesso</string>
+    <string name="string_snackbar_order_sent">Pedido Enviado ao Produtor! Aguarde um retorno!</string>
     <string name="string_my_products">Meus Produtos</string>
     <string name="string_product_not_found">Nenhum Produto Cadastrado!</string>
     <string name="string_name_title_update">Qual o nome da sua empresa?</string>
     <string name="string_name_hint">Digite o nome da sua empresa</string>
     <string name="string_name_title_profile">Olá, %1$s!</string>
+    <string name="string_product_not_found_order">Nenhum Produto Adicionado ao Carrinho</string>
 </resources>

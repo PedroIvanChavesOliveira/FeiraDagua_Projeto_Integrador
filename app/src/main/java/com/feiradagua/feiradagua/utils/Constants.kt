@@ -25,6 +25,8 @@ class Constants {
         const val PRODUCT_UPDATE = "ProductUpdate"
         const val PRODUCT_INFO = "ProductInfo"
         const val PRODUCT_ID = "ProductId"
+        const val PRODUCER_ID = "ProducerId"
+        const val CART_INFO = "CartInfo"
     }
 
     object CameraX {

@@ -42,8 +42,8 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivProfile"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/camera_icon"
                         android:scaleType="centerCrop"
@@ -52,21 +52,42 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/tvContactTitle"/>
+                        app:layout_constraintBottom_toTopOf="@id/tvNameTitle"/>
+
+                    <TextView
+                        android:id="@+id/tvNameTitle"
+                        style="@style/TextViewTitleDefault"
+                        android:text="@string/string_name_title"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivProfile"
+                        app:layout_constraintBottom_toTopOf="@id/tvNameValue"/>
+
+                    <TextView
+                        android:id="@+id/tvNameValue"
+                        style="@style/TextViewSubTitleDefault"
+                        android:text="@string/string_name_not_found"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/tvContactTitle"
+                        app:layout_constraintTop_toBottomOf="@id/tvNameTitle"
+                        app:layout_constraintBottom_toTopOf="@id/tvContactTitle"
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
                     <TextView
                         android:id="@+id/tvContactTitle"
                         style="@style/TextViewTitleDefault"
                         android:text="@string/string_contact_title"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ivProfile"
+                        app:layout_constraintTop_toBottomOf="@id/tvNameValue"
                         app:layout_constraintBottom_toTopOf="@id/tvContactValue"/>
 
                     <TextView
                         android:id="@+id/tvContactValue"
-                        style="@style/TextViewTitleDefault"
+                        style="@style/TextViewSubTitleDefault"
                         android:text="@string/string_contact_not_found"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
@@ -86,7 +107,7 @@
 
                     <TextView
                         android:id="@+id/tvAdressValue"
-                        style="@style/TextViewTitleDefault"
+                        style="@style/TextViewSubTitleDefault"
                         android:text="@string/string_adress_not_found"
                         android:layout_marginTop="5dp"
                         app:layout_constraintStart_toStartOf="@+id/tvContactTitle"
@@ -118,7 +139,7 @@
 
                     <TextView
                         android:id="@+id/tvPresentationValue"
-                        style="@style/TextViewTitleDefault"
+                        style="@style/TextViewSubTitleDefault"
                         android:layout_marginTop="5dp"
                         android:text="@string/string_presentation_not_found"
                         app:layout_constraintBottom_toTopOf="@id/viewSeparator2"
@@ -163,42 +184,50 @@
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipFlorianopolisNorth"
                             style="@style/ChipDefault"
-                            android:text="@string/string_florianopolis_north"/>
+                            android:text="@string/string_florianopolis_north"
+                            android:tag="@string/string_florianopolis_north"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipFlorianopolisCenter"
                             style="@style/ChipDefault"
-                            android:text="@string/string_florianopolis_center"/>
+                            android:text="@string/string_florianopolis_center"
+                            android:tag="@string/string_florianopolis_center"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipFlorianopolisSouth"
                             style="@style/ChipDefault"
-                            android:text="@string/string_florianopolis_south"/>
+                            android:text="@string/string_florianopolis_south"
+                            android:tag="@string/string_florianopolis_south"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipFlorianopolisEast"
                             style="@style/ChipDefault"
-                            android:text="@string/string_florianopolis_east"/>
+                            android:text="@string/string_florianopolis_east"
+                            android:tag="@string/string_florianopolis_east"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipPalhoca"
                             style="@style/ChipDefault"
-                            android:text="@string/string_palhoca"/>
+                            android:text="@string/string_palhoca"
+                            android:tag="@string/string_palhoca"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipBiguacu"
                             style="@style/ChipDefault"
-                            android:text="@string/string_biguacu"/>
+                            android:text="@string/string_biguacu"
+                            android:tag="@string/string_biguacu"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipImbituba"
                             style="@style/ChipDefault"
-                            android:text="@string/string_imbituba"/>
+                            android:text="@string/string_imbituba"
+                            android:tag="@string/string_imbituba"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipGaropaba"
                             style="@style/ChipDefault"
-                            android:text="@string/string_garopaba"/>
+                            android:text="@string/string_garopaba"
+                            android:tag="@string/string_garopaba"/>
 
                     </com.google.android.material.chip.ChipGroup>
 
@@ -226,22 +255,26 @@
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipPix"
                             style="@style/ChipDefault"
-                            android:text="@string/string_pix"/>
+                            android:text="@string/string_pix"
+                            android:tag="@string/string_pix"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipDebitCard"
                             style="@style/ChipDefault"
-                            android:text="@string/string_debit_card"/>
+                            android:text="@string/string_debit_card"
+                            android:tag="@string/string_debit_card"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipCreditCard"
                             style="@style/ChipDefault"
-                            android:text="@string/string_credit_card"/>
+                            android:text="@string/string_credit_card"
+                            android:tag="@string/string_credit_card"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipBankTransfer"
                             style="@style/ChipDefault"
-                            android:text="@string/string_bank_transfer"/>
+                            android:text="@string/string_bank_transfer"
+                            android:tag="@string/string_bank_transfer"/>
 
                     </com.google.android.material.chip.ChipGroup>
 
@@ -284,37 +317,44 @@
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipSunday"
                             style="@style/ChipDefault"
-                            android:text="@string/string_d"/>
+                            android:text="@string/string_d"
+                            android:tag="Domingo"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipMonday"
                             style="@style/ChipDefault"
-                            android:text="@string/string_s"/>
+                            android:text="@string/string_s"
+                            android:tag="Segunda"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipThursday"
                             style="@style/ChipDefault"
-                            android:text="@string/string_t"/>
+                            android:text="@string/string_t"
+                            android:tag="Terça"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipWednesday"
                             style="@style/ChipDefault"
-                            android:text="@string/string_q"/>
+                            android:text="@string/string_q"
+                            android:tag="Quarta"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipTuesday"
                             style="@style/ChipDefault"
-                            android:text="@string/string_q"/>
+                            android:text="@string/string_q"
+                            android:tag="Quinta"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipFriday"
                             style="@style/ChipDefault"
-                            android:text="@string/string_s"/>
+                            android:text="@string/string_s"
+                            android:tag="Sexta"/>
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/chipWSaturday"
+                            android:id="@+id/chipSaturday"
                             style="@style/ChipDefault"
-                            android:text="@string/string_s"/>
+                            android:text="@string/string_s"
+                            android:tag="Sábado"/>
                     </com.google.android.material.chip.ChipGroup>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>

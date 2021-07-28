@@ -28,8 +28,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivProfile"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_marginTop="20dp"
                     android:src="@drawable/camera_icon"
                     android:scaleType="centerCrop"
@@ -121,7 +121,6 @@
                 <Button
                     android:id="@+id/btEditProfile"
                     style="@style/ButtonDefault"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"
                     android:text="@string/string_update_profile_button"

@@ -26,6 +26,7 @@ class UserStoreInfosProductsFragment : Fragment() {
     private lateinit var binding: FragmentUserStoreInfosProductsBinding
     private var getId: String? = ""
     private var producerPhone: String? = ""
+    private var producerName: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,9 +45,10 @@ class UserStoreInfosProductsFragment : Fragment() {
             UserMenuActivity.PRODUCERS.forEach { producer ->
                 if(producer.uid == getId) {
                     producerPhone = producer.phone
+                    producerName = producer.name
                 }
             }
-            startWhatsAppChat(producerPhone)
+            startWhatsAppChat(producerPhone, producerName)
         }
 
         setUpRecyclerView()
@@ -70,10 +72,11 @@ class UserStoreInfosProductsFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun startWhatsAppChat(phone: String?) {
+    private fun startWhatsAppChat(phone: String?, name: String?) {
         phone?.let {
             val contact = "+55 $phone"
-            val message = "Ola Tubs, um abraço do Feira Dagua!"
+            val message = "Olá $name, sou o cliente ${UserMenuActivity.USER.name} e estou entrando em contato " +
+                    "a partir do Feira D'água!!"
             val intent = Intent(Intent.ACTION_VIEW)
             val url = "https://api.whatsapp.com/send?phone=$contact&text=${URLEncoder.encode(message,"UTF-8")}"
 

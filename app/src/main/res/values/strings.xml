@@ -86,6 +86,7 @@
     <string name="string_mask_cellphone">(##) #####-####</string>
     <string name="string_mask_uf">##</string>
     <string name="string_error_message">O campo %1$s é obrigatório</string>
+    <string name="string_error_message_cep">O CEP deve conter 8 dígitos</string>
     <string name="string_error_value_equals_zero">O preço não pode ser R$ 0.00</string>
     <string name="string_cellphone">Celular</string>
     <string name="string_cep_error">CEP</string>

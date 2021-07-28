@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_extra_infos.*
 
 class ExtraInfosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExtraInfosBinding
-    private var viewModelExtraInfos = ExtraInfosViewModel()
+    private val viewModelExtraInfos: ExtraInfosViewModel by viewModels()
     private var completedAdress = ""
     private var isCellphoneOk = false
     private var isCepOk = false
@@ -36,8 +37,6 @@ class ExtraInfosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityExtraInfosBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModelExtraInfos = ViewModelProvider(this).get(ExtraInfosViewModel::class.java)
 
         textChangeDefault(binding.tietCellNumber, binding.tilCellNumber, R.string.string_cellphone)
         textChangeDefault(binding.tietCep, binding.tilCep, R.string.string_cep_error)

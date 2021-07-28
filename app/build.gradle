@@ -86,6 +86,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-common-ktx:19.5.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:22.1.0'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //retrofit

@@ -7,5 +7,6 @@ class User (
     var phone: String? = "",
     var photo: String? = "",
     var type: Int? = 0,
-    var adress: String = ""
+    var adress: String = "",
+    var token: String? = ""
 )

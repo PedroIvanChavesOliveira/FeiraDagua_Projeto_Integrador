@@ -25,6 +25,12 @@ class UserMenuViewModel: ViewModel() {
         }
     }
 
+    fun updateToken() {
+        viewModelScope.launch {
+            repository.updateToken()
+        }
+    }
+
     fun getProducers() {
         viewModelScope.launch {
             producerList.postValue(repository.getProducers())

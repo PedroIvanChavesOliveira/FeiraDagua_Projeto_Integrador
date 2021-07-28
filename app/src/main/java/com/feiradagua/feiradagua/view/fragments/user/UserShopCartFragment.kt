@@ -1,12 +1,18 @@
 package com.feiradagua.feiradagua.view.fragments.user
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,9 +21,14 @@ import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.FragmentUserShopCartBinding
 import com.feiradagua.feiradagua.model.`class`.Cart
 import com.feiradagua.feiradagua.model.`class`.Order
+import com.feiradagua.feiradagua.model.`class`.notification.FirebaseService
+import com.feiradagua.feiradagua.model.`class`.notification.NotificationData
+import com.feiradagua.feiradagua.model.`class`.notification.PushNotification
 import com.feiradagua.feiradagua.utils.*
 import com.feiradagua.feiradagua.utils.Constants.Intents.CART_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
+import com.feiradagua.feiradagua.utils.Constants.Notification.CHANNEL_ID
+import com.feiradagua.feiradagua.utils.Constants.Notification.TOPIC
 import com.feiradagua.feiradagua.utils.getTotalPrice
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserProductInfoActivity
@@ -28,6 +39,12 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.iid.FirebaseInstanceIdReceiver
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,8 +66,11 @@ class UserShopCartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpRecyclerView()
+        //Se precisar enviar notificações para um grupo x de usuários
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+
         sendOrderToProducer()
+        setUpRecyclerView()
     }
 
     override fun onResume() {
@@ -114,11 +134,22 @@ class UserShopCartFragment : Fragment() {
                     viewModelShopCart.sendNewOrder(idOrder, order)
                     viewModelShopCart.orderOk.observe(activity) {
                         if(it) {
-                            // Falta Enviar a Mensagem Para o Produtor
                             Snackbar.make(view, R.string.string_snackbar_order_sent, Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(ContextCompat.getColor(activity, R.color.white))
                                 .setTextColor(ContextCompat.getColor(activity, R.color.textColor))
                                 .show()
+                        }
+                    }
+                    UserMenuActivity.PRODUCERS.getProducersToken(UserMenuActivity.MY_CART.getProducersIdsList()).let {
+                        it.forEach { token ->
+                            token?.let {
+                                PushNotification(
+                                    NotificationData(getString(R.string.string_title_notification_from_user),
+                                        getString(R.string.string_message_notification_from_user,
+                                            UserMenuActivity.USER.name)), token).also { not ->
+                                    viewModelShopCart.sendNotification(not)
+                                }
+                            }
                         }
                     }
                 }

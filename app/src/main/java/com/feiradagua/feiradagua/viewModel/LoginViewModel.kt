@@ -14,6 +14,8 @@ class LoginViewModel: ViewModel() {
     var userOk: MutableLiveData<FirebaseUser?> = MutableLiveData()
     var dbOk: MutableLiveData<DocumentSnapshot> = MutableLiveData()
     var registeredOk: MutableLiveData<Registered?> = MutableLiveData()
+    val token: MutableLiveData<String> = MutableLiveData()
+
     private val repository by lazy {
         LoginRepository()
     }
@@ -27,6 +29,12 @@ class LoginViewModel: ViewModel() {
     fun getUserDb() {
         viewModelScope.launch {
             dbOk.postValue(repository.getUserDb())
+        }
+    }
+
+    fun getToken() {
+        viewModelScope.launch {
+            token.postValue(repository.getToken())
         }
     }
 

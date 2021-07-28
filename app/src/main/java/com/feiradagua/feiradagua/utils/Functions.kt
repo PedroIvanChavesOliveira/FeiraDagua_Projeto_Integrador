@@ -110,6 +110,16 @@ fun MutableList<Cart>.getProducersIdsList(): MutableList<String> {
     return list
 }
 
+fun MutableList<Producer>.getProducersToken(producersIds: MutableList<String>): MutableList<String?> {
+    val list = mutableListOf<String?>()
+    this.forEach {
+        if(producersIds.contains(it.uid)) {
+            list.add(it.token)
+        }
+    }
+    return list
+}
+
 fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {
     val list = mutableListOf<ProductOrder>()
     this.forEach {

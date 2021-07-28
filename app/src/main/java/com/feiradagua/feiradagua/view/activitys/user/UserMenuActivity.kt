@@ -2,6 +2,7 @@ package com.feiradagua.feiradagua.view.activitys.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
@@ -17,7 +18,7 @@ import com.feiradagua.feiradagua.viewModel.UserMenuViewModel
 
 class UserMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuUserBinding
-    private var viewModelUserMenu = UserMenuViewModel()
+    private val viewModelUserMenu: UserMenuViewModel by viewModels()
 
     companion object {
         lateinit var USER: User
@@ -30,7 +31,7 @@ class UserMenuActivity : AppCompatActivity() {
         binding = ActivityMenuUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModelUserMenu = ViewModelProvider(this).get(UserMenuViewModel::class.java)
+        viewModelUserMenu.updateToken()
 
         setUserData()
     }

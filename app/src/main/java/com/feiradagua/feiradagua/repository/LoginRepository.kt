@@ -9,12 +9,19 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.iid.FirebaseInstanceIdReceiver
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.tasks.await
 
 class LoginRepository {
     private val auth by lazy {
         FirebaseAuth.getInstance().currentUser
+    }
+
+    private val token by lazy {
+        FirebaseMessaging.getInstance().token
     }
 
     private val userDB by lazy {
@@ -27,6 +34,10 @@ class LoginRepository {
 
     fun getUser(): FirebaseUser? {
         return auth
+    }
+
+    suspend fun getToken(): String {
+        return token.await()
     }
 
     suspend fun getUserDb(): DocumentSnapshot? {

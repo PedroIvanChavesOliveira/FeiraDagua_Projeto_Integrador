@@ -27,6 +27,12 @@ class ProducerMenuViewModel: ViewModel() {
         }
     }
 
+    fun updateToken() {
+        viewModelScope.launch {
+            repository.updateToken()
+        }
+    }
+
     fun getProductsDB() {
         viewModelScope.launch {
             repository.getProductsDB()?.let {

@@ -2,6 +2,7 @@ package com.feiradagua.feiradagua.view.activitys.producer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
@@ -21,7 +22,7 @@ import com.feiradagua.feiradagua.viewModel.ProducerMenuViewModel
 
 class ProducerMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProducerMenuBinding
-    private var viewModelProducerMenu = ProducerMenuViewModel()
+    private val viewModelProducerMenu: ProducerMenuViewModel by viewModels()
     private var getFirstLogin = 0
 
     companion object {
@@ -36,7 +37,7 @@ class ProducerMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getFirstLogin = intent.getIntExtra(EXTRA_INFOS, 0)
-        viewModelProducerMenu = ViewModelProvider(this).get(ProducerMenuViewModel::class.java)
+        viewModelProducerMenu.updateToken()
 
         when(getFirstLogin) {
             0 -> { setProducerInfos() }

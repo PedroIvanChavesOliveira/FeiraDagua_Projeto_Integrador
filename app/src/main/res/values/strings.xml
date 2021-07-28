@@ -116,4 +116,7 @@
     <string name="string_name_hint">Digite o nome da sua empresa</string>
     <string name="string_name_title_profile">Olá, %1$s!</string>
     <string name="string_product_not_found_order">Nenhum Produto Adicionado ao Carrinho</string>
+
+    <string name="string_title_notification_from_user">Novo Pedido</string>
+    <string name="string_message_notification_from_user">O cliente %1$s realizou um novo pedido</string>
 </resources>

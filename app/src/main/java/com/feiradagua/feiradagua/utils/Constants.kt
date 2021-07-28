@@ -1,6 +1,7 @@
 package com.feiradagua.feiradagua.utils
 
 import android.Manifest
+import com.feiradagua.feiradagua.BuildConfig
 
 class Constants {
     object Login {
@@ -16,7 +17,7 @@ class Constants {
 
     object  Notification {
         const val BASE_URL = "https://fcm.googleapis.com"
-        const val SERVER_KEY = "AAAAl5b1A4E:APA91bFoXnbni3dyDR_D1bZEaCFlIrkOLQNpBehnAyqDrwyTYii4pq73vUmP2fWeCrdl6PyJZMfA9BIEPVaec-Nfz9GQHpm2RBssLvHi-WLGnmfu6icOD4pFdG6RUjPUYf1DHHc3wtQV"
+        const val SERVER_KEY = BuildConfig.NOTIFICATION_SERVER_KEY
         const val CONTENT_TYPE = "application/json"
         const val CHANNEL_ID = "my_channel"
         const val TOPIC = "/topics/Topic"

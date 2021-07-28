@@ -6,6 +6,10 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+def getNotificationsKeyFile = rootProject.file("secrets.properties")
+def getNotificationsKey = new Properties()
+getNotificationsKey.load(new FileInputStream(getNotificationsKeyFile))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -16,6 +20,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "NOTIFICATION_SERVER_KEY", getNotificationsKey['NOTIFICATION_SERVER_KEY'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

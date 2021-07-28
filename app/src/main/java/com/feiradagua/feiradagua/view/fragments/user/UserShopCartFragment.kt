@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.feiradagua.feiradagua.BuildConfig.NOTIFICATION_SERVER_KEY
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.FragmentUserShopCartBinding
 import com.feiradagua.feiradagua.model.`class`.Cart
@@ -45,6 +46,7 @@ import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
 import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import io.grpc.android.BuildConfig
 import java.text.SimpleDateFormat
 import java.util.*
 

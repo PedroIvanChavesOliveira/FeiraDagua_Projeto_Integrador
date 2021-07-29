@@ -74,6 +74,7 @@
     <string name="string_update_data">Atualizar Dados</string>
     <string name="string_client_title">Cliente</string>
     <string name="string_accept_order_button">Aceitar Pedido</string>
+    <string name="string_decline_order_button">Recusar Pedido</string>
     <string name="string_delivery_title_order_details">Entrega</string>
     <string name="string_new_product">Novo Produto</string>
     <string name="string_product_name_hint">Digite o nome do produto</string>
@@ -109,6 +110,8 @@
     <string name="string_dialog_title">Deletar Produto</string>
     <string name="string_dialog_message">Deseja excluir esse produto?</string>
     <string name="string_dialog_message_cart">Deseja excluir esse produto do carrinho?</string>
+    <string name="string_dialog_send">Enviar</string>
+    <string name="string_dialog_title_order">Por quais motivos recusou este pedido?</string>
     <string name="string_snackbar_delete_done">Produto excluído com sucesso</string>
     <string name="string_snackbar_order_sent">Pedido Enviado ao Produtor! Aguarde um retorno!</string>
     <string name="string_my_products">Meus Produtos</string>
@@ -118,6 +121,20 @@
     <string name="string_name_title_profile">Olá, %1$s!</string>
     <string name="string_product_not_found_order">Nenhum Produto Adicionado ao Carrinho</string>
 
-    <string name="string_title_notification_from_user">Novo Pedido</string>
+    <string-array name="string_array_cancel_order_options">
+        <item>Sem Estoque Desses Produtos no Momento</item>
+        <item>Data de Entrega Indisponível</item>
+        <item>Área de Entrega Indisponível</item>
+    </string-array>
+
+    <string name="string_title_notification_from_user">Novo Pedido &#128515;</string>
     <string name="string_message_notification_from_user">O cliente %1$s realizou um novo pedido</string>
+    <string name="string_title_notification_from_producer_decline">Pedido Não Aceito &#128577;</string>
+    <string name="string_message_notification_from_producer_decline">
+        Infelizmente o produtor não aceitou o seu pedido devido o seguinte problema: %1$s.
+    </string>
+    <string name="string_title_notification_from_producer_accept">Pedido Aceito &#127881;</string>
+    <string name="string_message_notification_from_producer_accept">
+        Aceitaram o Seu Pedido, em Breve o Produtor irá Entrar em Contato!!
+    </string>
 </resources>

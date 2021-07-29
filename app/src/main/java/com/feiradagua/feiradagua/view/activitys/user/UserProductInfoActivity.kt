@@ -36,9 +36,7 @@ class UserProductInfoActivity : AppCompatActivity() {
         when(getOrigin) {
             1 -> { setUpProductInfosFromProducer(getProductInfos) }
             2 -> { setUpProductInfosFromUser(getProductInfos) }
-            3 -> {
-                setUpProductInfosFromCart(getCartInfo)
-            }
+            3 -> { setUpProductInfosFromCart(getCartInfo) }
         }
 
         getCartInfo?.let {

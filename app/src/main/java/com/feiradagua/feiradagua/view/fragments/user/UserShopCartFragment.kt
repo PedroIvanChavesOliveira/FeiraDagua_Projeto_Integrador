@@ -117,7 +117,7 @@ class UserShopCartFragment : Fragment() {
                     val dateString: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(datePicker.selection)
                     val order = Order(idOrder, UserMenuActivity.MY_CART.getProductsInfosList(), UserMenuActivity.USER.name?:"",
                         UserMenuActivity.USER.photo?:"", UserMenuActivity.MY_CART.getTotalPriceValue(),
-                        dateString,0, UserMenuActivity.MY_CART.getProducersIdsList() ,UserMenuActivity.USER.uid)
+                        dateString,0, UserMenuActivity.MY_CART.getProducersIdsList(),UserMenuActivity.USER.uid)
                     viewModelShopCart.sendNewOrder(idOrder, order)
                     viewModelShopCart.orderOk.observe(activity) {
                         if(it) {

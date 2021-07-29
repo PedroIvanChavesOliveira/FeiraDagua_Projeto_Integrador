@@ -33,6 +33,12 @@ class ProducerMyOrdersFragment : Fragment() {
         setUpOrdersRecyclerView()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        setUpOrdersRecyclerView()
+    }
+
     private fun setUpOrdersRecyclerView() {
         ProducerMenuActivity.ORDERS?.let { orders ->
             if(orders.isNotEmpty()) {

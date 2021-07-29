@@ -50,6 +50,6 @@ class ProducerMenuRepository {
     }
 
     suspend fun getOrdersDB(): QuerySnapshot? {
-        return ordersDB.whereEqualTo("confirmation", 0).whereEqualTo("producerId", auth?.uid).get().await()
+        return ordersDB.whereEqualTo("confirmation", 0).whereArrayContains("producerId", auth?.uid?:"").get().await()
     }
 }

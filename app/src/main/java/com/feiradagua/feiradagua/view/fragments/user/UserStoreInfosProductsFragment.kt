@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityExtraInfosProducerBinding
 import com.feiradagua.feiradagua.databinding.FragmentUserStoreInfosProductsBinding
+import com.feiradagua.feiradagua.model.`class`.Cart
 import com.feiradagua.feiradagua.model.`class`.Products
 import com.feiradagua.feiradagua.utils.Constants
+import com.feiradagua.feiradagua.utils.Constants.Intents.CART_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCER_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_INFO
+import com.feiradagua.feiradagua.utils.confirmIfProductExistsInCart
+import com.feiradagua.feiradagua.utils.getItemFromIdCart
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserProductInfoActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserStoreInfosActivity
@@ -59,10 +63,25 @@ class UserStoreInfosProductsFragment : Fragment() {
             UserStoreInfosActivity.PRODUCTS.let {list ->
                 list[getId]?.let {
                     layoutManager = LinearLayoutManager(activity)
-                    adapter = StoreInfosProductMainAdapter(it) { startProductInfosActivity(it) }
+                    adapter = StoreInfosProductMainAdapter(it) { prod ->
+                        if(UserMenuActivity.MY_CART.confirmIfProductExistsInCart(prod.id)) {
+                            UserMenuActivity.MY_CART.getItemFromIdCart(prod.id)?.let { item ->
+                                startProductInfosActivityInCart(item)
+                            }
+                        }else {
+                            startProductInfosActivity(prod)
+                        }
+                    }
                 }
             }
         }
+    }
+
+    private fun startProductInfosActivityInCart(cart: Cart) {
+        val intent = Intent(activity, UserProductInfoActivity::class.java)
+        intent.putExtra(CART_INFO, cart)
+        intent.putExtra(POSITION, 3)
+        startActivity(intent)
     }
 
     private fun startProductInfosActivity(prod: Products) {

@@ -89,6 +89,15 @@ fun MutableList<Cart>.updateCartList(item: Cart) {
     }
 }
 
+fun MutableList<Cart>.getItemFromIdCart(id: String): Cart? {
+    this.forEach{
+        if(it.id == id) {
+            return it
+        }
+    }
+    return null
+}
+
 fun MutableList<Cart>.deleteItemFromCartList(item: Cart) {
     this.removeAll {it.id == item.id}
 }
@@ -125,6 +134,34 @@ fun MutableList<Producer>.getProducersToken(producersIds: MutableList<String>): 
         if(producersIds.contains(it.uid)) {
             list.add(it.token)
         }
+    }
+    return list
+}
+
+fun Order.getOrderProducts(product: MutableList<Products>?): MutableList<Products> {
+    val list = mutableListOf<Products>()
+    product?.forEach { prod ->
+        this.products.forEach {
+            if(prod.id == it.id){
+                list.add(prod)
+            }
+        }
+    }
+    return list
+}
+
+fun MutableList<Cart>.confirmIfProductExistsInCart(id: String): Boolean {
+    return !this.none { it.id == id }
+}
+
+fun MutableList<Order>.deleteOrderSolved(id: String) {
+    this.removeAll{it.id == id}
+}
+
+fun Order.getTotalPriceOfProduct(): MutableMap<String, Double> {
+    val list = mutableMapOf<String, Double>()
+    this.products.forEach {
+        list[it.id] = it.totalPrice
     }
     return list
 }

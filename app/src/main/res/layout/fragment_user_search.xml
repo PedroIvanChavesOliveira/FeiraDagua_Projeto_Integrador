@@ -31,6 +31,31 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationSearch"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            app:lottie_rawRes="@raw/lottie_search_animation"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:layout_constraintStart_toStartOf="@id/tilSearchStore"
+            app:layout_constraintEnd_toEndOf="@id/tilSearchStore"
+            app:layout_constraintTop_toBottomOf="@id/tilSearchStore"
+            app:layout_constraintBottom_toTopOf="@id/tvProducerNotFound"/>
+
+        <TextView
+            android:id="@+id/tvProducerNotFound"
+            style="@style/TextViewTitleProductorHome"
+            android:layout_marginTop="10dp"
+            android:text="Nenhum Produtor Encontrado!"
+            android:textSize="23sp"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/tilSearchStore"
+            app:layout_constraintEnd_toEndOf="@id/tilSearchStore"
+            app:layout_constraintTop_toBottomOf="@id/animationSearch"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvStoreHome"
             android:layout_width="0dp"

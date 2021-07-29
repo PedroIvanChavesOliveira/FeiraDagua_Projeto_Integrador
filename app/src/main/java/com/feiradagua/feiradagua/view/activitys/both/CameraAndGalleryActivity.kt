@@ -10,6 +10,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -18,6 +21,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.feiradagua.feiradagua.R
@@ -60,6 +64,19 @@ class CameraAndGalleryActivity : AppCompatActivity() {
         position = intent.getIntExtra(POSITION, 0)
         getProductId = intent.getStringExtra(PRODUCT_ID).toString()
 
+        val getImageFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data?.data
+                intent?.let {
+                    when (position) {
+                        1 -> { addingPhotoToDB(intent) }
+                        2 -> { addingPhotoToProductsDB(intent) }
+                    }
+                }
+            }
+        }
+
         binding.ibChangeCamera.setOnClickListener {
             cameraChange = if(cameraChange == 0) { 1 } else { 0 }
             startCamera()
@@ -78,64 +95,51 @@ class CameraAndGalleryActivity : AppCompatActivity() {
         binding.cameraCaptureButton.setOnClickListener { takePhoto() }
         binding.btGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, 0)
-//            val resultLaunch = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result ->
-//                val data: Intent? = result.data
-//                val targetUri = data?.data
-//                if (result.resultCode == Activity.RESULT_OK) {
-//                    try {
-//                        targetUri?.let {
-//                            addingPhotoToDB(it)
-//                        }
-//                    } catch (exception: FileNotFoundException) {
-//                        exception.printStackTrace()
-//                    }
-//                }
-//            }
-//
-//            resultLaunch.launch(intent)
+            getImageFromGallery.launch(intent)
+//            getImageFromGallery.launch("image/*")
+//            startActivityForResult(intent, 0)
         }
         outputDirectory = getOutputDirectory()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val targetUri = data?.data
-        if (resultCode == Activity.RESULT_OK) {
-            try {
-                targetUri?.let { uri ->
-                    when(position) {
-                        1 -> { addingPhotoToDB(uri) }
-                        2 -> { addingPhotoToProductsDB(uri) }
-                    }
-//                    lifecycleScope.launch {
-////                        val inputStream = this@CameraAndGalleryActivity.contentResolver.openInputStream(uri)
-//                        uri.path?.let{
-//                            val file = File(it)
-////                            if(file.isFile) {
-//                                val compressedImage = Compressor.compress(this@CameraAndGalleryActivity, file)
-//                                val savedUri = Uri.fromFile(compressedImage)
-//                                when(position) {
-//                                    1 -> { addingPhotoToDB(savedUri) }
-//                                    2 -> { addingPhotoToProductsDB(savedUri) }
-//                                }
-////                            } else {
-////                                Toast.makeText(this@CameraAndGalleryActivity, "Não existe", Toast.LENGTH_LONG).show()
-////                            }
-////                            inputStream?.let {
-////                                file.copyInputStreamToFile(inputStream)
-////                                file
-////                            }
-//                        }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        val targetUri = data?.data
+//        if (resultCode == Activity.RESULT_OK) {
+//            try {
+//                targetUri?.let { uri ->
+//                    when(position) {
+//                        1 -> { addingPhotoToDB(uri) }
+//                        2 -> { addingPhotoToProductsDB(uri) }
 //                    }
-                }
-            } catch (exception: FileNotFoundException) {
-                exception.printStackTrace()
-            }
-        }
-    }
+////                    lifecycleScope.launch {
+//////                        val inputStream = this@CameraAndGalleryActivity.contentResolver.openInputStream(uri)
+////                        uri.path?.let{
+////                            val file = File(it)
+//////                            if(file.isFile) {
+////                                val compressedImage = Compressor.compress(this@CameraAndGalleryActivity, file)
+////                                val savedUri = Uri.fromFile(compressedImage)
+////                                when(position) {
+////                                    1 -> { addingPhotoToDB(savedUri) }
+////                                    2 -> { addingPhotoToProductsDB(savedUri) }
+////                                }
+//////                            } else {
+//////                                Toast.makeText(this@CameraAndGalleryActivity, "Não existe", Toast.LENGTH_LONG).show()
+//////                            }
+//////                            inputStream?.let {
+//////                                file.copyInputStreamToFile(inputStream)
+//////                                file
+//////                            }
+////                        }
+////                    }
+//                }
+//            } catch (exception: FileNotFoundException) {
+//                exception.printStackTrace()
+//            }
+//        }
+//    }
 
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case

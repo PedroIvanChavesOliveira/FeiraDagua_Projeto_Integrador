@@ -38,6 +38,10 @@ class Constants {
         const val CART_INFO = "CartInfo"
     }
 
+    object VoiceRecognation {
+        const val REQUEST_CODE = 999
+    }
+
     object CameraX {
         const val TAG = "CameraXBasic"
         const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"

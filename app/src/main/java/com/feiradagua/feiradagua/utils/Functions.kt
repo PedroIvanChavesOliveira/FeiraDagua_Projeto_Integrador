@@ -1,8 +1,7 @@
 package com.feiradagua.feiradagua.utils
 
 import com.feiradagua.feiradagua.R
-import com.feiradagua.feiradagua.model.`class`.Producer
-import com.feiradagua.feiradagua.model.`class`.Products
+import com.feiradagua.feiradagua.model.`class`.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
 import java.io.File
@@ -68,6 +67,84 @@ fun Producer.updateProducer(producer: Producer) {
     this.phone = producer.phone
     this.email = producer.email
     this.type = producer.type
+    this.token = producer.token
+}
+
+fun User.updateUser(user: User) {
+    this.uid = user.uid
+    this.name = user.name
+    this.photo = user.photo
+    this.adress = user.adress
+    this.email = user.email
+    this.phone = user.phone
+    this.token = user.token
+    this.type = user.type
+}
+
+fun MutableList<Cart>.updateCartList(item: Cart) {
+    this.forEachIndexed { index, cart ->
+        if(item.id == cart.id) {
+            cart.totalPrice = item.totalPrice
+        }
+    }
+}
+
+fun MutableList<Cart>.deleteItemFromCartList(item: Cart) {
+    this.removeAll {it.id == item.id}
+}
+
+fun MutableList<Cart>.getTotalPrice(): String {
+    var totalValue = 0.0
+    this.forEach { item ->
+        totalValue += item.totalPrice
+    }
+    return "R$ $totalValue"
+}
+
+fun MutableList<Cart>.getTotalPriceValue(): Double {
+    var totalValue = 0.0
+    this.forEach { item ->
+        totalValue += item.totalPrice
+    }
+    return totalValue
+}
+
+fun MutableList<Cart>.getProducersIdsList(): MutableList<String> {
+    val list = mutableListOf<String>()
+    this.forEach {
+        if(!list.contains(it.producerId)) {
+            list.add(it.producerId)
+        }
+    }
+    return list
+}
+
+fun MutableList<Producer>.getProducersToken(producersIds: MutableList<String>): MutableList<String?> {
+    val list = mutableListOf<String?>()
+    this.forEach {
+        if(producersIds.contains(it.uid)) {
+            list.add(it.token)
+        }
+    }
+    return list
+}
+
+fun MutableList<Producer>.getProducer(id: String?): Producer? {
+    this.forEach {
+        if(it.uid == id) {
+            return it
+        }
+    }
+    return null
+}
+
+fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {
+    val list = mutableListOf<ProductOrder>()
+    this.forEach {
+        val productOrder = ProductOrder(it.id, it.totalPrice)
+        list.add(productOrder)
+    }
+    return list
 }
 
 fun MutableList<Products>.deleteProduct(id: String) {

@@ -2,39 +2,32 @@ package com.feiradagua.feiradagua.repository
 
 import com.feiradagua.feiradagua.api.APIService
 import com.feiradagua.feiradagua.api.ResponseAPI
-import com.feiradagua.feiradagua.model.`class`.Registered
+import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.User
 import com.feiradagua.feiradagua.utils.Constants
-import com.feiradagua.feiradagua.utils.Constants.Firebase.REGISTERED_COLLECTION
-import com.feiradagua.feiradagua.utils.Constants.Firebase.USER_COLLECTION
+import com.feiradagua.feiradagua.utils.updateProducer
+import com.feiradagua.feiradagua.utils.updateUser
+import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
+import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.tasks.await
 
-class ExtraInfosRepository {
+class UserUpdateProfileRepository {
     private val auth by lazy {
         Firebase.auth.currentUser
     }
 
     private val userDB by lazy {
-        Firebase.firestore.collection(USER_COLLECTION).document("${auth?.uid}" ?: "")
+        Firebase.firestore.collection(Constants.Firebase.USER_COLLECTION).document("${auth?.uid}" ?: "")
     }
 
-    private val registeredDB by lazy {
-        Firebase.firestore.collection(REGISTERED_COLLECTION).document("${auth?.uid}" ?: "")
-    }
-
-    suspend fun getUserDB(): DocumentSnapshot {
-        return userDB.get().await()
-    }
-
-    suspend fun setExtraInfosDB(type: Int, adress: String, registered: Registered, phone: String) {
-        userDB.update(mapOf("type" to type, "adress" to adress, "phone" to phone)).await()
-        registeredDB.set(registered, SetOptions.merge()).await()
+    suspend fun updateUser(user: User): Boolean {
+        userDB.set(user, SetOptions.merge()).await()
+        UserMenuActivity.USER.updateUser(user)
+        return true
     }
 
     suspend fun viaCepResponse(cep: Int): ResponseAPI {
@@ -45,9 +38,9 @@ class ExtraInfosRepository {
                 ResponseAPI.Success(response.body())
             }else {
                 if(response.code() == 400) {
-                    ResponseAPI.Error("CEP Digitado Errado")
+                    ResponseAPI.Error(response.errorBody().toString())
                 }else {
-                    ResponseAPI.Error("CEP errado")
+                    ResponseAPI.Error(response.errorBody().toString())
                 }
             }
         }catch (exception: Exception) {

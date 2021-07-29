@@ -1,6 +1,7 @@
 package com.feiradagua.feiradagua.utils
 
 import android.Manifest
+import com.feiradagua.feiradagua.BuildConfig
 
 class Constants {
     object Login {
@@ -14,6 +15,14 @@ class Constants {
         const val PRODUCTS_COLLECTION = "Products"
     }
 
+    object  Notification {
+        const val BASE_URL = "https://fcm.googleapis.com"
+        const val SERVER_KEY = BuildConfig.NOTIFICATION_SERVER_KEY
+        const val CONTENT_TYPE = "application/json"
+        const val CHANNEL_ID = "my_channel"
+        const val TOPIC = "/topics/Topic"
+    }
+
     object BuscaCepAPI {
         const val VIA_CEP_BASE_URL = "https://viacep.com.br/"
     }
@@ -25,6 +34,12 @@ class Constants {
         const val PRODUCT_UPDATE = "ProductUpdate"
         const val PRODUCT_INFO = "ProductInfo"
         const val PRODUCT_ID = "ProductId"
+        const val PRODUCER_ID = "ProducerId"
+        const val CART_INFO = "CartInfo"
+    }
+
+    object VoiceRecognation {
+        const val REQUEST_CODE = 999
     }
 
     object CameraX {

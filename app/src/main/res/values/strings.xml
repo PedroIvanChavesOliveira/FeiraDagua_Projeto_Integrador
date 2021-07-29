@@ -20,6 +20,7 @@
     <string name="string_city_title">Qual a sua cidade?</string>
     <string name="string_city_hint">Informe a sua cidade</string>
     <string name="string_next_button">Avançar</string>
+    <string name="string_finish_order">Finalizar Pedido</string>
     <string name="string_presentation_title">Diga um pouco mais sobre vocês!!</string>
     <string name="string_presentation_hint">Insira uma apresentação</string>
     <string name="string_delivery_title">Diga-nos sua área de entrega</string>
@@ -85,6 +86,7 @@
     <string name="string_mask_cellphone">(##) #####-####</string>
     <string name="string_mask_uf">##</string>
     <string name="string_error_message">O campo %1$s é obrigatório</string>
+    <string name="string_error_message_cep">O CEP deve conter 8 dígitos</string>
     <string name="string_error_value_equals_zero">O preço não pode ser R$ 0.00</string>
     <string name="string_cellphone">Celular</string>
     <string name="string_cep_error">CEP</string>
@@ -106,10 +108,16 @@
     <string name="string_dialog_delete">Deletar</string>
     <string name="string_dialog_title">Deletar Produto</string>
     <string name="string_dialog_message">Deseja excluir esse produto?</string>
+    <string name="string_dialog_message_cart">Deseja excluir esse produto do carrinho?</string>
     <string name="string_snackbar_delete_done">Produto excluído com sucesso</string>
+    <string name="string_snackbar_order_sent">Pedido Enviado ao Produtor! Aguarde um retorno!</string>
     <string name="string_my_products">Meus Produtos</string>
     <string name="string_product_not_found">Nenhum Produto Cadastrado!</string>
     <string name="string_name_title_update">Qual o nome da sua empresa?</string>
     <string name="string_name_hint">Digite o nome da sua empresa</string>
     <string name="string_name_title_profile">Olá, %1$s!</string>
+    <string name="string_product_not_found_order">Nenhum Produto Adicionado ao Carrinho</string>
+
+    <string name="string_title_notification_from_user">Novo Pedido</string>
+    <string name="string_message_notification_from_user">O cliente %1$s realizou um novo pedido</string>
 </resources>

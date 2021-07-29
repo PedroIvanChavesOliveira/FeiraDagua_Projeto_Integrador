@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.feiradagua.feiradagua">
+
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +16,15 @@
         android:roundIcon="@drawable/logo_feira_dagua_remove"
         android:supportsRtl="true"
         android:theme="@style/Theme.FeiraDagua">
+        <service android:name=".model.class.notification.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.android.c2dm.permission.RECEIVE"/>
+            </intent-filter>
+        </service>
+
+        <activity android:name=".view.activitys.user.UserSendOrderActivity" />
         <activity android:name=".view.activitys.both.CameraAndGalleryActivity" />
         <activity android:name=".view.activitys.producer.ProducerUpdateProfileActivity" />
         <activity android:name=".view.activitys.producer.ProducerUpdateAndAddProductActivity" />
@@ -20,14 +33,14 @@
         <activity android:name=".view.activitys.user.UserUpdateProfileActivity" />
         <activity android:name=".view.activitys.user.UserStoreInfosActivity" />
         <activity android:name=".view.activitys.producer.ProducerMenuActivity" />
-        <activity android:name=".view.activitys.producer.ExtraInfosProducerActivity" >
-        </activity>
+        <activity android:name=".view.activitys.producer.ExtraInfosProducerActivity"></activity>
         <activity android:name=".view.activitys.user.UserMenuActivity" />
         <activity android:name=".view.activitys.both.ExtraInfosActivity" />
         <activity android:name=".view.activitys.both.LoginActivity" />
         <activity android:name=".view.activitys.both.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

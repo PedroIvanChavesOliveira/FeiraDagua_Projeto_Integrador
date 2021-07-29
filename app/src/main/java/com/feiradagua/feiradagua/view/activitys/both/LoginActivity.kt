@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
@@ -21,7 +22,7 @@ import kotlin.math.E
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private var viewModelLogin = LoginViewModel()
+    private val viewModelLogin: LoginViewModel by viewModels()
     private val providers by lazy {
         arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
@@ -32,8 +33,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModelLogin = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         startActivityForResult(
             AuthUI.getInstance()
@@ -54,37 +53,39 @@ class LoginActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 viewModelLogin.getUser()
                 viewModelLogin.getUserDb()
+                viewModelLogin.getToken()
                 viewModelLogin.userOk.observe(this) {
-                    it?.let {user ->
-//                        SplashActivity.CURRENT_USER = user
-                        var photo = ""
-                        if(user.photoUrl != null) {
-                            photo = user.photoUrl.toString()
-                        }
-                        val setUser = User(user.uid, user.displayName, user.email, user.phoneNumber, photo)
-                        viewModelLogin.dbOk.observe(this) {doc ->
-                            if(!doc.exists()) {
-                                viewModelLogin.addUserOnDataBase(setUser)
-                                startExtraInfosActivity()
-                            }else {
-                                viewModelLogin.getRegisteredDB()
-                                viewModelLogin.registeredOk.observe(this) {reg ->
-                                    reg?.let { type ->
-                                        type.type?.let {
-                                            when (it) {
-                                                1 -> {
-                                                    startMenuUserActivity()
-                                                }
-                                                2 -> {
-                                                    startMenuProducerActivity()
-                                                }
-                                                else -> {
-                                                    startExtraInfosActivity()
+                    viewModelLogin.token.observe(this) { token ->
+                        it?.let {user ->
+                            var photo = ""
+                            if(user.photoUrl != null) {
+                                photo = user.photoUrl.toString()
+                            }
+                            val setUser = User(user.uid, user.displayName, user.email, user.phoneNumber, photo, token=token)
+                            viewModelLogin.dbOk.observe(this) {doc ->
+                                if(!doc.exists()) {
+                                    viewModelLogin.addUserOnDataBase(setUser)
+                                    startExtraInfosActivity()
+                                }else {
+                                    viewModelLogin.getRegisteredDB()
+                                    viewModelLogin.registeredOk.observe(this) {reg ->
+                                        reg?.let { type ->
+                                            type.type?.let {
+                                                when (it) {
+                                                    1 -> {
+                                                        startMenuUserActivity()
+                                                    }
+                                                    2 -> {
+                                                        startMenuProducerActivity()
+                                                    }
+                                                    else -> {
+                                                        startExtraInfosActivity()
+                                                    }
                                                 }
                                             }
+                                        } ?: run {
+                                            startExtraInfosActivity()
                                         }
-                                    } ?: run {
-                                        startExtraInfosActivity()
                                     }
                                 }
                             }

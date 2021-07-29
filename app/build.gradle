@@ -6,6 +6,10 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+def getNotificationsKeyFile = rootProject.file("secrets.properties")
+def getNotificationsKey = new Properties()
+getNotificationsKey.load(new FileInputStream(getNotificationsKeyFile))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -16,6 +20,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "NOTIFICATION_SERVER_KEY", getNotificationsKey['NOTIFICATION_SERVER_KEY'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,6 +58,7 @@ dependencies {
     //Image Implementation
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.airbnb.android:lottie:3.5.0'
 
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
@@ -85,6 +91,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-common-ktx:19.5.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:22.1.0'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //retrofit

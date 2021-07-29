@@ -39,7 +39,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/tvCellTitleUpdate"/>
+                    app:layout_constraintBottom_toTopOf="@id/tvNameTitleUpdate"/>
+
+                <TextView
+                    android:id="@+id/tvNameTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/string_name_title_update"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/ivProfileUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilNameUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNameUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_name_hint"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvCellTitleUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietNameUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        android:tag="@string/string_name_hint"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/tvCellTitleUpdate"
@@ -47,7 +74,7 @@
                     android:layout_marginStart="10dp"
                     android:text="@string/string_whatsapp_title"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivProfileUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilNameUpdate"
                     app:layout_constraintBottom_toTopOf="@id/tilCellNumberUpdate"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +92,7 @@
                         android:id="@+id/tietCellNumberUpdate"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="phone"
-                        />
+                        android:tag="@string/string_whatsapp_number_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -90,7 +117,7 @@
                         android:id="@+id/tietCepUpdate"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
-                        />
+                        android:tag="@string/string_cep_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -115,7 +142,7 @@
                         android:id="@+id/tietStreetUpdate"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
-                        />
+                        android:tag="@string/string_street_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -140,7 +167,7 @@
                         android:id="@+id/tietDistrictUpdate"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
-                        />
+                        android:tag="@string/string_district_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -165,7 +192,7 @@
                         android:id="@+id/tietNumberUpdate"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
-                        />
+                        android:tag="@string/string_number_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -190,7 +217,7 @@
                         android:id="@+id/tietComplementUpdate"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
-                        />
+                        android:tag="@string/string_complement_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -209,12 +236,38 @@
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
                     app:layout_constraintTop_toBottomOf="@id/tvCityTitleUpdate"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
-                    app:layout_constraintBottom_toTopOf="@id/btContinueUpdate">
+                    app:layout_constraintBottom_toTopOf="@id/tvUfTitleUpdate">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietCityUpdate"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="text"
+                        android:tag="@string/string_city_hint"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvUfTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_uf_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilCityUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/tilUfUpdate"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUfUpdate"
+                    style="@style/TextInputDefault"
+                    android:hint="@string/string_uf_hint"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvUfTitleUpdate"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/btContinueUpdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietUfUpdate"
+                        style="@style/TextInputEditTextDefault"
+                        android:inputType="text"
+                        android:tag="@string/string_uf_hint"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -225,7 +278,7 @@
                     android:text="@string/string_update_data"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdate"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdate"
-                    app:layout_constraintTop_toBottomOf="@id/tilCityUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilUfUpdate"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,10 @@
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
+/app/src/main/java/com/feiradagua/feiradagua/utils/Constants.kt
 /app/google-services.json
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+secrets.properties

@@ -64,7 +64,11 @@ class UserShopCartFragment : Fragment() {
         tutorial = arguments?.getBoolean(TUTORIAL) == true
 
         if(tutorial) {
-            initTutorial()
+            context?.let {
+                if(TutorialPreferences.getTutorialStatus(it, 5) == true) {
+                    initTutorial()
+                }
+            }
         }else {
             sendOrderToProducer()
             setUpRecyclerView()
@@ -206,6 +210,7 @@ class UserShopCartFragment : Fragment() {
                     val intent = Intent(activity, UserMenuActivity::class.java)
                     intent.putExtra(TUTORIAL, true)
                     intent.putExtra(POSITION, 2)
+                    context?.let { TutorialPreferences.tutorialPreferences(it, false, 5) }
                     startActivity(intent)
                     activity?.finish()
                 }

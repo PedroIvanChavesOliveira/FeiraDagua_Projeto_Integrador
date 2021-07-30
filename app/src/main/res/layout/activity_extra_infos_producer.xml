@@ -50,7 +50,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietPresentationPresentation"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="text"
+                        android:inputType="textLongMessage"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 

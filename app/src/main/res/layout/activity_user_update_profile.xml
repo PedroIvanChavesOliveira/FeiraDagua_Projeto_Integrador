@@ -216,7 +216,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietComplementUpdate"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:tag="@string/string_complement_hint"/>
                 </com.google.android.material.textfield.TextInputLayout>
 

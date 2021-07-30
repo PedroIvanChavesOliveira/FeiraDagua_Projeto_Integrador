@@ -19,6 +19,7 @@ import com.feiradagua.feiradagua.utils.Constants.Intents.CART_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.utils.updateCartList
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
@@ -42,7 +43,9 @@ class UserProductInfoActivity : AppCompatActivity() {
         tutorial = intent.getBooleanExtra(TUTORIAL, false)
 
         if(tutorial) {
-            initTutorial()
+            if(TutorialPreferences.getTutorialStatus(this, 4) == true) {
+                initTutorial()
+            }
         }else {
             when(getOrigin) {
                 1 -> { setUpProductInfosFromProducer(getProductInfos) }
@@ -175,6 +178,7 @@ class UserProductInfoActivity : AppCompatActivity() {
                     val intent = Intent(this@UserProductInfoActivity, UserMenuActivity::class.java)
                     intent.putExtra(TUTORIAL, true)
                     intent.putExtra(POSITION, 1)
+                    TutorialPreferences.tutorialPreferences(this@UserProductInfoActivity, false, 4)
                     startActivity(intent)
                     finish()
                 }

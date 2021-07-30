@@ -20,6 +20,7 @@ import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.TutorialData
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCER_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserStoreInfosActivity
 import com.feiradagua.feiradagua.view.adapter.UserSearchMainAdapter
@@ -63,7 +64,11 @@ class UserSearchFragment : Fragment() {
         tutorial = arguments?.getBoolean(TUTORIAL) == true
 
         if(tutorial) {
-            initTutorial()
+            context?.let {
+                if(TutorialPreferences.getTutorialStatus(it, 1) == true) {
+                    initTutorial()
+                }
+            }
         }else {
             if(start == 0) {
                 setUpRecyclerView(null)
@@ -179,6 +184,8 @@ class UserSearchFragment : Fragment() {
                     val intent = Intent(activity, UserStoreInfosActivity::class.java)
                     intent.putExtra(TUTORIAL, true)
                     startActivity(intent)
+                    context?.let { TutorialPreferences.tutorialPreferences(it, false, 1) }
+                    activity?.finish()
                 }
                 override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
                 override fun onSequenceCanceled(lastTarget: TapTarget?) {}

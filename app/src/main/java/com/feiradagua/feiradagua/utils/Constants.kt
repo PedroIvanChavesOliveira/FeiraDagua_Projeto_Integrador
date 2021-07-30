@@ -15,6 +15,16 @@ class Constants {
         const val PRODUCTS_COLLECTION = "Products"
     }
 
+    object  SharedPreferences {
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIRST = "ShowTutorial1"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SECOND = "ShowTutorial2"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_THIRD = "ShowTutorial3"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FORTH = "ShowTutorial4"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIFTH= "ShowTutorial5"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SIXTH = "ShowTutorial6"
+        const val SHAREDPREFERENCES_TUTORIAL_KEY = "show"
+    }
+
     object  Notification {
         const val BASE_URL = "https://fcm.googleapis.com"
         const val SERVER_KEY = BuildConfig.NOTIFICATION_SERVER_KEY

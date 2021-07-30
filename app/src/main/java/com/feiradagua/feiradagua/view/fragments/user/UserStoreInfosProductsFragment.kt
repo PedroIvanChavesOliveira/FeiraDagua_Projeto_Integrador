@@ -21,6 +21,7 @@ import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCER_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.utils.confirmIfProductExistsInCart
 import com.feiradagua.feiradagua.utils.getItemFromIdCart
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
@@ -63,10 +64,18 @@ class UserStoreInfosProductsFragment : Fragment() {
         }
 
         if(tutorial == true) {
-            initTutorial()
+            context?.let {
+                if(TutorialPreferences.getTutorialStatus(it, 3) == true) {
+                    initTutorial()
+                }
+            }
         }else {
             setUpRecyclerView()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun setUpRecyclerView() {
@@ -135,6 +144,7 @@ class UserStoreInfosProductsFragment : Fragment() {
                 override fun onSequenceFinish() {
                     val intent = Intent(activity, UserProductInfoActivity::class.java)
                     intent.putExtra(TUTORIAL, true)
+                    context?.let { TutorialPreferences.tutorialPreferences(it, false, 3) }
                     startActivity(intent)
                     activity?.finish()
                 }

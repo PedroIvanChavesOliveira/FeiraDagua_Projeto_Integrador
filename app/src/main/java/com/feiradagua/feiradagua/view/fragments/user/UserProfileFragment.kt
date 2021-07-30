@@ -13,6 +13,7 @@ import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.FragmentUserProfileBinding
 import com.feiradagua.feiradagua.utils.Constants
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.view.activitys.both.LoginActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserStoreInfosActivity
@@ -51,15 +52,12 @@ class UserProfileFragment : Fragment() {
         }
 
         if(tutorial) {
-            initTutorial()
+            context?.let {
+                if(TutorialPreferences.getTutorialStatus(it, 6) == true) {
+                    initTutorial()
+                }
+            }
         }else {
-            setUserInfos()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if(!tutorial) {
             setUserInfos()
         }
     }
@@ -105,6 +103,7 @@ class UserProfileFragment : Fragment() {
             object : TapTargetSequence.Listener {
                 override fun onSequenceFinish() {
                     val intent = Intent(activity, UserMenuActivity::class.java)
+                    context?.let { TutorialPreferences.tutorialPreferences(it, false, 6) }
                     startActivity(intent)
                     activity?.finish()
                 }

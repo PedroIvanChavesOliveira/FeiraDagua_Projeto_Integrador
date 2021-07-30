@@ -15,6 +15,7 @@ import com.feiradagua.feiradagua.model.`class`.TutorialData
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCER_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.utils.checkByTag
 import com.feiradagua.feiradagua.utils.getProducer
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
@@ -48,13 +49,23 @@ class UserStoreInfosAboutUsFragment : Fragment() {
         }
 
         if(tutorial) {
-            initTutorial()
+            context?.let {
+                if(TutorialPreferences.getTutorialStatus(it, 2) == true) {
+                    initTutorial()
+                }
+            }
         }else {
             producer = UserMenuActivity.PRODUCERS.getProducer(getId)
             setUpProducerInfos()
         }
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//        if(tutorial) {
+//            initTutorial()
+//        }
+//    }
     private fun setUpProducerInfos() {
         producer?.let {producer ->
             Glide.with(this).load(producer.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProfile)
@@ -160,6 +171,7 @@ class UserStoreInfosAboutUsFragment : Fragment() {
                     val intent = Intent(activity, UserStoreInfosActivity::class.java)
                     intent.putExtra(POSITION, 1)
                     intent.putExtra(TUTORIAL, true)
+                    context?.let { TutorialPreferences.tutorialPreferences(it, false, 2) }
                     startActivity(intent)
                     activity?.finish()
                 }

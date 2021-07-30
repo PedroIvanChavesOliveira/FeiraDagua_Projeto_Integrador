@@ -208,12 +208,6 @@ class UserShopCartFragment : Fragment() {
                     intent.putExtra(POSITION, 2)
                     startActivity(intent)
                     activity?.finish()
-//                    val frag = activity?.supportFragmentManager?.beginTransaction()
-//                    val bundle = Bundle()
-//                    bundle.putBoolean(TUTORIAL, true)
-//                    UserProfileFragment().arguments = bundle
-//                    frag?.replace(R.id.flContainerHomeUserActivity, UserProfileFragment())
-//                    frag?.commit()
                 }
                 override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
                 override fun onSequenceCanceled(lastTarget: TapTarget?) {}

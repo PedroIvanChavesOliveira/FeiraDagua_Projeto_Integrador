@@ -69,15 +69,22 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
             if(cepValue.length == 8) {
                 viewModelProducerUpdate.viaCepAPIResponse(cepValue.toInt())
                 viewModelProducerUpdate.viaCepResponseSuccess.observe(this) {cep ->
-                    binding.tietCityUpdateProducer.setText(cep.localidade)
-                    binding.tietStreetUpdateProducer.setText(cep.logradouro)
-                    binding.tietDistrictUpdateProducer.setText(cep.bairro)
-                    binding.tietUfUpdateProducer.setText(cep.uf)
+                    if(cep.bairro.isNullOrEmpty()) {
+                        binding.tilCepUpdateProducer.error = "Este CEP não é válido"
+                        isCepOk = false
+                    }else {
+                        binding.tilCepUpdateProducer.isErrorEnabled = false
+                        isCepOk = true
+                        binding.tietCityUpdateProducer.setText(cep.localidade)
+                        binding.tietStreetUpdateProducer.setText(cep.logradouro)
+                        binding.tietDistrictUpdateProducer.setText(cep.bairro)
+                        binding.tietUfUpdateProducer.setText(cep.uf)
 
-                    binding.tietCityUpdateProducer.isEnabled = false
-                    binding.tietStreetUpdateProducer.isEnabled = false
-                    binding.tietDistrictUpdateProducer.isEnabled = false
-                    binding.tietUfUpdateProducer.isEnabled = false
+                        binding.tietCityUpdateProducer.isEnabled = false
+                        binding.tietStreetUpdateProducer.isEnabled = false
+                        binding.tietDistrictUpdateProducer.isEnabled = false
+                        binding.tietUfUpdateProducer.isEnabled = false
+                    }
                 }
             }else {
                 binding.tietCityUpdateProducer.isEnabled = true
@@ -117,8 +124,24 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
                 textInputLayout.isErrorEnabled = false
                 setByTag(editText.tag as String, true)
             }
+
+            if(editText.tag == getString(R.string.string_whatsapp_number_hint)) {
+                if(text?.length == 15) {
+                    if(validatingPhoneNumber(text.toString())) {
+                        isNumberOk = true
+                        textInputLayout.isErrorEnabled = false
+                    }else {
+                        isNumberOk = false
+                        textInputLayout.error = getString(R.string.string_error_phone_not_valid)
+                    }
+                }
+            }
             activatingButton()
         }
+    }
+
+    private fun validatingPhoneNumber(phone: String): Boolean {
+        return phone.validatingPhone()
     }
 
     private fun startingCameraActivity() {

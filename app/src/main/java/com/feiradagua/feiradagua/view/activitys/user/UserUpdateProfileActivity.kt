@@ -15,6 +15,7 @@ import com.feiradagua.feiradagua.model.`class`.Registered
 import com.feiradagua.feiradagua.model.`class`.User
 import com.feiradagua.feiradagua.utils.Constants
 import com.feiradagua.feiradagua.utils.splitAdress
+import com.feiradagua.feiradagua.utils.validatingPhone
 import com.feiradagua.feiradagua.view.activitys.both.CameraAndGalleryActivity
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.viewModel.UserUpdateProfileViewModel
@@ -95,15 +96,22 @@ class UserUpdateProfileActivity : AppCompatActivity() {
             if(cepValue.length == 8) {
                 viewModelUserUpdate.viaCepAPIResponse(cepValue.toInt())
                 viewModelUserUpdate.viaCepResponseSuccess.observe(this) {cep ->
-                    binding.tietCityUpdate.setText(cep.localidade)
-                    binding.tietStreetUpdate.setText(cep.logradouro)
-                    binding.tietDistrictUpdate.setText(cep.bairro)
-                    binding.tietUfUpdate.setText(cep.uf)
+                    if(cep.bairro.isNullOrEmpty()) {
+                        binding.tilCepUpdate.error = "Este CEP não é válido"
+                        isCepOk = false
+                    }else {
+                        binding.tilCepUpdate.isErrorEnabled = false
+                        isCepOk = true
+                        binding.tietCityUpdate.setText(cep.localidade)
+                        binding.tietStreetUpdate.setText(cep.logradouro)
+                        binding.tietDistrictUpdate.setText(cep.bairro)
+                        binding.tietUfUpdate.setText(cep.uf)
 
-                    binding.tietCityUpdate.isEnabled = false
-                    binding.tietStreetUpdate.isEnabled = false
-                    binding.tietDistrictUpdate.isEnabled = false
-                    binding.tietUfUpdate.isEnabled = false
+                        binding.tietCityUpdate.isEnabled = false
+                        binding.tietStreetUpdate.isEnabled = false
+                        binding.tietDistrictUpdate.isEnabled = false
+                        binding.tietUfUpdate.isEnabled = false
+                    }
                 }
             }else {
                 binding.tietCityUpdate.isEnabled = true
@@ -139,8 +147,24 @@ class UserUpdateProfileActivity : AppCompatActivity() {
                     setByTag(editText.tag as String, false)
                 }
             }
+
+            if(editText.tag == getString(R.string.string_whatsapp_number_hint)) {
+                if(text?.length == 15) {
+                    if(validatingPhoneNumber(text.toString())) {
+                        isNumberOk = true
+                        textInputLayout.isErrorEnabled = false
+                    }else {
+                        isNumberOk = false
+                        textInputLayout.error = getString(R.string.string_error_phone_not_valid)
+                    }
+                }
+            }
             activatingButton()
         }
+    }
+
+    private fun validatingPhoneNumber(phone: String): Boolean {
+        return phone.validatingPhone()
     }
 
     private fun startingCameraActivity() {

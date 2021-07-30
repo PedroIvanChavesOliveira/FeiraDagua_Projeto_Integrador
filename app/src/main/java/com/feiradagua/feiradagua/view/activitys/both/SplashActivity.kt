@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.databinding.ActivitySplashBinding
+import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION_SPLASH
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.viewModel.SplashViewModel
@@ -60,7 +61,9 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initMenuUserActivity() {
-        startActivity(Intent(this, UserMenuActivity::class.java))
+        val intent = Intent(this, UserMenuActivity::class.java)
+        intent.putExtra(POSITION_SPLASH, 1)
+        startActivity(intent)
         finish()
     }
 

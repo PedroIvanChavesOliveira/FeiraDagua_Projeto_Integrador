@@ -1,7 +1,9 @@
 package com.feiradagua.feiradagua.view.activitys.user
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -12,13 +14,18 @@ import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityUserProductInfoBinding
 import com.feiradagua.feiradagua.model.`class`.Cart
 import com.feiradagua.feiradagua.model.`class`.Products
+import com.feiradagua.feiradagua.model.`class`.TutorialData
 import com.feiradagua.feiradagua.utils.Constants.Intents.CART_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_INFO
+import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.utils.updateCartList
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 
 class UserProductInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserProductInfoBinding
+    private var tutorial = false
     private var getProductInfos: Products? = null
     private var getCartInfo: Cart? = null
     private var getOrigin = 0
@@ -32,20 +39,25 @@ class UserProductInfoActivity : AppCompatActivity() {
         getProductInfos = intent.getParcelableExtra(PRODUCT_INFO)
         getCartInfo = intent.getParcelableExtra(CART_INFO)
         getOrigin = intent.getIntExtra(POSITION, 0)
+        tutorial = intent.getBooleanExtra(TUTORIAL, false)
 
-        when(getOrigin) {
-            1 -> { setUpProductInfosFromProducer(getProductInfos) }
-            2 -> { setUpProductInfosFromUser(getProductInfos) }
-            3 -> { setUpProductInfosFromCart(getCartInfo) }
+        if(tutorial) {
+            initTutorial()
+        }else {
+            when(getOrigin) {
+                1 -> { setUpProductInfosFromProducer(getProductInfos) }
+                2 -> { setUpProductInfosFromUser(getProductInfos) }
+                3 -> { setUpProductInfosFromCart(getCartInfo) }
+            }
+
+            getCartInfo?.let {
+                updateCartProducts(it)
+            }?: run {
+                savingToTheCart()
+            }
+
+            settingCount()
         }
-
-        getCartInfo?.let {
-            updateCartProducts(it)
-        }?: run {
-            savingToTheCart()
-        }
-
-        settingCount()
     }
 
     private fun setUpProductInfosFromCart(cart: Cart?) {
@@ -120,5 +132,55 @@ class UserProductInfoActivity : AppCompatActivity() {
             binding.tvProductNumberValue.text = count.toString()
             binding.btAddToCart.isEnabled = count>=1
         }
+    }
+
+    private fun initTutorial() {
+        val tutorialInfos = TutorialData().setUpCartRecyclerView()
+        tutorialInfos.forEach { item ->
+            Glide.with(this).load(R.drawable.logo_feira_dagua_remove).into(binding.ivProduct)
+            binding.tvProductNameValue.text = item.description
+            binding.tvProductNameTitle.text = item.name
+            binding.tvProductNumberValue.text = "2"
+            binding.tvProductValue.text = "R$ ${item.price}"
+        }
+
+        TapTargetSequence(this).targets(
+            TapTarget.forView(
+                binding.ivProduct, "Informações do Produto",
+                "Aqui se encontram as principais informações desse produto!!"
+            )
+                .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                .cancelable(false)
+                .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                .titleTextSize(20).descriptionTextSize(16).targetRadius(200),
+            TapTarget.forView(
+                binding.productCountCard, "Selecionar a Quantidade",
+                "Aqui é o local que você poderá escolher a quantidade desse produto você quer comprar!!"
+            )
+                .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                .cancelable(false)
+                .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                .titleTextSize(20).descriptionTextSize(16).targetRadius(100),
+            TapTarget.forView(
+                binding.btAddToCart, "Adicionar ao Carrinho",
+                "Apenas com um clique, você irá adicionar esse produto ao seu tão precioso carrinho!!"
+            )
+                .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                .cancelable(false)
+                .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                .titleTextSize(20).descriptionTextSize(16).targetRadius(100)
+        ).listener(
+            object : TapTargetSequence.Listener {
+                override fun onSequenceFinish() {
+                    val intent = Intent(this@UserProductInfoActivity, UserMenuActivity::class.java)
+                    intent.putExtra(TUTORIAL, true)
+                    intent.putExtra(POSITION, 1)
+                    startActivity(intent)
+                    finish()
+                }
+                override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
+                override fun onSequenceCanceled(lastTarget: TapTarget?) {}
+            }
+        ).start()
     }
 }

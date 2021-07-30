@@ -15,17 +15,22 @@ import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.FragmentUserShopCartBinding
 import com.feiradagua.feiradagua.model.`class`.Cart
 import com.feiradagua.feiradagua.model.`class`.Order
+import com.feiradagua.feiradagua.model.`class`.TutorialData
 import com.feiradagua.feiradagua.model.`class`.notification.NotificationData
 import com.feiradagua.feiradagua.model.`class`.notification.PushNotification
 import com.feiradagua.feiradagua.utils.*
 import com.feiradagua.feiradagua.utils.Constants.Intents.CART_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
+import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.utils.Constants.Notification.TOPIC
 import com.feiradagua.feiradagua.utils.getTotalPrice
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserProductInfoActivity
 import com.feiradagua.feiradagua.view.adapter.UserShopCartMainAdapter
 import com.feiradagua.feiradagua.viewModel.UserShopCartViewModel
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
+import com.getkeepsafe.taptargetview.TapTargetView
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -38,6 +43,7 @@ import java.util.*
 
 class UserShopCartFragment : Fragment() {
     private lateinit var binding: FragmentUserShopCartBinding
+    private var tutorial = false
     private val idOrder = generateRandomUUID()
     private val viewModelShopCart: UserShopCartViewModel by viewModels()
 
@@ -55,15 +61,21 @@ class UserShopCartFragment : Fragment() {
 
         //Se precisar enviar notificações para um grupo x de usuários
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+        tutorial = arguments?.getBoolean(TUTORIAL) == true
 
-        sendOrderToProducer()
-        setUpRecyclerView()
+        if(tutorial) {
+            initTutorial()
+        }else {
+            sendOrderToProducer()
+            setUpRecyclerView()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-
-        setUpRecyclerView()
+        if(!tutorial) {
+            setUpRecyclerView()
+        }
     }
 
     private fun setUpRecyclerView() {
@@ -149,5 +161,63 @@ class UserShopCartFragment : Fragment() {
         intent.putExtra(CART_INFO, prod)
         intent.putExtra(POSITION, 3)
         startActivity(intent)
+    }
+
+    private fun initTutorial() {
+        binding.tvOrderNotFound.isVisible = false
+        binding.animationCart.isVisible = false
+        binding.rvCart.isVisible = true
+        binding.btFinish.isEnabled = true
+        binding.rvCart.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = UserShopCartMainAdapter(TutorialData().setUpCartRecyclerView(), {}) {}
+        }
+        binding.tvTotalValue.text = "R$ 37,00"
+        TapTargetSequence(activity).targets(
+            TapTarget.forView(
+                binding.tvYourCartTitle, "Seu Carrinho",
+                "Este é o seu carrinho, onde você poderá ver os produtos que você selecionou para efetuar a compra!!"
+            )
+                .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                .cancelable(false)
+                .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                .titleTextSize(20).descriptionTextSize(16).targetRadius(100),
+            TapTarget.forView(
+                binding.rvCart, "Produto Escolhido",
+                "Aqui você terá algumas informações do produto escolhido, caso queira editá-lo (adicionar ou remover itens)" +
+                        " basta clicar no cartão ou se simplesmente desistiu da compra deste produto é so apagar clicando na lixeirinha ao lado!!"
+            )
+                .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                .cancelable(false)
+                .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                .titleTextSize(20).descriptionTextSize(16).targetRadius(200),
+            TapTarget.forView(
+                binding.btFinish, "Finalizar o Pedido",
+                "Com tudo nos conformes, você poderá finalizar o seu pedido, escolhendo uma data para receber a sua Feira D'água" +
+                        " e então partir para o abraço!!"
+            )
+                .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                .cancelable(false)
+                .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                .titleTextSize(20).descriptionTextSize(16).targetRadius(100)
+        ).listener(
+            object : TapTargetSequence.Listener {
+                override fun onSequenceFinish() {
+                    val intent = Intent(activity, UserMenuActivity::class.java)
+                    intent.putExtra(TUTORIAL, true)
+                    intent.putExtra(POSITION, 2)
+                    startActivity(intent)
+                    activity?.finish()
+//                    val frag = activity?.supportFragmentManager?.beginTransaction()
+//                    val bundle = Bundle()
+//                    bundle.putBoolean(TUTORIAL, true)
+//                    UserProfileFragment().arguments = bundle
+//                    frag?.replace(R.id.flContainerHomeUserActivity, UserProfileFragment())
+//                    frag?.commit()
+                }
+                override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
+                override fun onSequenceCanceled(lastTarget: TapTarget?) {}
+            }
+        ).start()
     }
 }

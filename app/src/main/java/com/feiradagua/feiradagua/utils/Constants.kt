@@ -29,6 +29,7 @@ class Constants {
 
     object Intents {
         const val POSITION = "Position"
+        const val POSITION_SPLASH = "PositionSplash"
         const val EXTRA_INFOS = "ExtraInfos"
         const val ORDER_DETAILS = "OrderDetails"
         const val PRODUCT_UPDATE = "ProductUpdate"
@@ -36,6 +37,7 @@ class Constants {
         const val PRODUCT_ID = "ProductId"
         const val PRODUCER_ID = "ProducerId"
         const val CART_INFO = "CartInfo"
+        const val TUTORIAL = "Tutorial"
     }
 
     object VoiceRecognation {

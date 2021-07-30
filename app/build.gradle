@@ -60,6 +60,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.airbnb.android:lottie:3.5.0'
 
+    //Tutorial
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
+
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.2'

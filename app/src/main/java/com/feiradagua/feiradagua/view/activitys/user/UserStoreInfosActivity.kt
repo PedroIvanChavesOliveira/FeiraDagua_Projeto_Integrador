@@ -1,5 +1,6 @@
 package com.feiradagua.feiradagua.view.activitys.user
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -8,15 +9,21 @@ import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityUserStoreInfosBinding
 import com.feiradagua.feiradagua.model.`class`.Products
 import com.feiradagua.feiradagua.utils.Constants
+import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCER_ID
+import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.view.fragments.user.UserStoreInfosAboutUsFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserStoreInfosProductsFragment
 import com.feiradagua.feiradagua.viewModel.StoreInfosViewModel
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.google.android.material.tabs.TabLayout
 
 class UserStoreInfosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserStoreInfosBinding
     private val viewModelStoreInfos: StoreInfosViewModel by viewModels()
+    private var tutorial = false
+    private var tutorialPos = 0
     private var getProducerId = ""
 
     companion object {
@@ -28,8 +35,22 @@ class UserStoreInfosActivity : AppCompatActivity() {
         binding = ActivityUserStoreInfosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        tutorial = intent.getBooleanExtra(TUTORIAL, false)
+        tutorialPos = intent.getIntExtra(POSITION, 0)
         getProducerId = intent.getStringExtra(PRODUCER_ID).toString()
-        startFragments()
+
+        if(tutorial) {
+            when(tutorialPos) {
+                1 -> {
+                    initFragmentsTutorial(UserStoreInfosProductsFragment())
+                }
+                else -> {
+                    initFragmentsTutorial(UserStoreInfosAboutUsFragment())
+                }
+            }
+        }else {
+            startFragments()
+        }
     }
 
     private fun startFragments() {
@@ -65,6 +86,16 @@ class UserStoreInfosActivity : AppCompatActivity() {
         val frag = supportFragmentManager.beginTransaction()
         val bundle = Bundle()
         bundle.putString(PRODUCER_ID, getProducerId)
+        fragment.arguments = bundle
+        frag.replace(R.id.flContainerStoreInfoActivity, fragment)
+        frag.commit()
+    }
+
+    private fun initFragmentsTutorial(fragment: Fragment) {
+        val frag = supportFragmentManager.beginTransaction()
+        val bundle = Bundle()
+        bundle.putString(PRODUCER_ID, getProducerId)
+        bundle.putBoolean(TUTORIAL, true)
         fragment.arguments = bundle
         frag.replace(R.id.flContainerStoreInfoActivity, fragment)
         frag.commit()

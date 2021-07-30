@@ -14,6 +14,7 @@ import com.feiradagua.feiradagua.databinding.ActivityExtraInfosBinding
 import com.feiradagua.feiradagua.model.`class`.Mask
 import com.feiradagua.feiradagua.model.`class`.Registered
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
+import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.view.activitys.producer.ExtraInfosProducerActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.viewModel.ExtraInfosViewModel
@@ -181,6 +182,7 @@ class ExtraInfosActivity : AppCompatActivity() {
 
     private fun startMenuUserActivity() {
         val intent = Intent(this, UserMenuActivity::class.java)
+        intent.putExtra(TUTORIAL,true)
         startActivity(intent)
         finish()
     }

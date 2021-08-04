@@ -54,7 +54,7 @@ class UserStoreInfosProductsFragment : Fragment() {
         tutorial = arguments?.getBoolean(TUTORIAL)
 
         binding.floatingButtonWhatsApp.setOnClickListener {
-            UserMenuActivity.PRODUCERS.forEach { producer ->
+            UserMenuActivity.PRODUCERS?.forEach { producer ->
                 if(producer.uid == getId) {
                     producerPhone = producer.phone
                     producerName = producer.name
@@ -72,10 +72,6 @@ class UserStoreInfosProductsFragment : Fragment() {
         }else {
             setUpRecyclerView()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     private fun setUpRecyclerView() {

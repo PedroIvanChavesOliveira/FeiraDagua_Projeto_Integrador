@@ -11,7 +11,6 @@ import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityExtraInfosBinding
 import com.feiradagua.feiradagua.model.`class`.Mask
 import com.feiradagua.feiradagua.model.`class`.Registered
-import com.feiradagua.feiradagua.model.cep.ViaCep
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.utils.validatingPhone

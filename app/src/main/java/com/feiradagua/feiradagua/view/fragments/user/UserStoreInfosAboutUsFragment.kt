@@ -55,17 +55,11 @@ class UserStoreInfosAboutUsFragment : Fragment() {
                 }
             }
         }else {
-            producer = UserMenuActivity.PRODUCERS.getProducer(getId)
+            producer = UserMenuActivity.PRODUCERS?.getProducer(getId)
             setUpProducerInfos()
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        if(tutorial) {
-//            initTutorial()
-//        }
-//    }
     private fun setUpProducerInfos() {
         producer?.let {producer ->
             Glide.with(this).load(producer.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProfile)

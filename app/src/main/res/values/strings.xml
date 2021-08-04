@@ -113,6 +113,11 @@
     <string name="string_dialog_message_cart">Deseja excluir esse produto do carrinho?</string>
     <string name="string_dialog_send">Enviar</string>
     <string name="string_dialog_title_order">Por quais motivos recusou este pedido?</string>
+    <string name="string_dialog_email_message">
+        Foi enviado um e-mail de verificação para o seguinte e-mail: %1$s. Para continuar a usar o App essa ação é necessária!!
+    </string>
+    <string name="string_dialog_ok">Irei Verificar</string>
+    <string name="string_dialog_title_email">Verifique o seu E-mail</string>
     <string name="string_snackbar_delete_done">Produto excluído com sucesso</string>
     <string name="string_snackbar_order_sent">Pedido Enviado ao Produtor! Aguarde um retorno!</string>
     <string name="string_my_products">Meus Produtos</string>
@@ -138,4 +143,5 @@
     <string name="string_message_notification_from_producer_accept">
         Aceitaram o Seu Pedido, em Breve o Produtor irá Entrar em Contato!!
     </string>
+    <string name="string_back_arrow">Voltar</string>
 </resources>

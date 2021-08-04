@@ -98,6 +98,11 @@ class UserShopCartFragment : Fragment() {
                         .setNegativeButton(resources.getString(R.string.string_dialog_delete)) { _, _ ->
                             UserMenuActivity.MY_CART.deleteItemFromCartList(it)
                             binding.tvTotalValue.text = UserMenuActivity.MY_CART.getTotalPrice()
+                            if(UserMenuActivity.MY_CART.isEmpty()) {
+                                binding.tvOrderNotFound.isVisible = true
+                                binding.animationCart.isVisible = true
+                                binding.btFinish.isEnabled = false
+                            }
                             adapter?.notifyDataSetChanged()
                         }
                         .show()
@@ -143,8 +148,8 @@ class UserShopCartFragment : Fragment() {
                                 .show()
                         }
                     }
-                    UserMenuActivity.PRODUCERS.getProducersToken(UserMenuActivity.MY_CART.getProducersIdsList()).let {
-                        it.forEach { token ->
+                    UserMenuActivity.PRODUCERS?.getProducersToken(UserMenuActivity.MY_CART.getProducersIdsList()).let {
+                        it?.forEach { token ->
                             token?.let {
                                 PushNotification(
                                     NotificationData(getString(R.string.string_title_notification_from_user),

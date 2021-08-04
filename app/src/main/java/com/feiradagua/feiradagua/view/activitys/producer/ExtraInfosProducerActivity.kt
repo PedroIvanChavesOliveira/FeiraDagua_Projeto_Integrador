@@ -3,6 +3,7 @@ package com.feiradagua.feiradagua.view.activitys.producer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityExtraInfosProducerBinding
@@ -13,7 +14,7 @@ import com.feiradagua.feiradagua.viewModel.ExtraInfosProducerViewModel
 
 class ExtraInfosProducerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExtraInfosProducerBinding
-    private var viewModelExtraInfosProducer = ExtraInfosProducerViewModel()
+    private val viewModelExtraInfosProducer: ExtraInfosProducerViewModel by viewModels()
     private var deliveryDateArray = mutableListOf<String>()
     private var deliveryLocationArray = mutableListOf<String>()
     private var paymentArray = mutableListOf<String>()
@@ -22,8 +23,6 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityExtraInfosProducerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModelExtraInfosProducer = ViewModelProvider(this).get(ExtraInfosProducerViewModel::class.java)
 
         chipDeliveryDateSelection()
         chipDeliveryLocationSelection()
@@ -36,7 +35,7 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
             viewModelExtraInfosProducer.setExtraInfosDB(
                     presentationMessage(), deliveryDateArray, deliveryLocationArray, paymentArray
             )
-//            startProducerMenu()
+            startProducerMenu()
         }
     }
 
@@ -48,12 +47,12 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
         }
     }
 
-//    private fun startProducerMenu() {
-//        val intent = Intent(this, ProducerMenuActivity::class.java)
-//        intent.putExtra(EXTRA_INFOS, 1)
-//        startActivity(intent)
-//        finish()
-//    }
+    private fun startProducerMenu() {
+        val intent = Intent(this, ProducerMenuActivity::class.java)
+        intent.putExtra(EXTRA_INFOS, 1)
+        startActivity(intent)
+        finish()
+    }
 
     private fun chipDeliveryDateSelection() {
         binding.chipSunday.setOnCheckedChangeListener { buttonView, isChecked ->

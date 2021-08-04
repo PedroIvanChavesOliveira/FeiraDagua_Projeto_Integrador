@@ -30,7 +30,7 @@ class UserMenuActivity : AppCompatActivity() {
 
     companion object {
         lateinit var USER: User
-        lateinit var PRODUCERS: MutableList<Producer>
+        var PRODUCERS: MutableList<Producer>? = mutableListOf()
         var MY_CART: MutableList<Cart> = mutableListOf()
     }
 
@@ -59,6 +59,7 @@ class UserMenuActivity : AppCompatActivity() {
         }else {
             when(positionFromSplash) {
                 1 -> setUserData()
+                2 -> setUserData()
                 else -> {
                     initFragments(UserSearchFragment())
                     startNavBar()

@@ -27,8 +27,8 @@ class ProducerMenuActivity : AppCompatActivity() {
 
     companion object {
         lateinit var PRODUCER: Producer
-        var PRODUCTS: MutableList<Products>? = null
-        var ORDERS: MutableList<Order>? = null
+        var PRODUCTS: MutableList<Products>? = mutableListOf()
+        var ORDERS: MutableList<Order>? = mutableListOf()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

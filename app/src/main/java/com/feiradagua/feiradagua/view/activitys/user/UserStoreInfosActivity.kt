@@ -50,6 +50,13 @@ class UserStoreInfosActivity : AppCompatActivity() {
             }
         }else {
             startFragments()
+            setArrowBack()
+        }
+    }
+
+    private fun setArrowBack() {
+        binding.topAppBar.setNavigationOnClickListener {
+            finish()
         }
     }
 

@@ -99,21 +99,25 @@ class UserSearchFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(text: String?) {
-        when(filteredList(UserMenuActivity.PRODUCERS, text).size) {
-            0 -> {
-                binding.rvStoreHome.isVisible = false
-                binding.animationSearch.isVisible = true
-                binding.tvProducerNotFound.isVisible = true
-            }
-            else -> {
-                binding.rvStoreHome.isVisible = true
-                binding.rvStoreHome.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = UserSearchMainAdapter(filteredList(UserMenuActivity.PRODUCERS, text)) {
-                        startProducerInfos(it.uid)
+        UserMenuActivity.PRODUCERS?.let {
+            when(filteredList(it, text).size) {
+                0 -> {
+                    binding.rvStoreHome.isVisible = false
+                    binding.animationSearch.isVisible = true
+                    binding.tvProducerNotFound.isVisible = true
+                }
+                else -> {
+                    binding.rvStoreHome.isVisible = true
+                    UserMenuActivity.PRODUCERS?.let {
+                        binding.rvStoreHome.apply {
+                            layoutManager = LinearLayoutManager(activity)
+                            adapter = UserSearchMainAdapter(filteredList(it, text)) {
+                                startProducerInfos(it.uid)
+                            }
+                            binding.animationSearch.isVisible = false
+                            binding.tvProducerNotFound.isVisible = false
+                        }
                     }
-                    binding.animationSearch.isVisible = false
-                    binding.tvProducerNotFound.isVisible = false
                 }
             }
         }

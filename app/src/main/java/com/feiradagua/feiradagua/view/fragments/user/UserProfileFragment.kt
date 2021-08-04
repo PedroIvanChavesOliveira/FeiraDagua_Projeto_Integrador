@@ -62,6 +62,11 @@ class UserProfileFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setUserInfos()
+    }
+
     private fun setUserInfos() {
         val user = UserMenuActivity.USER
 

@@ -116,6 +116,7 @@ class UserShopCartFragment : Fragment() {
             binding.rvCart.isVisible = false
             binding.tvOrderNotFound.isVisible = true
             binding.animationCart.isVisible = true
+            binding.btFinish.isEnabled = false
 
             val paramsTv = binding.tvTotalValue.layoutParams as ConstraintLayout.LayoutParams
             val paramsBt = binding.btFinish.layoutParams as ConstraintLayout.LayoutParams
@@ -147,18 +148,20 @@ class UserShopCartFragment : Fragment() {
                                 .setTextColor(ContextCompat.getColor(activity, R.color.textColor))
                                 .show()
                         }
-                    }
-                    UserMenuActivity.PRODUCERS?.getProducersToken(UserMenuActivity.MY_CART.getProducersIdsList()).let {
-                        it?.forEach { token ->
-                            token?.let {
-                                PushNotification(
-                                    NotificationData(getString(R.string.string_title_notification_from_user),
-                                        getString(R.string.string_message_notification_from_user,
-                                            UserMenuActivity.USER.name)), token).also { not ->
-                                    viewModelShopCart.sendNotification(not)
+                        UserMenuActivity.PRODUCERS?.getProducersToken(UserMenuActivity.MY_CART.getProducersIdsList()).let {
+                            it?.forEach { token ->
+                                token?.let {
+                                    PushNotification(
+                                            NotificationData(getString(R.string.string_title_notification_from_user),
+                                                    getString(R.string.string_message_notification_from_user,
+                                                            UserMenuActivity.USER.name)), token).also { not ->
+                                        viewModelShopCart.sendNotification(not)
+                                    }
                                 }
                             }
                         }
+                        UserMenuActivity.MY_CART.clear()
+                        setUpRecyclerView()
                     }
                 }
             }

@@ -29,10 +29,13 @@ class UserSearchMainAdapter(
 
     class ViewHolder(val binding: RecyclerViewProductsCardBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(producer: Producer, onCardClick: (Producer) -> Unit) {
+            var text = ""
             Glide.with(itemView).load(producer.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivStore)
             binding.tvProducerNameTitle.text = producer.name
-            binding.tvProducerCategoryTitle.text = "Sem Categoria"
-
+            producer.category.forEach {
+                text = "$text $it,"
+            }
+            binding.tvProducerCategoryTitle.text = text
             itemView.setOnClickListener {
                 onCardClick(producer)
             }

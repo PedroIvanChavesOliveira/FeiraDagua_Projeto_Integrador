@@ -76,6 +76,9 @@ class UserStoreInfosAboutUsFragment : Fragment() {
             producer.payment.forEach { loc ->
                 getChipTagPayment(loc)
             }
+            producer.category.forEach { loc ->
+                getChipTagCategory(loc)
+            }
         }
     }
 
@@ -118,6 +121,13 @@ class UserStoreInfosAboutUsFragment : Fragment() {
         binding.chipBankTransfer.checkByTag(tag)
         binding.chipDebitCard.checkByTag(tag)
         binding.chipCreditCard.checkByTag(tag)
+    }
+
+    private fun getChipTagCategory(tag: String) {
+        binding.chipFish.checkByTag(tag)
+        binding.chipOyster.checkByTag(tag)
+        binding.chipShrimp.checkByTag(tag)
+        binding.chipAquaponic.checkByTag(tag)
     }
 
     private fun setUpProducerInfosTutorial() {

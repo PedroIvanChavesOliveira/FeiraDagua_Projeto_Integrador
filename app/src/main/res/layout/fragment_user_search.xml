@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rvStoreHome">
+            app:layout_constraintBottom_toTopOf="@id/scrollChipGroup">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietSearchStore"
@@ -31,17 +31,64 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <HorizontalScrollView
+            android:id="@+id/scrollChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilSearchStore"
+            app:layout_constraintBottom_toTopOf="@id/animationSearch">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFish"
+                    android:layout_marginStart="10dp"
+                    style="@style/ChipDefault"
+                    android:text="@string/string_chip_fish"
+                    android:tag="@string/string_chip_fish"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAquaponic"
+                    style="@style/ChipDefault"
+                    android:text="@string/string_chip_aquaponic"
+                    android:tag="@string/string_chip_aquaponic"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOyster"
+                    style="@style/ChipDefault"
+                    android:text="@string/string_chip_oyster"
+                    android:tag="@string/string_chip_oyster"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipShrimp"
+                    style="@style/ChipDefault"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/string_chip_shrimp"
+                    android:tag="@string/string_chip_shrimp"/>
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationSearch"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
             app:lottie_rawRes="@raw/lottie_search_animation"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:layout_constraintStart_toStartOf="@id/tilSearchStore"
             app:layout_constraintEnd_toEndOf="@id/tilSearchStore"
-            app:layout_constraintTop_toBottomOf="@id/tilSearchStore"
+            app:layout_constraintTop_toBottomOf="@id/scrollChipGroup"
             app:layout_constraintBottom_toTopOf="@id/tvProducerNotFound"/>
 
         <TextView
@@ -63,7 +110,7 @@
             android:layout_marginTop="20dp"
             tools:listitem="@layout/recycler_view_products_card"
             tools:itemCount="2"
-            app:layout_constraintTop_toBottomOf="@id/tilSearchStore"
+            app:layout_constraintTop_toBottomOf="@id/scrollChipGroup"
             app:layout_constraintStart_toStartOf="@+id/tilSearchStore"
             app:layout_constraintEnd_toEndOf="@+id/tilSearchStore"/>
 

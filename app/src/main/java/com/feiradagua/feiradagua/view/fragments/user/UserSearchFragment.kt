@@ -21,12 +21,14 @@ import com.feiradagua.feiradagua.model.`class`.TutorialData
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCER_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.utils.TutorialPreferences
+import com.feiradagua.feiradagua.utils.checkByTagFilter
+import com.feiradagua.feiradagua.utils.compareListsAndFilter
+import com.feiradagua.feiradagua.utils.filterByCategory
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserStoreInfosActivity
 import com.feiradagua.feiradagua.view.adapter.UserSearchMainAdapter
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
-import com.getkeepsafe.taptargetview.TapTargetView
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -34,6 +36,7 @@ class UserSearchFragment : Fragment() {
     private  lateinit var binding: FragmentUserSearchBinding
     private var tutorial = false
     private var start = 0
+    var nowChecked = ""
     private val setUpMicrophone = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
             val intent = result.data
@@ -71,12 +74,46 @@ class UserSearchFragment : Fragment() {
             }
         }else {
             if(start == 0) {
-                setUpRecyclerView(null)
+                setUpRecyclerView(null, nowChecked)
                 start++
             }
 
             binding.tilSearchStore.setEndIconOnClickListener {
                 openActivityForResult()
+            }
+
+            binding.chipShrimp.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked){
+                    nowChecked = binding.chipShrimp.checkByTagFilter(buttonView.tag.toString(), isChecked)
+                    setUpRecyclerView(VALUE_TEXT, nowChecked)
+                }else {
+                    setUpRecyclerView(VALUE_TEXT, "")
+                }
+            }
+            binding.chipOyster.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked){
+                    nowChecked = binding.chipOyster.checkByTagFilter(buttonView.tag.toString(), isChecked)
+                    setUpRecyclerView(VALUE_TEXT, nowChecked)
+                }else {
+                    setUpRecyclerView(VALUE_TEXT, "")
+                }
+            }
+            binding.chipAquaponic.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked){
+                    nowChecked = binding.chipAquaponic.checkByTagFilter(buttonView.tag.toString(), isChecked)
+                    setUpRecyclerView(VALUE_TEXT, nowChecked)
+                }else {
+                    setUpRecyclerView(VALUE_TEXT, "")
+                }
+            }
+            binding.chipFish.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked){
+                    nowChecked = binding.chipFish.checkByTagFilter(buttonView.tag.toString(), isChecked)
+                    setUpRecyclerView(VALUE_TEXT, nowChecked)
+                }else {
+                    setUpRecyclerView(VALUE_TEXT, "")
+                }
+
             }
 
             searchProducer()
@@ -90,32 +127,74 @@ class UserSearchFragment : Fragment() {
 
     private fun openActivityForResult() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Pesquisando...")
         setUpMicrophone.launch(intent)
     }
 
-    private fun setUpRecyclerView(text: String?) {
+    private fun setUpRecyclerView(text: String?, chip: String) {
         UserMenuActivity.PRODUCERS?.let {
             when(filteredList(it, text).size) {
                 0 -> {
-                    binding.rvStoreHome.isVisible = false
-                    binding.animationSearch.isVisible = true
-                    binding.tvProducerNotFound.isVisible = true
+                    if(chip.isNotEmpty() && text.isNullOrEmpty()) {
+                        val producerListFiltered = mutableListOf<Producer>()
+                        binding.rvStoreHome.isVisible = true
+                        UserMenuActivity.PRODUCERS?.let {
+                            it.forEach { prod ->
+                                if(prod.category.filterByCategory(chip))
+                                    producerListFiltered.add(prod)
+                            }
+                            if(!producerListFiltered.isEmpty()) {
+                                binding.rvStoreHome.apply {
+                                    layoutManager = LinearLayoutManager(activity)
+                                    adapter = UserSearchMainAdapter(producerListFiltered) {
+                                        startProducerInfos(it.uid)
+                                    }
+                                    binding.animationSearch.isVisible = false
+                                    binding.tvProducerNotFound.isVisible = false
+                                }
+                            }else {
+                                binding.rvStoreHome.isVisible = false
+                                binding.animationSearch.isVisible = true
+                                binding.tvProducerNotFound.isVisible = true
+                            }
+                        }
+                    }else {
+                        binding.rvStoreHome.isVisible = false
+                        binding.animationSearch.isVisible = true
+                        binding.tvProducerNotFound.isVisible = true
+                    }
                 }
                 else -> {
-                    binding.rvStoreHome.isVisible = true
-                    UserMenuActivity.PRODUCERS?.let {
-                        binding.rvStoreHome.apply {
-                            layoutManager = LinearLayoutManager(activity)
-                            adapter = UserSearchMainAdapter(filteredList(it, text)) {
-                                startProducerInfos(it.uid)
+                    if(chip.isNotEmpty()) {
+                        val producerListFiltered = mutableListOf<Producer>()
+                        binding.rvStoreHome.isVisible = true
+                        UserMenuActivity.PRODUCERS?.let {
+                            it.forEach { prod ->
+                                if(prod.category.filterByCategory(chip))
+                                    producerListFiltered.add(prod)
                             }
-                            binding.animationSearch.isVisible = false
-                            binding.tvProducerNotFound.isVisible = false
+                            producerListFiltered.compareListsAndFilter(filteredList(it, text))
+                            binding.rvStoreHome.apply {
+                                layoutManager = LinearLayoutManager(activity)
+                                adapter = UserSearchMainAdapter(producerListFiltered) {
+                                    startProducerInfos(it.uid)
+                                }
+                                binding.animationSearch.isVisible = false
+                                binding.tvProducerNotFound.isVisible = false
+                            }
+                        }
+                    }else {
+                        binding.rvStoreHome.isVisible = true
+                        UserMenuActivity.PRODUCERS?.let {
+                            binding.rvStoreHome.apply {
+                                layoutManager = LinearLayoutManager(activity)
+                                adapter = UserSearchMainAdapter(filteredList(it, text)) {
+                                    startProducerInfos(it.uid)
+                                }
+                                binding.animationSearch.isVisible = false
+                                binding.tvProducerNotFound.isVisible = false
+                            }
                         }
                     }
                 }
@@ -126,7 +205,7 @@ class UserSearchFragment : Fragment() {
     private fun searchProducer() {
         binding.tietSearchStore.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                setUpRecyclerView(s.toString())
+                setUpRecyclerView(s.toString(), nowChecked)
                 VALUE_TEXT = s.toString()
             }
 
@@ -137,13 +216,16 @@ class UserSearchFragment : Fragment() {
 
     private fun filteredList(producers: MutableList<Producer>, text: String?): MutableList<Producer> {
         val filteredList = ArrayList<Producer>()
-        return if(text.isNullOrBlank()) {
+        return if(text.isNullOrBlank() && !binding.chipAquaponic.isChecked
+                && !binding.chipFish.isChecked && !binding.chipOyster.isChecked && !binding.chipShrimp.isChecked) {
             producers
         }else {
             for(i in producers) {
                 i.name?.let {
-                    if(it.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
-                        filteredList.add(i)
+                    if(!text.isNullOrEmpty()) {
+                        if(it.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
+                            filteredList.add(i)
+                        }
                     }
                 }
             }

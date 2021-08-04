@@ -35,10 +35,35 @@ fun Chip.checkByTag(tag: String) {
     this.isEnabled = false
 }
 
+fun Chip.checkByTagFilter(tag: String, isChecked: Boolean): String {
+    return if(this.tag == tag && isChecked) {
+        this.text.toString()
+    }else {
+        ""
+    }
+}
+
 fun Chip.checkByTagUpdate(tag: String, array: MutableList<String>) {
     if(this.tag == tag) {
         this.isChecked = true
         array.addItem(tag)
+    }
+}
+
+fun MutableList<String>.filterByCategory(category: String): Boolean {
+    this.forEach {
+        if(it == category) {
+            return true
+        }
+    }
+    return false
+}
+
+fun MutableList<Producer>.compareListsAndFilter(list: MutableList<Producer>) {
+    list.forEach { second ->
+        if(!this.contains(second)) {
+            this.add(second)
+        }
     }
 }
 

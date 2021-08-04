@@ -27,9 +27,4 @@ class UpdateAndAddProductRepository {
         productDB.document(id).set(product, SetOptions.merge()).await()
         return true
     }
-
-    suspend fun getPhoto(id: String): String? {
-        val getProduct = productDB.document(id).get().await()
-        return getProduct.toObject(Products::class.java)?.photo
-    }
 }

@@ -23,6 +23,7 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
     private var deliveryDateArray = mutableListOf<String>()
     private var deliveryLocationArray = mutableListOf<String>()
     private var paymentArray = mutableListOf<String>()
+    private var categoryArray = mutableListOf<String>()
     private var completedAdress = ""
     private var isCellphoneOk = false
     private var isCepOk = false
@@ -50,6 +51,7 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         chipDeliveryDateSelection()
         chipDeliveryLocationSelection()
         chipPaymentSelection()
+        chipCategorySelection()
         presentationMessage()
         startingCameraActivity()
         addingMaskOnCepAndCellphone()
@@ -107,7 +109,7 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
             val setProducer = Producer(producer.uid, binding.tietNameUpdateProducer.text.toString(),
                 producer.email, binding.tietCellNumberUpdateProducer.text.toString(), photo?:producer.photo,
                 producer.type, completedAdress, binding.tietPresentationUpdateProducer.text.toString(),
-                deliveryDateArray, deliveryLocationArray, paymentArray)
+                deliveryDateArray, deliveryLocationArray, paymentArray, categoryArray)
             viewModelProducerUpdate.updateProducer(setProducer)
             viewModelProducerUpdate.updateProducer.observe(this) {
                 finish()
@@ -167,15 +169,17 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
     private fun activatingButton(): Boolean {
         val isOk: Boolean
         val cepValue = Mask.unmask(binding.tietCepUpdateProducer.text.toString())
-        if (isCellphoneOk && isCepOk && isStreetOk && isDistrictOk && isNumberOk && isCityOk && isUfOk && deliveryDateArray.isNotEmpty() && deliveryLocationArray.isNotEmpty() && paymentArray.isNotEmpty()) {
+        if (isCellphoneOk && isCepOk && isStreetOk && isDistrictOk && isNumberOk && isCityOk && isUfOk &&
+                deliveryDateArray.isNotEmpty() && deliveryLocationArray.isNotEmpty()
+                && paymentArray.isNotEmpty() && categoryArray.isNotEmpty()) {
             binding.btContinueUpdateProducer.isEnabled = true
             completedAdress = if(!binding.tietComplementUpdateProducer.text.isNullOrEmpty()) {
-                "${binding.tietStreetUpdateProducer.text}, ${binding.tietNumberUpdateProducer.text}," +
-                        " ${binding.tietComplementUpdateProducer.text}, ${binding.tietDistrictUpdateProducer.text}," +
-                        " ${binding.tietCityUpdateProducer.text} - ${binding.tietUfUpdateProducer.text} - $cepValue"
+                "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                        "${binding.tietComplementUpdateProducer.text},${binding.tietDistrictUpdateProducer.text}," +
+                        "${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-$cepValue"
             }else {
-                "${binding.tietStreetUpdateProducer.text}, ${binding.tietNumberUpdateProducer.text}," +
-                        " ${binding.tietDistrictUpdateProducer.text}, ${binding.tietCityUpdateProducer.text} - ${binding.tietUfUpdateProducer.text} - $cepValue"
+                "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                        "${binding.tietDistrictUpdateProducer.text},${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-$cepValue"
             }
             isOk = true
         } else {
@@ -211,6 +215,11 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         producer.payment.forEach { loc ->
             getChipTagPayment(loc, paymentArray)
         }
+        producer.category.forEach { loc ->
+            getChipTagCategory(loc, categoryArray)
+        }
+
+        binding.btContinueUpdateProducer.isEnabled = true
     }
 
     private fun presentationMessage(): String {
@@ -287,6 +296,21 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun chipCategorySelection() {
+        binding.chipFish.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipOyster.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipAquaponic.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipShrimp.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+    }
+
     private fun checkingArrays(array: MutableList<String>, isChecked: Boolean, tag: String) {
         if(isChecked) {
             array.addItem(tag)
@@ -322,5 +346,12 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         binding.chipBankTransfer.checkByTagUpdate(tag, array)
         binding.chipDebitCard.checkByTagUpdate(tag, array)
         binding.chipCreditCard.checkByTagUpdate(tag, array)
+    }
+
+    private fun getChipTagCategory(tag: String, array: MutableList<String>) {
+        binding.chipFish.checkByTagUpdate(tag, array)
+        binding.chipOyster.checkByTagUpdate(tag, array)
+        binding.chipShrimp.checkByTagUpdate(tag, array)
+        binding.chipAquaponic.checkByTagUpdate(tag, array)
     }
 }

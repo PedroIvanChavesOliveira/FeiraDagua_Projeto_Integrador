@@ -94,7 +94,11 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
 //                            ProducerMenuActivity.PRODUCTS?.set(index, setProduct)
 //                        }
                 viewModelUpdateAndAddProduct.addAndUpdateProduct(product.id, setProduct)
-                finish()
+                viewModelUpdateAndAddProduct.insertOk.observe(this) {
+                    if(it) {
+                        finish()
+                    }
+                }
             }
         }?: run {
             binding.btConfirmUpdate.setOnClickListener {
@@ -102,7 +106,11 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
                     binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
                     binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:"")
                 viewModelUpdateAndAddProduct.addAndUpdateProduct(id, setProduct)
-                finish()
+                viewModelUpdateAndAddProduct.insertOk.observe(this) {
+                    if(it) {
+                        finish()
+                    }
+                }
             }
         }
     }

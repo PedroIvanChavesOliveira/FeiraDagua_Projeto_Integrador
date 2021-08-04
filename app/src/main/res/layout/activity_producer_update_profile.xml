@@ -386,7 +386,7 @@
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tvPaymentTitleUpdateProducer"
-                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryPeriodTitleUpdateProducer">
+                    app:layout_constraintBottom_toTopOf="@id/tvCategoryTitleUpdateProducer">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPix"
@@ -415,11 +415,58 @@
                 </com.google.android.material.chip.ChipGroup>
 
                 <TextView
+                    android:id="@+id/tvCategoryTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_category_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupPaymentUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/chipGroupCategoryUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategoryUpdateProducer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvCategoryTitleUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryPeriodTitleUpdateProducer">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFish"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_fish"
+                        android:tag="@string/string_chip_fish"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAquaponic"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_aquaponic"
+                        android:tag="@string/string_chip_aquaponic"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipOyster"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_oyster"
+                        android:tag="@string/string_chip_oyster"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipShrimp"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_shrimp"
+                        android:tag="@string/string_chip_shrimp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
                     android:id="@+id/tvDeliveryPeriodTitleUpdateProducer"
                     style="@style/TextViewTitleDefault"
                     android:text="@string/string_delivery_period_title"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
-                    app:layout_constraintTop_toBottomOf="@id/chipGroupPaymentUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupCategoryUpdateProducer"
                     app:layout_constraintBottom_toTopOf="@id/chipGroupDeliveryPeriodUpdateProducer"/>
 
                 <com.google.android.material.chip.ChipGroup

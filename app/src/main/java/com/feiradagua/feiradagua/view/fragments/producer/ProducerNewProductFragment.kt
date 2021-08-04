@@ -80,6 +80,7 @@ class ProducerNewProductFragment : Fragment() {
                     })
                 }
                 binding.tvProductNotFound.isVisible = false
+                binding.animationProduct.isVisible = false
             }else {
                 binding.rvNewProducts.isVisible = false
             }

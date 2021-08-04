@@ -202,9 +202,9 @@ private fun TextInputEditText.filterEditTextByTag(splited: List<String>) {
         when(this.tag) {
             "Informe o seu endereço" -> {this.setText(splited[0])}
             "Informe o seu bairro" -> {this.setText(splited[3])}
-            "Informe seu número" -> {this.setText(splited[1])}
-            "Informe seu complemento" -> {this.setText(splited[2])}
-            "Informe a sua cidade" -> {this.setText(splited[4])}
+            "Informe o número da sua residência" -> {this.setText(splited[1])}
+            "Informe o complemento de sua residência" -> {this.setText(splited[2])}
+            "Informe a cidade em que você reside" -> {this.setText(splited[4])}
             "Informe a UF do seu Estado" -> {this.setText(splited[5])}
             "Informe o seu CEP" -> {this.setText(splited[6])}
         }
@@ -212,8 +212,8 @@ private fun TextInputEditText.filterEditTextByTag(splited: List<String>) {
         when(this.tag) {
             "Informe o seu endereço" -> {this.setText(splited[0])}
             "Informe o seu bairro" -> {this.setText(splited[2])}
-            "Informe seu número" -> {this.setText(splited[1])}
-            "Informe a sua cidade" -> {this.setText(splited[3])}
+            "Informe o número da sua residência" -> {this.setText(splited[1])}
+            "Informe a cidade em que você reside" -> {this.setText(splited[3])}
             "Informe a UF do seu Estado" -> {this.setText(splited[4])}
             "Informe o seu CEP" -> {this.setText(splited[5])}
         }

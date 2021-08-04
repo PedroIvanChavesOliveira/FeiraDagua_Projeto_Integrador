@@ -37,6 +37,8 @@
     <string name="string_debit_card">Cartão de Débito</string>
     <string name="string_credit_card">Cartão de Crédito</string>
     <string name="string_payment_title">Diga-nos as formas de pagamento</string>
+    <string name="string_category_title">Diga-nos em quais categorias o seu comércio se enquadra</string>
+    <string name="string_category_producer_profile_title">Categorias</string>
     <string name="string_d">D</string>
     <string name="string_s">S</string>
     <string name="string_t">T</string>
@@ -144,4 +146,8 @@
         Aceitaram o Seu Pedido, em Breve o Produtor irá Entrar em Contato!!
     </string>
     <string name="string_back_arrow">Voltar</string>
+    <string name="string_chip_fish">Peixes</string>
+    <string name="string_chip_aquaponic">Hidroponia e/ou Aquaponia</string>
+    <string name="string_chip_oyster">Ostras e Mariscos</string>
+    <string name="string_chip_shrimp">Camarão</string>
 </resources>

@@ -18,6 +18,7 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
     private var deliveryDateArray = mutableListOf<String>()
     private var deliveryLocationArray = mutableListOf<String>()
     private var paymentArray = mutableListOf<String>()
+    private var categoryArray = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +28,14 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
         chipDeliveryDateSelection()
         chipDeliveryLocationSelection()
         chipPaymentSelection()
+        chipCategorySelection()
         insertDataToDB()
     }
 
     private fun insertDataToDB() {
         binding.btContinue.setOnClickListener {
             viewModelExtraInfosProducer.setExtraInfosDB(
-                    presentationMessage(), deliveryDateArray, deliveryLocationArray, paymentArray
+                    presentationMessage(), deliveryDateArray, deliveryLocationArray, paymentArray, categoryArray
             )
             startProducerMenu()
         }
@@ -120,8 +122,23 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
         }
     }
 
+    private fun chipCategorySelection() {
+        binding.chipFish.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipAquaponic.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipOyster.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipShrimp.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+    }
+
     private fun activatingButton() {
-        binding.btContinue.isEnabled = deliveryDateArray.isNotEmpty() && deliveryLocationArray.isNotEmpty() && paymentArray.isNotEmpty()
+        binding.btContinue.isEnabled = deliveryDateArray.isNotEmpty() && deliveryLocationArray.isNotEmpty() && paymentArray.isNotEmpty() && categoryArray.isNotEmpty()
     }
 
     private fun checkingArrays(array: MutableList<String>, isChecked: Boolean, tag: String) {

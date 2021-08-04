@@ -7,7 +7,7 @@ class TutorialData {
             "",0, "Avenida Beira Mar, 1000, 102, Centro, Florianópolis - SC",
             "Bem vindo ao nosso Perfil, temos os produtos mai frescos do mercado!! Venha conferir!!",
             mutableListOf("Segunda","Terça", "Quarta"), mutableListOf("Florianópolis - Centro", "Florianópolis - Norte"),
-            mutableListOf("Pix", "Cartão de Débito"),"")
+            mutableListOf("Pix", "Cartão de Débito"), mutableListOf("Peixes, Camarão"), "")
 
         return mutableListOf(producer1)
     }

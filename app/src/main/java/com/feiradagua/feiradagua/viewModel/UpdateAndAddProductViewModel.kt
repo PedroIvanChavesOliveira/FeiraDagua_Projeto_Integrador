@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 
 class UpdateAndAddProductViewModel: ViewModel() {
     val insertOk: MutableLiveData<Boolean> = MutableLiveData()
-    val photo: MutableLiveData<String?> = MutableLiveData()
     private val repository by lazy {
         UpdateAndAddProductRepository()
     }
@@ -17,12 +16,6 @@ class UpdateAndAddProductViewModel: ViewModel() {
     fun addAndUpdateProduct(id: String, product: Products) {
         viewModelScope.launch {
             insertOk.postValue(repository.addNewProduct(id, product))
-        }
-    }
-
-    fun getPhoto(id: String) {
-        viewModelScope.launch {
-            photo.postValue(repository.getPhoto(id))
         }
     }
 }

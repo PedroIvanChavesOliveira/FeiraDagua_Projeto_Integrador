@@ -24,16 +24,30 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/rvNewProducts"/>
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationProduct"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:lottie_rawRes="@raw/lottie_product_animation"
+            android:layout_marginTop="20dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:layout_constraintStart_toStartOf="@id/btNewProduct"
+            app:layout_constraintEnd_toEndOf="@id/btNewProduct"
+            app:layout_constraintTop_toBottomOf="@id/btNewProduct"
+            app:layout_constraintBottom_toTopOf="@id/tvProductNotFound"/>
+
         <TextView
             android:id="@+id/tvProductNotFound"
             style="@style/TextViewTitleDefault"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/string_product_not_found"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:layout_margin="20dp"
             app:layout_constraintStart_toStartOf="@id/btNewProduct"
-            app:layout_constraintTop_toBottomOf="@id/btNewProduct"
+            app:layout_constraintTop_toBottomOf="@id/animationProduct"
             app:layout_constraintEnd_toEndOf="@id/btNewProduct"
             />
 

@@ -51,6 +51,7 @@ class ProducerMyOrdersFragment : Fragment() {
                     }
                 }
                 binding.tvOrderNotFound.isVisible = false
+                binding.animationMyOrder.isVisible = false
             }else {
                 binding.rvStoreHome.isVisible = false
             }

@@ -32,8 +32,12 @@ class UserSearchMainAdapter(
             var text = ""
             Glide.with(itemView).load(producer.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivStore)
             binding.tvProducerNameTitle.text = producer.name
-            producer.category.forEach {
-                text = "$text $it,"
+            producer.category.forEachIndexed {index, cat ->
+                text = if(producer.category.size -1 == index) {
+                    "$text $cat"
+                }else {
+                    "$text $cat,"
+                }
             }
             binding.tvProducerCategoryTitle.text = text
             itemView.setOnClickListener {

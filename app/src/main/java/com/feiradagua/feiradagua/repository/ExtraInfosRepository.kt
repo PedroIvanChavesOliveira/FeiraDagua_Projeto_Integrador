@@ -37,6 +37,11 @@ class ExtraInfosRepository {
         registeredDB.set(registered, SetOptions.merge()).await()
     }
 
+    suspend fun setExtraInfosUserDB(type: Int, adress: String, registered: Registered, phone: String, deliveryArea: String) {
+        userDB.update(mapOf("type" to type, "adress" to adress, "phone" to phone, "deliveryArea" to deliveryArea)).await()
+        registeredDB.set(registered, SetOptions.merge()).await()
+    }
+
     suspend fun viaCepResponse(cep: Int): ResponseAPI {
         return try {
             val response = APIService.viaCepApi.getCep(cep)

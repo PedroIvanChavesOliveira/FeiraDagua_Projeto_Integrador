@@ -70,10 +70,10 @@ class UserMenuActivity : AppCompatActivity() {
 
     private fun setUserData() {
         viewModelUserMenu.getUserDB()
-        viewModelUserMenu.getProducers()
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
+                viewModelUserMenu.getProducers(it.deliveryArea)
                 viewModelUserMenu.producerList.observe(this) { producer ->
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer
@@ -87,10 +87,10 @@ class UserMenuActivity : AppCompatActivity() {
 
     private fun setUserDataTutorial() {
         viewModelUserMenu.getUserDB()
-        viewModelUserMenu.getProducers()
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
+                viewModelUserMenu.getProducers(it.deliveryArea)
                 viewModelUserMenu.producerList.observe(this) { producer ->
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer

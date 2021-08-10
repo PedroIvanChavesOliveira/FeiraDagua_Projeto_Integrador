@@ -160,7 +160,7 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
             getString(R.string.string_cep_hint) -> isCepOk = isOk
             getString(R.string.string_street_hint) -> isStreetOk = isOk
             getString(R.string.string_district_hint) -> isDistrictOk = isOk
-            getString(R.string.string_number_hint) -> isNumberOk = isOk
+            getString(R.string.string_number_hint_producer) -> isNumberOk = isOk
             getString(R.string.string_city_hint) -> isCityOk = isOk
             getString(R.string.string_uf_hint) -> isUfOk = isOk
         }

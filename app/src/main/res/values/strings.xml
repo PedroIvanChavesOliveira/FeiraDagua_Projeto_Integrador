@@ -15,8 +15,12 @@
     <string name="string_district_hint">Informe o seu bairro</string>
     <string name="string_number_title">Qual é o número de sua residência?</string>
     <string name="string_number_hint">Informe o número da sua residência</string>
+    <string name="string_number_title_producer">Qual é o número de sua empresa?</string>
+    <string name="string_number_hint_producer">Informe o número da sua empresa</string>
     <string name="string_complement_title">Sua residência possui um complemento?</string>
     <string name="string_complement_hint">Informe o complemento de sua residência</string>
+    <string name="string_complement_title_producer">Sua empresa possui um complemento?</string>
+    <string name="string_complement_hint_producer">Informe o complemento de sua empresa</string>
     <string name="string_city_title">Qual a cidade onde você reside?</string>
     <string name="string_city_hint">Informe a cidade em que você reside</string>
     <string name="string_next_button">Avançar</string>
@@ -24,6 +28,7 @@
     <string name="string_presentation_title">Diga um pouco mais sobre vocês!!</string>
     <string name="string_presentation_hint">Insira uma apresentação</string>
     <string name="string_delivery_title">Diga-nos sua área de entrega</string>
+    <string name="string_delivery_title_user">Para filtrarmos melhor os produtores, nos informe a região em que reside</string>
     <string name="string_florianopolis_north">Florianópolis - Norte</string>
     <string name="string_florianopolis_center">Florianópolis - Centro</string>
     <string name="string_florianopolis_south">Florianópolis - Sul</string>
@@ -59,6 +64,8 @@
     <string name="string_cellphone_not_found">Celular não encontrado</string>
     <string name="string_adress_title">Endereço</string>
     <string name="string_adress_not_found">Endereço não encontrado</string>
+    <string name="string_delivery_area_title_user">Região de Entrega</string>
+    <string name="string_delivery_area_not_found">Endereço de entrega não encontrado</string>
     <string name="string_update_profile_button">Atualizar Perfil</string>
     <string name="string_contact_title">Contato</string>
     <string name="string_contact_not_found">Contato não encontrado</string>
@@ -93,6 +100,7 @@
     <string name="string_error_phone_not_valid">O Celular não é válido</string>
     <string name="string_error_value_equals_zero">O preço não pode ser R$ 0.00</string>
     <string name="string_cellphone">Celular</string>
+    <string name="string_name">Nome</string>
     <string name="string_cep_error">CEP</string>
     <string name="string_city">Cidade</string>
     <string name="string_district">Bairro</string>
@@ -126,6 +134,8 @@
     <string name="string_product_not_found">Nenhum Produto Cadastrado!</string>
     <string name="string_name_title_update">Qual o nome da sua empresa?</string>
     <string name="string_name_hint">Digite o nome da sua empresa</string>
+    <string name="string_name_title_update_user">Qual é o seu nome?</string>
+    <string name="string_name_hint_user">Digite o seu nome</string>
     <string name="string_name_title_profile">Olá, %1$s!</string>
     <string name="string_product_not_found_order">Nenhum Produto Adicionado ao Carrinho</string>
 
@@ -150,4 +160,5 @@
     <string name="string_chip_aquaponic">Hidroponia e/ou Aquaponia</string>
     <string name="string_chip_oyster">Ostras e Mariscos</string>
     <string name="string_chip_shrimp">Camarão</string>
+    <string name="string_producer_not_found">Nenhum Produtor Encontrado em Sua Região!</string>
 </resources>

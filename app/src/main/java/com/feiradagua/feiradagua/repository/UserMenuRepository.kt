@@ -39,8 +39,8 @@ class UserMenuRepository {
         return userDB.get().await()
     }
 
-    suspend fun getProducers(): MutableList<Producer>? {
-        val query = producerDB.whereEqualTo("type", 2).get().await()
+    suspend fun getProducers(deliveryArea: String): MutableList<Producer>? {
+        val query = producerDB.whereEqualTo("type", 2).whereArrayContains("deliveryLocation", deliveryArea).get().await()
         return query.toObjects(Producer::class.java)
     }
 }

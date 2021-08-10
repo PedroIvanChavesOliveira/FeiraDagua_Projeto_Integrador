@@ -95,7 +95,7 @@
             android:id="@+id/tvProducerNotFound"
             style="@style/TextViewTitleProductorHome"
             android:layout_marginTop="10dp"
-            android:text="Nenhum Produtor Encontrado!"
+            android:text="@string/string_producer_not_found"
             android:textSize="23sp"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="@id/tilSearchStore"

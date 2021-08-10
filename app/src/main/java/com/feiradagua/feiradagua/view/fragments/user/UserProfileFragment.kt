@@ -70,11 +70,12 @@ class UserProfileFragment : Fragment() {
     private fun setUserInfos() {
         val user = UserMenuActivity.USER
 
-        Glide.with(this).load(user.photo).into(binding.ivProfile)
+        Glide.with(this).load(user.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProfile)
         binding.tvNameValue.text = user.name
         binding.tvEmailValue.text = user.email
         binding.tvCellPhoneValue.text = user.phone
         binding.tvAdressValue.text = user.adress
+        binding.tvDeliveryAreaValue.text = user.deliveryArea
     }
 
     private fun initTutorial() {

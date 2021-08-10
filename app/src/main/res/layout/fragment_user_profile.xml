@@ -115,8 +115,27 @@
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
                     app:layout_constraintTop_toBottomOf="@id/tvAdressTitle"
-                    app:layout_constraintBottom_toTopOf="@id/btEditProfile"
+                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryAreaTitle"
                     app:layout_constraintEnd_toEndOf="@id/tvNameValue"/>
+
+                <TextView
+                    android:id="@+id/tvDeliveryAreaTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_delivery_area_title_user"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvAdressValue"
+                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryAreaValue"
+                    app:layout_constraintEnd_toEndOf="@id/tvNameValue"/>
+
+                <TextView
+                    android:id="@+id/tvDeliveryAreaValue"
+                    style="@style/TextViewSubTitleDefault"
+                    android:text="@string/string_delivery_area_not_found"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvDeliveryAreaTitle"
+                    app:layout_constraintBottom_toTopOf="@id/btEditProfile"/>
 
                 <Button
                     android:id="@+id/btEditProfile"
@@ -126,7 +145,7 @@
                     android:text="@string/string_update_profile_button"
                     app:layout_constraintStart_toStartOf="@id/tvNameTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvAdressValue"
+                    app:layout_constraintTop_toBottomOf="@id/tvDeliveryAreaValue"
                     app:layout_constraintBottom_toTopOf="@id/btLogOutProfile"/>
 
                 <Button

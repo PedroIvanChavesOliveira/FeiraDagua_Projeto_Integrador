@@ -12,6 +12,7 @@ import com.feiradagua.feiradagua.databinding.ActivityLoginBinding
 import com.feiradagua.feiradagua.model.`class`.User
 import com.feiradagua.feiradagua.utils.Constants
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION_SPLASH
+import com.feiradagua.feiradagua.utils.Constants.Login.RC_SIGN_IN
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.viewModel.LoginViewModel
@@ -43,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
+        }else {
+            result.data?.extras
         }
     }
 

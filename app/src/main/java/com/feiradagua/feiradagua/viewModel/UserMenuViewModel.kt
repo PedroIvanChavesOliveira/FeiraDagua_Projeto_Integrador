@@ -31,9 +31,9 @@ class UserMenuViewModel: ViewModel() {
         }
     }
 
-    fun getProducers() {
+    fun getProducers(deliveryArea: String) {
         viewModelScope.launch {
-            producerList.postValue(repository.getProducers())
+            producerList.postValue(repository.getProducers(deliveryArea))
         }
     }
 }

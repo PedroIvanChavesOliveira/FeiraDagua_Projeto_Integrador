@@ -12,6 +12,9 @@ import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.Products
 import com.feiradagua.feiradagua.utils.Constants
 import com.feiradagua.feiradagua.utils.Constants.Intents.EXTRA_INFOS
+import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
+import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION_SPLASH
+import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerMyOrdersFragment
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerNewProductFragment
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerProfileFragment
@@ -24,6 +27,8 @@ class ProducerMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProducerMenuBinding
     private val viewModelProducerMenu: ProducerMenuViewModel by viewModels()
     private var getFirstLogin = 0
+    private var startTutorial = false
+    private var positionFromSplash = 0
 
     companion object {
         lateinit var PRODUCER: Producer
@@ -37,11 +42,27 @@ class ProducerMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getFirstLogin = intent.getIntExtra(EXTRA_INFOS, 0)
+        startTutorial = intent.getBooleanExtra(TUTORIAL, false)
+        positionFromSplash = intent.getIntExtra(POSITION_SPLASH, 0)
         viewModelProducerMenu.updateToken()
 
-        when(getFirstLogin) {
-            0 -> { setProducerInfos() }
-            1 -> { setProducerInfosFirstLogin() }
+        if(startTutorial) {
+            when(getFirstLogin) {
+                1 -> { initFragmentsTutorial(ProducerNewProductFragment()) }
+                2 -> { initFragmentsTutorial(ProducerNewProductFragment()) }
+                3 -> { initFragmentsTutorial(ProducerMyOrdersFragment()) }
+                4 -> { initFragmentsTutorial(ProducerProfileFragment()) }
+                else -> { setProducerInfos() }
+            }
+        }else {
+            when(positionFromSplash) {
+                1 -> { setProducerInfos() }
+                2 -> { setProducerInfos() }
+                else -> {
+                    initFragments(ProducerMyOrdersFragment())
+                    startNavBar()
+                }
+            }
         }
     }
 
@@ -57,25 +78,6 @@ class ProducerMenuActivity : AppCompatActivity() {
                     viewModelProducerMenu.orders.observe(this) { orders ->
                         ORDERS = orders
                         initFragments(ProducerMyOrdersFragment())
-                        startNavBar()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setProducerInfosFirstLogin() {
-        viewModelProducerMenu.getProducerDB()
-        viewModelProducerMenu.getOrdersDB()
-        viewModelProducerMenu.getProductsDB()
-        viewModelProducerMenu.producerInfo.observe(this) { producer ->
-            producer?.let {
-                PRODUCER = it
-                viewModelProducerMenu.products.observe(this) { products ->
-                    PRODUCTS = products
-                    viewModelProducerMenu.orders.observe(this) { orders ->
-                        ORDERS = orders
-                        initFragments(ProducerNewProductFragment())
                         startNavBar()
                     }
                 }
@@ -105,6 +107,15 @@ class ProducerMenuActivity : AppCompatActivity() {
 
     private fun initFragments(fragment: Fragment) {
         val frag = supportFragmentManager.beginTransaction()
+        frag.replace(R.id.flContainerHomeProducerActivity, fragment)
+        frag.commit()
+    }
+
+    private fun initFragmentsTutorial(fragment: Fragment) {
+        val frag = supportFragmentManager.beginTransaction()
+        val bundle = Bundle()
+        bundle.putBoolean(TUTORIAL, true)
+        fragment.arguments = bundle
         frag.replace(R.id.flContainerHomeProducerActivity, fragment)
         frag.commit()
     }

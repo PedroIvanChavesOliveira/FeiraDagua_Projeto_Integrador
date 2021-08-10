@@ -22,6 +22,12 @@ class Constants {
         const val SHAREDPREFERENCES_TUTORIAL_NAME_FORTH = "ShowTutorial4"
         const val SHAREDPREFERENCES_TUTORIAL_NAME_FIFTH= "ShowTutorial5"
         const val SHAREDPREFERENCES_TUTORIAL_NAME_SIXTH = "ShowTutorial6"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIRST_PRODUCER = "ShowTutorial1Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SECOND_PRODUCER = "ShowTutorial2Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_THIRD_PRODUCER = "ShowTutorial3Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FORTH_PRODUCER = "ShowTutorial4Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIFTH_PRODUCER = "ShowTutorial5Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SIXTH_PRODUCER = "ShowTutorial6Producer"
         const val SHAREDPREFERENCES_TUTORIAL_KEY = "show"
     }
 

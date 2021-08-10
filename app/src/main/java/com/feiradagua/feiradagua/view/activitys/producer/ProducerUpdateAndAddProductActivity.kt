@@ -11,17 +11,25 @@ import com.bumptech.glide.Glide
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityProducerUpdateAndAddProductBinding
 import com.feiradagua.feiradagua.model.`class`.Products
+import com.feiradagua.feiradagua.model.`class`.TutorialData
+import com.feiradagua.feiradagua.utils.Constants
+import com.feiradagua.feiradagua.utils.Constants.Intents.EXTRA_INFOS
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_UPDATE
+import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.utils.generateRandomUUID
 import com.feiradagua.feiradagua.view.activitys.both.CameraAndGalleryActivity
 import com.feiradagua.feiradagua.viewModel.UpdateAndAddProductViewModel
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.google.android.material.textfield.TextInputLayout
 
 class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProducerUpdateAndAddProductBinding
     private var viewModelUpdateAndAddProduct = UpdateAndAddProductViewModel()
+    private var tutorial = false
     private var getProducts: Products? = null
     private var nameOk = false
     private var descriptionOk = false
@@ -36,27 +44,34 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
 
         viewModelUpdateAndAddProduct = ViewModelProvider(this).get(UpdateAndAddProductViewModel::class.java)
         getProducts = intent.getParcelableExtra(PRODUCT_UPDATE)
+        tutorial = intent.getBooleanExtra(TUTORIAL, false)
 
-        getProducts?.let { product ->
-            Glide.with(this).load(product.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProductUpdateAndAdd)
-            binding.tietProductNameUpdate.setText(product.name)
-            binding.tietDescriptionUpdate.setText(product.description)
-            binding.tietProductValueUpdate.setText(product.price.toString())
+        if(tutorial) {
+            if(TutorialPreferences.getTutorialStatusProducer(this, 2) == true) {
+                initTutorial()
+            }
+        }else {
+            getProducts?.let { product ->
+                Glide.with(this).load(product.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProductUpdateAndAdd)
+                binding.tietProductNameUpdate.setText(product.name)
+                binding.tietDescriptionUpdate.setText(product.description)
+                binding.tietProductValueUpdate.setText(product.price.toString())
 
-            textChangeUpdate(binding.tietProductNameUpdate, binding.tilProductNameUpdate, R.string.string_product_name_title, product)
-            textChangeUpdate(binding.tietDescriptionUpdate, binding.tilDescriptionUpdate, R.string.string_product_description_title_update, product)
-            textChangeUpdate(binding.tietProductValueUpdate, binding.tilProductValueUpdate, R.string.string_product_price_title_update, product)
+                textChangeUpdate(binding.tietProductNameUpdate, binding.tilProductNameUpdate, R.string.string_product_name_title, product)
+                textChangeUpdate(binding.tietDescriptionUpdate, binding.tilDescriptionUpdate, R.string.string_product_description_title_update, product)
+                textChangeUpdate(binding.tietProductValueUpdate, binding.tilProductValueUpdate, R.string.string_product_price_title_update, product)
 
-            confirmUpdate(product)
-        }?: run {
-            binding.btConfirmUpdate.isEnabled = false
-            textChangeDefault(binding.tietProductNameUpdate, binding.tilProductNameUpdate, R.string.string_product_name_title)
-            textChangeDefault(binding.tietDescriptionUpdate, binding.tilDescriptionUpdate, R.string.string_product_description_title_update)
-            textChangeDefault(binding.tietProductValueUpdate, binding.tilProductValueUpdate, R.string.string_product_price_title_update)
+                confirmUpdate(product)
+            }?: run {
+                binding.btConfirmUpdate.isEnabled = false
+                textChangeDefault(binding.tietProductNameUpdate, binding.tilProductNameUpdate, R.string.string_product_name_title)
+                textChangeDefault(binding.tietDescriptionUpdate, binding.tilDescriptionUpdate, R.string.string_product_description_title_update)
+                textChangeDefault(binding.tietProductValueUpdate, binding.tilProductValueUpdate, R.string.string_product_price_title_update)
 
-            confirmUpdate(null)
+                confirmUpdate(null)
+            }
+            startCameraActivity(getProducts)
         }
-        startCameraActivity(getProducts)
     }
 
     private fun startCameraActivity(products: Products?) {
@@ -186,5 +201,47 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
             isOk = false
         }
         return isOk
+    }
+
+    private fun initTutorial() {
+        val tutorialProduct = TutorialData().setUpNewProduct()
+        Glide.with(this).load("").placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProductUpdateAndAdd)
+        binding.tietDescriptionUpdate.setText(tutorialProduct.description)
+        binding.tietProductValueUpdate.setText(tutorialProduct.price.toString())
+        binding.tietProductNameUpdate.setText(tutorialProduct.name)
+
+        TapTargetSequence(this).targets(
+                TapTarget.forView(
+                        binding.ivProductUpdateAndAdd, "Informações Sobre o Produto",
+                        "Aqui, você poderá inserir as informações do produto, como foto, nome, valor e uma descrição" +
+                                 " sobre o produto que está comercializando."
+                )
+                        .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                        .cancelable(false)
+                        .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                        .titleTextSize(20).descriptionTextSize(16).targetRadius(100),
+                TapTarget.forView(
+                        binding.btConfirmUpdate, "Cadastrar o Produto",
+                        "Clicando neste botão, após conferir se as informações do produto estão de acordo, basta clicar" +
+                                " nesse botão que seu produto estará disponível em seu perfil para todos os seus clientes."
+                )
+                        .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
+                        .cancelable(false)
+                        .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
+                        .titleTextSize(20).descriptionTextSize(16).targetRadius(100)
+        ).listener(
+                object : TapTargetSequence.Listener {
+                    override fun onSequenceFinish() {
+                        val intent = Intent(this@ProducerUpdateAndAddProductActivity, ProducerMenuActivity::class.java)
+                        intent.putExtra(TUTORIAL, true)
+                        intent.putExtra(EXTRA_INFOS, 2)
+                        startActivity(intent)
+                        TutorialPreferences.tutorialPreferencesProducer(this@ProducerUpdateAndAddProductActivity, false, 2)
+                        finish()
+                    }
+                    override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
+                    override fun onSequenceCanceled(lastTarget: TapTarget?) {}
+                }
+        ).start()
     }
 }

@@ -14,6 +14,7 @@ import com.feiradagua.feiradagua.model.`class`.Mask
 import com.feiradagua.feiradagua.model.`class`.Registered
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.utils.validatingPhone
 import com.feiradagua.feiradagua.view.activitys.producer.ExtraInfosProducerActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
@@ -281,6 +282,11 @@ class ExtraInfosActivity : AppCompatActivity() {
     private fun startMenuUserActivity() {
         val intent = Intent(this, UserMenuActivity::class.java)
         intent.putExtra(TUTORIAL, true)
+        for(i in 1..6) {
+            if(TutorialPreferences.getTutorialStatus(this, i) == false) {
+                TutorialPreferences.tutorialPreferences(this, true, i)
+            }
+        }
         startActivity(intent)
         finish()
     }

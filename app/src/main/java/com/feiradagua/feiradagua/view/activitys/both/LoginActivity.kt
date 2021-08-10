@@ -101,7 +101,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startMenuProducerActivity() {
-        startActivity(Intent(this, ProducerMenuActivity::class.java))
+        val intent = Intent(this, ProducerMenuActivity::class.java)
+        intent.putExtra(POSITION_SPLASH, 2)
+        startActivity(intent)
         finish()
     }
 }

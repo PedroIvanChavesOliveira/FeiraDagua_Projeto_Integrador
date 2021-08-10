@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityExtraInfosProducerBinding
 import com.feiradagua.feiradagua.utils.Constants.Intents.EXTRA_INFOS
+import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.utils.addItem
 import com.feiradagua.feiradagua.utils.removeItem
 import com.feiradagua.feiradagua.viewModel.ExtraInfosProducerViewModel
@@ -52,6 +54,12 @@ class ExtraInfosProducerActivity : AppCompatActivity() {
     private fun startProducerMenu() {
         val intent = Intent(this, ProducerMenuActivity::class.java)
         intent.putExtra(EXTRA_INFOS, 1)
+        intent.putExtra(TUTORIAL, true)
+        for(i in 1..5) {
+            if(TutorialPreferences.getTutorialStatusProducer(this, i) == false) {
+                TutorialPreferences.tutorialPreferencesProducer(this, true, i)
+            }
+        }
         startActivity(intent)
         finish()
     }

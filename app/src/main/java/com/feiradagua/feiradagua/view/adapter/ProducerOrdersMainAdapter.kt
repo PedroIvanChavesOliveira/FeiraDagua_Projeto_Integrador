@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.RecyclerViewPendingsOrdersBinding
 import com.feiradagua.feiradagua.model.`class`.Order
+import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 
 class ProducerOrdersMainAdapter(
     private var ordersList: MutableList<Order>,
@@ -31,7 +32,7 @@ class ProducerOrdersMainAdapter(
             Glide.with(itemView).load(order.userPhoto).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivUser)
             binding.tvProducerNameTitle.text = order.username
             binding.tvDeliveryDateTitle.text = order.deliveryDate
-            binding.tvValueTitle.text = order.totalPrice.toString()
+            binding.tvValueTitle.text = "R$ ${order.totalPrice}"
 
             itemView.setOnClickListener {
                 onCardClick(order)

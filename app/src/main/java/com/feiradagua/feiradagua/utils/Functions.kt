@@ -146,7 +146,15 @@ fun MutableList<Cart>.getTotalPrice(): String {
     return "R$ $totalValue"
 }
 
-fun MutableList<Cart>.getTotalPriceValue(): Double {
+//fun MutableList<Cart>.getTotalPriceValue(): Double {
+//    var totalValue = 0.0
+//    this.forEach { item ->
+//        totalValue += item.totalPrice
+//    }
+//    return totalValue
+//}
+
+fun MutableList<ProductOrder>.getTotalPriceValue(): Double {
     var totalValue = 0.0
     this.forEach { item ->
         totalValue += item.totalPrice
@@ -211,11 +219,22 @@ fun MutableList<Producer>.getProducer(id: String?): Producer? {
     return null
 }
 
-fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {
+//fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {
+//    val list = mutableListOf<ProductOrder>()
+//    this.forEach {
+//        val productOrder = ProductOrder(it.id, it.totalPrice)
+//        list.add(productOrder)
+//    }
+//    return list
+//}
+
+fun MutableList<Cart>.getProductsInfosList(producerId: String): MutableList<ProductOrder> {
     val list = mutableListOf<ProductOrder>()
     this.forEach {
-        val productOrder = ProductOrder(it.id, it.totalPrice)
-        list.add(productOrder)
+        if(it.producerId == producerId) {
+            val productOrder = ProductOrder(it.id, it.totalPrice)
+            list.add(productOrder)
+        }
     }
     return list
 }

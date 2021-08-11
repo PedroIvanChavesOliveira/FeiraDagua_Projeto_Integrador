@@ -34,9 +34,9 @@ class TutorialData {
 
     fun setUpOrderRecyclerView(): MutableList<Order> {
         val order1 = Order("", mutableListOf(), "Antônio Chaves", "", 150.0, "10/10/2021",
-        0, mutableListOf(), "")
+        0, "")
         val order2 = Order("", mutableListOf(), "Jéssica Nascimento", "", 40.0, "05/10/2021",
-                0, mutableListOf(), "")
+                0, "")
 
         return  mutableListOf(order1, order2)
     }

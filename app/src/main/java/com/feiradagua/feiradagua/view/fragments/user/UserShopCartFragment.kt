@@ -44,7 +44,6 @@ import java.util.*
 class UserShopCartFragment : Fragment() {
     private lateinit var binding: FragmentUserShopCartBinding
     private var tutorial = false
-    private val idOrder = generateRandomUUID()
     private val viewModelShopCart: UserShopCartViewModel by viewModels()
 
     override fun onCreateView(
@@ -60,7 +59,7 @@ class UserShopCartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Se precisar enviar notificações para um grupo x de usuários
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+//        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
         tutorial = arguments?.getBoolean(TUTORIAL) == true
 
         if(tutorial) {
@@ -137,10 +136,16 @@ class UserShopCartFragment : Fragment() {
                 datePicker.show(activity.supportFragmentManager, "tag")
                 datePicker.addOnPositiveButtonClickListener {
                     val dateString: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(datePicker.selection)
-                    val order = Order(idOrder, UserMenuActivity.MY_CART.getProductsInfosList(), UserMenuActivity.USER.name?:"",
-                        UserMenuActivity.USER.photo?:"", UserMenuActivity.MY_CART.getTotalPriceValue(),
-                        dateString,0, UserMenuActivity.MY_CART.getProducersIdsList(),UserMenuActivity.USER.uid)
-                    viewModelShopCart.sendNewOrder(idOrder, order)
+                    if(UserMenuActivity.MY_CART.getProducersIdsList().size > 1) {
+                        UserMenuActivity.MY_CART.getProducersIdsList().forEach {
+                            val idOrder = generateRandomUUID()
+                            val productsOrder = UserMenuActivity.MY_CART.getProductsInfosList(it)
+                            val order = Order(idOrder, productsOrder, UserMenuActivity.USER.name?:"",
+                                    UserMenuActivity.USER.photo?:"", productsOrder.getTotalPriceValue(),
+                                    dateString,0, it, UserMenuActivity.USER.uid)
+                            viewModelShopCart.sendNewOrder(idOrder, order)
+                        }
+                    }
                     viewModelShopCart.orderOk.observe(activity) {
                         if(it) {
                             Snackbar.make(view, R.string.string_snackbar_order_sent, Snackbar.LENGTH_SHORT)

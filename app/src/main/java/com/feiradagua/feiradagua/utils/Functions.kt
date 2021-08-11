@@ -143,16 +143,8 @@ fun MutableList<Cart>.getTotalPrice(): String {
     this.forEach { item ->
         totalValue += item.totalPrice
     }
-    return "R$ $totalValue"
+    return "R$ %.2f".format(totalValue)
 }
-
-//fun MutableList<Cart>.getTotalPriceValue(): Double {
-//    var totalValue = 0.0
-//    this.forEach { item ->
-//        totalValue += item.totalPrice
-//    }
-//    return totalValue
-//}
 
 fun MutableList<ProductOrder>.getTotalPriceValue(): Double {
     var totalValue = 0.0

@@ -52,25 +52,25 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipFish"
                     android:layout_marginStart="10dp"
-                    style="@style/ChipDefault"
+                    style="@style/ChipSearchFilter"
                     android:text="@string/string_chip_fish"
                     android:tag="@string/string_chip_fish"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipAquaponic"
-                    style="@style/ChipDefault"
+                    style="@style/ChipSearchFilter"
                     android:text="@string/string_chip_aquaponic"
                     android:tag="@string/string_chip_aquaponic"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipOyster"
-                    style="@style/ChipDefault"
+                    style="@style/ChipSearchFilter"
                     android:text="@string/string_chip_oyster"
                     android:tag="@string/string_chip_oyster"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipShrimp"
-                    style="@style/ChipDefault"
+                    style="@style/ChipSearchFilter"
                     android:layout_marginEnd="10dp"
                     android:text="@string/string_chip_shrimp"
                     android:tag="@string/string_chip_shrimp"/>

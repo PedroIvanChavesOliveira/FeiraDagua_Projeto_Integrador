@@ -33,7 +33,7 @@ class ProducerNewProductMainAdapter(
                  onDeleteClick: (Products) -> Unit, onUpdateClick: (Products) -> Unit) {
 
             Glide.with(itemView).load(product.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivStore)
-            binding.tvProducerCategoryTitle.text = "R$ ${product.price}"
+            binding.tvProducerCategoryTitle.text = "R$ %.2f".format(product.price)
             binding.tvProducerNameTitle.text = product.name
 
             itemView.setOnClickListener {

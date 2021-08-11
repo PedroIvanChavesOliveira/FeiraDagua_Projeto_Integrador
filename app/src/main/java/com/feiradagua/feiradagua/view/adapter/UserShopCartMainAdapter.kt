@@ -34,7 +34,7 @@ class UserShopCartMainAdapter(
         fun bind(item: Cart, onCardClick: (Cart) -> Unit, onDeleteClick: (Cart) -> Unit) {
             Glide.with(itemView).load(item.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivStore)
             binding.tvProducerNameTitle.text = item.name
-            binding.tvProducerCategoryTitle.text = "R$ ${item.totalPrice}"
+            binding.tvProducerCategoryTitle.text = "R$ %.2f".format(item.totalPrice)
 
             itemView.setOnClickListener {
                 onCardClick(item)

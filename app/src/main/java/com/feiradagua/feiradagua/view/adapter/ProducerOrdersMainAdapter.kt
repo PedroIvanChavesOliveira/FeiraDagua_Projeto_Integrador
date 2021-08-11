@@ -32,7 +32,7 @@ class ProducerOrdersMainAdapter(
             Glide.with(itemView).load(order.userPhoto).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivUser)
             binding.tvProducerNameTitle.text = order.username
             binding.tvDeliveryDateTitle.text = order.deliveryDate
-            binding.tvValueTitle.text = "R$ ${order.totalPrice}"
+            binding.tvValueTitle.text = "R$ %.2f".format(order.totalPrice)
 
             itemView.setOnClickListener {
                 onCardClick(order)

@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="backgroundColor">#14145A</color>
+<!--    <color name="backgroundColor">#14145A</color>-->
+    <color name="backgroundColor">#141D3A</color>
     <color name="textColor">#186C7F</color>
     <color name="textColorOpaque">#99186C7F</color>
     <color name="grey">#CACACA</color>

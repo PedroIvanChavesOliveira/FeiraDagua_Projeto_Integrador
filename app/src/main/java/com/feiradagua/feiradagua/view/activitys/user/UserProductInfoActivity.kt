@@ -68,7 +68,7 @@ class UserProductInfoActivity : AppCompatActivity() {
             Glide.with(this).load(cart.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProduct)
             binding.tvProductNameTitle.text = cart.name
             binding.tvProductNameValue.text = cart.description
-            binding.tvProductValue.text = "R$ ${cart.price}"
+            binding.tvProductValue.text = "R$ %.2f".format(cart.price)
             count = (cart.totalPrice/cart.price).toInt()
             binding.tvProductNumberValue.text = count.toString()
             binding.btAddToCart.isEnabled = true
@@ -108,7 +108,7 @@ class UserProductInfoActivity : AppCompatActivity() {
         Glide.with(this).load(product?.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProduct)
         binding.tvProductNameTitle.text = product?.name
         binding.tvProductNameValue.text = product?.description
-        binding.tvProductValue.text = "R$ ${product?.price.toString()}"
+        binding.tvProductValue.text = "R$ %.2f".format(product?.price)
 
         binding.productCountCard.isVisible = false
         binding.btAddToCart.isVisible = false
@@ -118,7 +118,7 @@ class UserProductInfoActivity : AppCompatActivity() {
         Glide.with(this).load(product?.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProduct)
         binding.tvProductNameTitle.text = product?.name
         binding.tvProductNameValue.text = product?.description
-        binding.tvProductValue.text = "R$ ${product?.price.toString()}"
+        binding.tvProductValue.text = "R$ %.2f".format(product?.price)
 
     }
 
@@ -144,7 +144,7 @@ class UserProductInfoActivity : AppCompatActivity() {
             binding.tvProductNameValue.text = item.description
             binding.tvProductNameTitle.text = item.name
             binding.tvProductNumberValue.text = "2"
-            binding.tvProductValue.text = "R$ ${item.price}"
+            binding.tvProductValue.text = "R$ %.2f".format(item.price)
         }
 
         TapTargetSequence(this).targets(

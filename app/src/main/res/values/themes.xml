@@ -144,6 +144,16 @@
         <item name="android:clickable"> true</item>
     </style>
 
+    <style name="ChipSearchFilter">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="chipBackgroundColor">@drawable/custom_chip_filter_checked</item>
+        <item name="android:textColor">@drawable/custom_chip_text_checked</item>
+        <item name="android:checkable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable"> true</item>
+    </style>
+
     <style name="BottomNavigationDefault">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>

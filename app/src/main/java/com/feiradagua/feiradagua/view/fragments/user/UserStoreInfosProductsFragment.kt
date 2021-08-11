@@ -75,18 +75,26 @@ class UserStoreInfosProductsFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        binding.rvStoreHome.apply {
-            UserStoreInfosActivity.PRODUCTS.let {list ->
+        UserStoreInfosActivity.PRODUCTS.let { list ->
+            binding.rvStoreHome.apply {
                 list[getId]?.let {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = StoreInfosProductMainAdapter(it) { prod ->
-                        if(UserMenuActivity.MY_CART.confirmIfProductExistsInCart(prod.id)) {
-                            UserMenuActivity.MY_CART.getItemFromIdCart(prod.id)?.let { item ->
-                                startProductInfosActivityInCart(item)
+                    if(it.size != 0) {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = StoreInfosProductMainAdapter(it) { prod ->
+                            if(UserMenuActivity.MY_CART.confirmIfProductExistsInCart(prod.id)) {
+                                UserMenuActivity.MY_CART.getItemFromIdCart(prod.id)?.let { item ->
+                                    startProductInfosActivityInCart(item)
+                                }
+                            }else {
+                                startProductInfosActivity(prod)
                             }
-                        }else {
-                            startProductInfosActivity(prod)
                         }
+                        binding.animationProduct.isVisible = false
+                        binding.tvProductNotFound.isVisible = false
+                    }else {
+                        binding.animationProduct.isVisible = true
+                        binding.tvProductNotFound.isVisible = true
+                        binding.rvStoreHome.isVisible = false
                     }
                 }
             }

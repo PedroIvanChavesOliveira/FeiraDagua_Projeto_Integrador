@@ -124,6 +124,19 @@ class UserShopCartFragment : Fragment() {
         }
     }
 
+    private fun finishOrder() {
+        binding.rvCart.isVisible = false
+        binding.tvOrderNotFound.isVisible = true
+        binding.animationCart.isVisible = true
+        binding.btFinish.isEnabled = false
+        binding.tvTotalValue.text = "R$ 00,00"
+
+        val paramsTv = binding.tvTotalValue.layoutParams as ConstraintLayout.LayoutParams
+        val paramsBt = binding.btFinish.layoutParams as ConstraintLayout.LayoutParams
+        paramsBt.endToEnd = binding.tvOrderNotFound.id
+        paramsTv.endToEnd = binding.tvOrderNotFound.id
+    }
+
     private fun sendOrderToProducer() {
         binding.btFinish.setOnClickListener { view ->
             val contraints = CalendarConstraints.Builder().setValidator(DateValidatorPointForward.now()).build()
@@ -135,16 +148,15 @@ class UserShopCartFragment : Fragment() {
             activity?.let { activity ->
                 datePicker.show(activity.supportFragmentManager, "tag")
                 datePicker.addOnPositiveButtonClickListener {
-                    val dateString: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(datePicker.selection)
-                    if(UserMenuActivity.MY_CART.getProducersIdsList().size > 1) {
-                        UserMenuActivity.MY_CART.getProducersIdsList().forEach {
-                            val idOrder = generateRandomUUID()
-                            val productsOrder = UserMenuActivity.MY_CART.getProductsInfosList(it)
-                            val order = Order(idOrder, productsOrder, UserMenuActivity.USER.name?:"",
-                                    UserMenuActivity.USER.photo?:"", productsOrder.getTotalPriceValue(),
-                                    dateString,0, it, UserMenuActivity.USER.uid)
-                            viewModelShopCart.sendNewOrder(idOrder, order)
-                        }
+                    val currentDate = 86400000 + it
+                    val dateString: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(currentDate)
+                    UserMenuActivity.MY_CART.getProducersIdsList().forEach {
+                        val idOrder = generateRandomUUID()
+                        val productsOrder = UserMenuActivity.MY_CART.getProductsInfosList(it)
+                        val order = Order(idOrder, productsOrder, UserMenuActivity.USER.name?:"",
+                                UserMenuActivity.USER.photo?:"", productsOrder.getTotalPriceValue(),
+                                dateString,0, it, UserMenuActivity.USER.uid)
+                        viewModelShopCart.sendNewOrder(idOrder, order)
                     }
                     viewModelShopCart.orderOk.observe(activity) {
                         if(it) {
@@ -166,7 +178,7 @@ class UserShopCartFragment : Fragment() {
                             }
                         }
                         UserMenuActivity.MY_CART.clear()
-                        setUpRecyclerView()
+                        finishOrder()
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.feiradagua.feiradagua.utils
 
 import android.Manifest
 import com.feiradagua.feiradagua.BuildConfig
+import com.google.firebase.firestore.Source
 
 class Constants {
     object Login {
@@ -13,6 +14,9 @@ class Constants {
         const val REGISTERED_COLLECTION = "Registered"
         const val ORDERS_COLLECTION = "Orders"
         const val PRODUCTS_COLLECTION = "Products"
+        const val LAST_MODIFIED_FIELD = "lastModified"
+        val CACHE = Source.CACHE
+        val SERVER = Source.SERVER
     }
 
     object  SharedPreferences {
@@ -28,6 +32,11 @@ class Constants {
         const val SHAREDPREFERENCES_TUTORIAL_NAME_FORTH_PRODUCER = "ShowTutorial4Producer"
         const val SHAREDPREFERENCES_TUTORIAL_NAME_FIFTH_PRODUCER = "ShowTutorial5Producer"
         const val SHAREDPREFERENCES_TUTORIAL_NAME_SIXTH_PRODUCER = "ShowTutorial6Producer"
+        const val SHAREDPREFERENCES_TIMESTAMP_USERS = "SharedPreferencesUsersCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_ORDERS = "SharedPreferencesOrdersCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_PRODUCTS = "SharedPreferencesProductsCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_PRODUCERS_LIST = "SharedPreferencesProductsCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_KEY = "TimestampKey"
         const val SHAREDPREFERENCES_TUTORIAL_KEY = "show"
     }
 

@@ -23,6 +23,7 @@ import com.feiradagua.feiradagua.utils.Constants.Intents.CART_INFO
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.utils.Constants.Notification.TOPIC
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
 import com.feiradagua.feiradagua.utils.getTotalPrice
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserProductInfoActivity
@@ -36,6 +37,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.messaging.FirebaseMessaging
 import java.text.SimpleDateFormat
 import java.util.*
@@ -156,6 +158,7 @@ class UserShopCartFragment : Fragment() {
                         val order = Order(idOrder, productsOrder, UserMenuActivity.USER.name?:"",
                                 UserMenuActivity.USER.photo?:"", productsOrder.getTotalPriceValue(),
                                 dateString,0, it, UserMenuActivity.USER.uid)
+//                        setLastModifiedPreferences(activity, 2, Calendar.getInstance().time.toString())
                         viewModelShopCart.sendNewOrder(idOrder, order)
                     }
                     viewModelShopCart.orderOk.observe(activity) {

@@ -5,15 +5,18 @@ import com.feiradagua.feiradagua.api.ResponseAPI
 import com.feiradagua.feiradagua.model.`class`.Registered
 import com.feiradagua.feiradagua.model.`class`.User
 import com.feiradagua.feiradagua.utils.Constants
+import com.feiradagua.feiradagua.utils.Constants.Firebase.LAST_MODIFIED_FIELD
 import com.feiradagua.feiradagua.utils.Constants.Firebase.REGISTERED_COLLECTION
 import com.feiradagua.feiradagua.utils.Constants.Firebase.USER_COLLECTION
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.tasks.await
+import java.util.*
 
 class ExtraInfosRepository {
     private val auth by lazy {
@@ -28,9 +31,9 @@ class ExtraInfosRepository {
         Firebase.firestore.collection(REGISTERED_COLLECTION).document("${auth?.uid}" ?: "")
     }
 
-    suspend fun getUserDB(): DocumentSnapshot {
-        return userDB.get().await()
-    }
+//    suspend fun getUserDB(): DocumentSnapshot {
+//        return userDB.get().await()
+//    }
 
     suspend fun setExtraInfosDB(type: Int, adress: String, registered: Registered, phone: String) {
         userDB.update(mapOf("type" to type, "adress" to adress, "phone" to phone)).await()
@@ -38,7 +41,7 @@ class ExtraInfosRepository {
     }
 
     suspend fun setExtraInfosUserDB(type: Int, adress: String, registered: Registered, phone: String, deliveryArea: String) {
-        userDB.update(mapOf("type" to type, "adress" to adress, "phone" to phone, "deliveryArea" to deliveryArea)).await()
+        userDB.update(mapOf("type" to type, "adress" to adress, "phone" to phone, "deliveryArea" to deliveryArea, LAST_MODIFIED_FIELD to Calendar.getInstance().time.toString())).await()
         registeredDB.set(registered, SetOptions.merge()).await()
     }
 

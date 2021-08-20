@@ -5,15 +5,18 @@ import com.feiradagua.feiradagua.api.ResponseAPI
 import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.User
 import com.feiradagua.feiradagua.utils.Constants
+import com.feiradagua.feiradagua.utils.Constants.Firebase.LAST_MODIFIED_FIELD
 import com.feiradagua.feiradagua.utils.updateProducer
 import com.feiradagua.feiradagua.utils.updateUser
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import java.util.*
 
 class UserUpdateProfileRepository {
     private val auth by lazy {
@@ -26,6 +29,7 @@ class UserUpdateProfileRepository {
 
     suspend fun updateUser(user: User): Boolean {
         userDB.set(user, SetOptions.merge()).await()
+        userDB.update(mapOf(LAST_MODIFIED_FIELD to Calendar.getInstance().time.toString())).await()
         UserMenuActivity.USER.updateUser(user)
         return true
     }

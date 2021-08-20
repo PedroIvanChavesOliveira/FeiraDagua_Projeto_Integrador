@@ -17,9 +17,9 @@ class ProducerMenuViewModel: ViewModel() {
         ProducerMenuRepository()
     }
 
-    fun getProducerDB() {
+    fun getProducerDB(lastDate: String) {
         viewModelScope.launch {
-            repository.getProducerDb()?.let {
+            repository.getProducerDb(lastDate)?.let {
                 producerInfo.postValue(it.toObject(Producer::class.java))
             }?: run {
                 producerInfo.postValue(null)
@@ -33,7 +33,7 @@ class ProducerMenuViewModel: ViewModel() {
         }
     }
 
-    fun getProductsDB() {
+    fun getProductsDB(/*lastDate: String*/) {
         viewModelScope.launch {
             repository.getProductsDB()?.let {
                 products.postValue(it.toObjects(Products::class.java))
@@ -43,7 +43,7 @@ class ProducerMenuViewModel: ViewModel() {
         }
     }
 
-    fun getOrdersDB() {
+    fun getOrdersDB(/*lastDate: String*/) {
         viewModelScope.launch {
             repository.getOrdersDB()?.let {
                 orders.postValue(it.toObjects(Order::class.java))

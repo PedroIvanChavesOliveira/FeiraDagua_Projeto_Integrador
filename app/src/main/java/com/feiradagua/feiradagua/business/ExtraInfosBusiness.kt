@@ -10,10 +10,10 @@ class ExtraInfosBusiness {
         ExtraInfosRepository()
     }
 
-    suspend fun getUserDB(): String? {
-        val photo = repository.getUserDB().toObject(User::class.java)
-        return photo?.photo
-    }
+//    suspend fun getUserDB(): String? {
+//        val photo = repository.getUserDB().toObject(User::class.java)
+//        return photo?.photo
+//    }
 
     suspend fun viaCepResponse(cep: Int): ResponseAPI {
         val response = repository.viaCepResponse(cep)

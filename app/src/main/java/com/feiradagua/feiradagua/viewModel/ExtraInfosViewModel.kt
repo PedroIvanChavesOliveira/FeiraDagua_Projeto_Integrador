@@ -43,13 +43,13 @@ class ExtraInfosViewModel: ViewModel() {
         }
     }
 
-    fun getUserPhoto() {
-        viewModelScope.launch {
-            business.getUserDB()?.let {
-                userPhoto.postValue(it)
-            }?: run {
-                userPhoto.postValue(null)
-            }
-        }
-    }
+//    fun getUserPhoto() {
+//        viewModelScope.launch {
+//            business.getUserDB()?.let {
+//                userPhoto.postValue(it)
+//            }?: run {
+//                userPhoto.postValue(null)
+//            }
+//        }
+//    }
 }

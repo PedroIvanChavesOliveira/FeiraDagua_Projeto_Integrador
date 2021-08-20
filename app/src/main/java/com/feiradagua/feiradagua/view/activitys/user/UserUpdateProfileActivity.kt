@@ -13,15 +13,15 @@ import com.feiradagua.feiradagua.model.`class`.Mask
 import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.Registered
 import com.feiradagua.feiradagua.model.`class`.User
-import com.feiradagua.feiradagua.utils.Constants
-import com.feiradagua.feiradagua.utils.checkByTagUser
-import com.feiradagua.feiradagua.utils.splitAdress
-import com.feiradagua.feiradagua.utils.validatingPhone
+import com.feiradagua.feiradagua.utils.*
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
 import com.feiradagua.feiradagua.view.activitys.both.CameraAndGalleryActivity
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.viewModel.UserUpdateProfileViewModel
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.FieldValue
 import kotlinx.android.synthetic.main.activity_extra_infos.*
+import java.util.*
 
 class UserUpdateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserUpdateProfileBinding
@@ -99,6 +99,7 @@ class UserUpdateProfileActivity : AppCompatActivity() {
             val user = UserMenuActivity.USER
             val setUser = User(user.uid, binding.tietNameUpdate.text.toString(),user.email,
                 binding.tietCellNumberUpdate.text.toString(),photo?:user.photo,user.type,completedAdress, user.token, deliveryLocation )
+            setLastModifiedPreferences(this, 1, Calendar.getInstance().time.toString())
             viewModelUserUpdate.updateUser(setUser)
             viewModelUserUpdate.updateUser.observe(this) {
                 if(it) {

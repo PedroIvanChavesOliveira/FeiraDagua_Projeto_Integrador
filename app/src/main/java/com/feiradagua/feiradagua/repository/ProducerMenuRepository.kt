@@ -1,11 +1,18 @@
 package com.feiradagua.feiradagua.repository
 
+import android.content.Context
 import com.feiradagua.feiradagua.utils.Constants
+import com.feiradagua.feiradagua.utils.Constants.Firebase.CACHE
+import com.feiradagua.feiradagua.utils.Constants.Firebase.LAST_MODIFIED_FIELD
 import com.feiradagua.feiradagua.utils.Constants.Firebase.ORDERS_COLLECTION
 import com.feiradagua.feiradagua.utils.Constants.Firebase.PRODUCTS_COLLECTION
+import com.feiradagua.feiradagua.utils.Constants.Firebase.SERVER
 import com.feiradagua.feiradagua.utils.Constants.Firebase.USER_COLLECTION
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.getLastModifiedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -41,15 +48,52 @@ class ProducerMenuRepository {
         userDB.update("token", getToken()).await()
     }
 
-    suspend fun getProducerDb(): DocumentSnapshot? {
-        return userDB.get().await()
+    suspend fun getProducerDb(lastDate: String): DocumentSnapshot? {
+//        return userDB.get().await()
+        return userDB.get(CACHE).addOnCompleteListener {
+            if(it.isSuccessful) {
+                val exists = it.result?.exists()
+                val cacheDate = it.result?.get(LAST_MODIFIED_FIELD)?.toString()
+                if(exists == false) {
+                    userDB.get(SERVER)
+                }else {
+                    if (cacheDate != null) {
+                        if(cacheDate < lastDate) {
+                            userDB.get(SERVER)
+                        }
+                    }
+                }
+            }
+        }.await()
     }
 
-    suspend fun getProductsDB(): QuerySnapshot? {
-        return productsDB.whereEqualTo("producerId", auth?.uid).get().await()
+    suspend fun getProductsDB(/*lastDate: String*/): QuerySnapshot? {
+       return  productsDB.whereEqualTo("producerId", auth?.uid).get().await()
+//        val orderedQuery = query.orderBy(LAST_MODIFIED_FIELD, Query.Direction.DESCENDING).whereGreaterThan(LAST_MODIFIED_FIELD, lastDate)
+//        return query.get(CACHE).addOnCompleteListener { task ->
+//            if(task.isSuccessful) {
+//                orderedQuery.get(CACHE).addOnCompleteListener {
+//                    val isEmpty = task.result?.isEmpty
+//                    if(isEmpty == true) {
+//                        orderedQuery.get(SERVER)
+//                    }
+//                }
+//            }
+//        }.await()
     }
 
-    suspend fun getOrdersDB(): QuerySnapshot? {
+    suspend fun getOrdersDB(/*lastDate: String*/): QuerySnapshot? {
         return ordersDB.whereEqualTo("confirmation", 0).whereEqualTo("producerId", auth?.uid?:"").get().await()
+//        val orderedQuery = query.orderBy(LAST_MODIFIED_FIELD, Query.Direction.DESCENDING).whereGreaterThan(LAST_MODIFIED_FIELD, lastDate)
+//        return query.get(CACHE).addOnCompleteListener { task ->
+//            if(task.isSuccessful) {
+//                orderedQuery.get(CACHE).addOnCompleteListener {
+//                    val isEmpty = it.result?.isEmpty
+//                    if(isEmpty == true) {
+//                        orderedQuery.get(SERVER)
+//                    }
+//                }
+//            }
+//        }.await()
     }
 }

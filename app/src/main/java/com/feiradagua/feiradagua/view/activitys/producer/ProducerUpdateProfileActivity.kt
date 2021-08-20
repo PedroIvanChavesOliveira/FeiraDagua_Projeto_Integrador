@@ -13,9 +13,12 @@ import com.feiradagua.feiradagua.model.`class`.Mask
 import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.utils.*
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
 import com.feiradagua.feiradagua.view.activitys.both.CameraAndGalleryActivity
 import com.feiradagua.feiradagua.viewModel.ProducerUpdateProfileViewModel
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.FieldValue
+import java.util.*
 
 class ProducerUpdateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProducerUpdateProfileBinding
@@ -109,7 +112,8 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
             val setProducer = Producer(producer.uid, binding.tietNameUpdateProducer.text.toString(),
                 producer.email, binding.tietCellNumberUpdateProducer.text.toString(), photo?:producer.photo,
                 producer.type, completedAdress, binding.tietPresentationUpdateProducer.text.toString(),
-                deliveryDateArray, deliveryLocationArray, paymentArray, categoryArray)
+                deliveryDateArray, deliveryLocationArray, paymentArray, categoryArray, producer.token)
+            setLastModifiedPreferences(this, 1, Calendar.getInstance().time.toString())
             viewModelProducerUpdate.updateProducer(setProducer)
             viewModelProducerUpdate.updateProducer.observe(this) {
                 finish()
@@ -217,6 +221,15 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         }
         producer.category.forEach { loc ->
             getChipTagCategory(loc, categoryArray)
+        }
+
+        completedAdress = if(!binding.tietComplementUpdateProducer.text.isNullOrEmpty()) {
+            "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                    "${binding.tietComplementUpdateProducer.text},${binding.tietDistrictUpdateProducer.text}," +
+                    "${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-${binding.tietCepUpdateProducer.text}"
+        }else {
+            "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                    "${binding.tietDistrictUpdateProducer.text},${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-${binding.tietCepUpdateProducer.text}"
         }
 
         binding.btContinueUpdateProducer.isEnabled = true

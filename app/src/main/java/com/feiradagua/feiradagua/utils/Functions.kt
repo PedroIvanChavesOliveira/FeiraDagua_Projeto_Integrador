@@ -1,12 +1,13 @@
 package com.feiradagua.feiradagua.utils
 
-import com.feiradagua.feiradagua.R
+import com.feiradagua.feiradagua.model.*
 import com.feiradagua.feiradagua.model.`class`.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
-import java.io.File
-import java.io.InputStream
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
+
 
 fun generateRandomUUID(): String {
     return UUID.randomUUID().toString().replace("-", "").toUpperCase(Locale.ROOT)
@@ -14,6 +15,10 @@ fun generateRandomUUID(): String {
 
 fun String.validatingPhone(): Boolean {
     return this.matches("""^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$""".toRegex())
+}
+
+fun String.convertToTimestamp() {
+    SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.getDefault()).parse(this)
 }
 
 fun MutableList<String>.removeItem(element: String) {
@@ -73,9 +78,18 @@ fun MutableList<Producer>.compareListsAndFilter(list: MutableList<Producer>) {
     }
 }
 
-fun MutableList<Products>.checkingIfExist(id: String): Boolean {
+fun MutableList<Products>.checkingIfExist(id: String?): Boolean {
     this.forEach {
         if(id == it.id) {
+            return true
+        }
+    }
+    return false
+}
+
+fun MutableList<Producer>.checkingIfExistProducer(id: String?): Boolean {
+    this.forEach {
+        if(id == it.uid) {
             return true
         }
     }
@@ -236,32 +250,64 @@ fun MutableList<Products>.deleteProduct(id: String) {
 }
 
 fun TextInputEditText.splitAdress(text: String) {
-    val splited = text.split(",","-")
+    val splited = text.split(",", "-")
     this.filterEditTextByTag(splited)
 }
 
 private fun TextInputEditText.filterEditTextByTag(splited: List<String>) {
     if(splited.size == 7) {
         when(this.tag) {
-            "Informe o seu endereço" -> {this.setText(splited[0])}
-            "Informe o seu bairro" -> {this.setText(splited[3])}
-            "Informe o número da sua residência" -> {this.setText(splited[1])}
-            "Informe o número da sua empresa" -> {this.setText(splited[1])}
-            "Informe o complemento de sua residência" -> {this.setText(splited[2])}
-            "Informe o complemento de sua empresa" -> {this.setText(splited[2])}
-            "Informe a cidade em que você reside" -> {this.setText(splited[4])}
-            "Informe a UF do seu Estado" -> {this.setText(splited[5])}
-            "Informe o seu CEP" -> {this.setText(splited[6])}
+            "Informe o seu endereço" -> {
+                this.setText(splited[0])
+            }
+            "Informe o seu bairro" -> {
+                this.setText(splited[3])
+            }
+            "Informe o número da sua residência" -> {
+                this.setText(splited[1])
+            }
+            "Informe o número da sua empresa" -> {
+                this.setText(splited[1])
+            }
+            "Informe o complemento de sua residência" -> {
+                this.setText(splited[2])
+            }
+            "Informe o complemento de sua empresa" -> {
+                this.setText(splited[2])
+            }
+            "Informe a cidade em que você reside" -> {
+                this.setText(splited[4])
+            }
+            "Informe a UF do seu Estado" -> {
+                this.setText(splited[5])
+            }
+            "Informe o seu CEP" -> {
+                this.setText(splited[6])
+            }
         }
     }else {
         when(this.tag) {
-            "Informe o seu endereço" -> {this.setText(splited[0])}
-            "Informe o seu bairro" -> {this.setText(splited[2])}
-            "Informe o número da sua residência" -> {this.setText(splited[1])}
-            "Informe o número da sua empresa" -> {this.setText(splited[1])}
-            "Informe a cidade em que você reside" -> {this.setText(splited[3])}
-            "Informe a UF do seu Estado" -> {this.setText(splited[4])}
-            "Informe o seu CEP" -> {this.setText(splited[5])}
+            "Informe o seu endereço" -> {
+                this.setText(splited[0])
+            }
+            "Informe o seu bairro" -> {
+                this.setText(splited[2])
+            }
+            "Informe o número da sua residência" -> {
+                this.setText(splited[1])
+            }
+            "Informe o número da sua empresa" -> {
+                this.setText(splited[1])
+            }
+            "Informe a cidade em que você reside" -> {
+                this.setText(splited[3])
+            }
+            "Informe a UF do seu Estado" -> {
+                this.setText(splited[4])
+            }
+            "Informe o seu CEP" -> {
+                this.setText(splited[5])
+            }
         }
     }
 }

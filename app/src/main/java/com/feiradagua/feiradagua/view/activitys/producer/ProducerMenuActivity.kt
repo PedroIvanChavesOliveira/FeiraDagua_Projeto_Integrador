@@ -15,6 +15,7 @@ import com.feiradagua.feiradagua.utils.Constants.Intents.EXTRA_INFOS
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION_SPLASH
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.getLastModifiedPreferences
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerMyOrdersFragment
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerNewProductFragment
 import com.feiradagua.feiradagua.view.fragments.producer.ProducerProfileFragment
@@ -67,12 +68,15 @@ class ProducerMenuActivity : AppCompatActivity() {
     }
 
     private fun setProducerInfos() {
-        viewModelProducerMenu.getProducerDB()
+        getLastModifiedPreferences(this, 1)?.let { viewModelProducerMenu.getProducerDB(it) }
+//        getLastModifiedPreferences(this, 2)?.let { viewModelProducerMenu.getOrdersDB(it) }
+//        getLastModifiedPreferences(this, 3)?.let { viewModelProducerMenu.getProductsDB(it) }
         viewModelProducerMenu.getOrdersDB()
         viewModelProducerMenu.getProductsDB()
         viewModelProducerMenu.producerInfo.observe(this) { producer ->
             producer?.let {
                 PRODUCER = it
+                PRODUCER.token = it.token
                 viewModelProducerMenu.products.observe(this) { products ->
                     PRODUCTS = products
                     viewModelProducerMenu.orders.observe(this) { orders ->

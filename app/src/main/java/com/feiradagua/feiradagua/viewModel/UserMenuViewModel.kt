@@ -15,9 +15,9 @@ class UserMenuViewModel: ViewModel() {
         UserMenuRepository()
     }
 
-    fun getUserDB() {
+    fun getUserDB(lastModified: String) {
         viewModelScope.launch {
-            repository.getUserDb()?.let {
+            repository.getUserDb(lastModified)?.let {
                 userInfo.postValue(it.toObject(User::class.java))
             }?: run {
                 userInfo.postValue(null)
@@ -31,7 +31,7 @@ class UserMenuViewModel: ViewModel() {
         }
     }
 
-    fun getProducers(deliveryArea: String) {
+    fun getProducers(deliveryArea: String, /*lastDate: String*/) {
         viewModelScope.launch {
             producerList.postValue(repository.getProducers(deliveryArea))
         }

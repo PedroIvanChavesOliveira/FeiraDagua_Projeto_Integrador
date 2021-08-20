@@ -18,6 +18,8 @@ import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCT_UPDATE
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
 import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.utils.generateRandomUUID
 import com.feiradagua.feiradagua.view.activitys.both.CameraAndGalleryActivity
@@ -25,6 +27,8 @@ import com.feiradagua.feiradagua.viewModel.UpdateAndAddProductViewModel
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.FieldValue
+import java.util.*
 
 class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProducerUpdateAndAddProductBinding
@@ -108,6 +112,7 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
 //                        if(products.id == setProduct.id) {
 //                            ProducerMenuActivity.PRODUCTS?.set(index, setProduct)
 //                        }
+//                setLastModifiedPreferences(this, 3, Calendar.getInstance().time.toString())
                 viewModelUpdateAndAddProduct.addAndUpdateProduct(product.id, setProduct)
                 viewModelUpdateAndAddProduct.insertOk.observe(this) {
                     if(it) {
@@ -120,6 +125,7 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
                 val setProduct = Products(id,
                     binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
                     binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:"")
+//                setLastModifiedPreferences(this, 3, Calendar.getInstance().time.toString())
                 viewModelUpdateAndAddProduct.addAndUpdateProduct(id, setProduct)
                 viewModelUpdateAndAddProduct.insertOk.observe(this) {
                     if(it) {

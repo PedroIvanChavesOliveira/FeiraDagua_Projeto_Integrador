@@ -12,6 +12,7 @@ import com.feiradagua.feiradagua.utils.Constants
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.PRODUCER_ID
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.getLastModifiedPreferences
 import com.feiradagua.feiradagua.view.fragments.user.UserStoreInfosAboutUsFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserStoreInfosProductsFragment
 import com.feiradagua.feiradagua.viewModel.StoreInfosViewModel
@@ -61,11 +62,16 @@ class UserStoreInfosActivity : AppCompatActivity() {
     }
 
     private fun startFragments() {
-        viewModelStoreInfos.getProducts(getProducerId)
-        viewModelStoreInfos.productsList.observe(this) {
-            if(PRODUCTS.isEmpty() || !PRODUCTS.containsKey(getProducerId)) {
+        if(PRODUCTS.isEmpty() || !PRODUCTS.containsKey(getProducerId)) {
+//            val lastModified = getLastModifiedPreferences(this, 3)
+//            lastModified?.let { viewModelStoreInfos.getProducts(getProducerId,lastModified) }
+            viewModelStoreInfos.getProducts(getProducerId)
+            viewModelStoreInfos.productsList.observe(this) {
                 PRODUCTS[getProducerId] = it
+                initFragments(UserStoreInfosProductsFragment())
+                startMenu()
             }
+        }else {
             initFragments(UserStoreInfosProductsFragment())
             startMenu()
         }

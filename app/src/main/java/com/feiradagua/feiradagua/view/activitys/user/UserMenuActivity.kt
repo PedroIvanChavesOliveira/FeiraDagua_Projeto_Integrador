@@ -14,12 +14,15 @@ import com.feiradagua.feiradagua.model.`class`.User
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION_SPLASH
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.getLastModifiedPreferences
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
 import com.feiradagua.feiradagua.view.fragments.user.UserProfileFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserSearchFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserShopCartFragment
 import com.feiradagua.feiradagua.viewModel.UserMenuViewModel
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
+import java.util.*
 
 class UserMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuUserBinding
@@ -69,15 +72,19 @@ class UserMenuActivity : AppCompatActivity() {
     }
 
     private fun setUserData() {
-        viewModelUserMenu.getUserDB()
+        val userLastModified = getLastModifiedPreferences(this, 1)
+        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
+//                val producersLastModified = getLastModifiedPreferences(this, 4)
+//                producersLastModified?.let {date -> viewModelUserMenu.getProducers(it.deliveryArea, producersLastModified) }
                 viewModelUserMenu.getProducers(it.deliveryArea)
                 viewModelUserMenu.producerList.observe(this) { producer ->
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer
                     }
+//                    setLastModifiedPreferences(this, 4, Calendar.getInstance().time.toString())
                     initFragments(UserSearchFragment())
                     startNavBar()
                 }
@@ -86,15 +93,19 @@ class UserMenuActivity : AppCompatActivity() {
     }
 
     private fun setUserDataTutorial() {
-        viewModelUserMenu.getUserDB()
+        val userLastModified = getLastModifiedPreferences(this, 1)
+        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
+//                val producersLastModified = getLastModifiedPreferences(this, 4)
+//                producersLastModified?.let {date -> viewModelUserMenu.getProducers(it.deliveryArea, producersLastModified) }
                 viewModelUserMenu.getProducers(it.deliveryArea)
                 viewModelUserMenu.producerList.observe(this) { producer ->
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer
                     }
+//                    setLastModifiedPreferences(this, 4, Calendar.getInstance().time.toString())
                     initFragmentsTutorial(UserSearchFragment())
                 }
             }

@@ -11,7 +11,7 @@ import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 
 class ProducerOrdersMainAdapter(
     private var ordersList: MutableList<Order>,
-    private val onCardClick: (Order) -> Unit,
+    private val onCardClick: (Order) -> Unit
 ): RecyclerView.Adapter<ProducerOrdersMainAdapter.ViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

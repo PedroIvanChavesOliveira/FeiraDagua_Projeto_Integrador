@@ -12,7 +12,7 @@ class ProducerNewProductMainAdapter(
         private val products: MutableList<Products>,
         private val onCardClick: (Products) -> Unit,
         private val onDeleteClick: (Products) -> Unit,
-        private val onUpdateClick: (Products) -> Unit,
+        private val onUpdateClick: (Products) -> Unit
 ): RecyclerView.Adapter<ProducerNewProductMainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

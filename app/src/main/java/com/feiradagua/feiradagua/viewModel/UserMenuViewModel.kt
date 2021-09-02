@@ -39,6 +39,7 @@ class UserMenuViewModel(): ViewModel() {
             producerList.postValue(repository.getProducers(deliveryArea, context, id))
         }
     }
+
 //    fun insertUserDateInRoom(context: Context) {
 //        viewModelScope.launch {
 //            repository.insertUserDateInRoom(context)

@@ -1,12 +1,16 @@
 package com.feiradagua.feiradagua.model.roomClass
 
-import android.os.Parcelable
+//import android.os.Parcelable
 //import androidx.room.ColumnInfo
 //import androidx.room.Entity
 //import androidx.room.PrimaryKey
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FieldValue
-import kotlinx.android.parcel.Parcelize
+////import androidx.room.ColumnInfo
+////import androidx.room.Entity
+////import androidx.room.PrimaryKey
+//import com.google.firebase.Timestamp
+//import com.google.firebase.firestore.FieldValue
+//import kotlinx.android.parcel.Parcelize
+//import java.util.*
 
 //@Parcelize
 //@Entity(tableName = "userData")
@@ -15,7 +19,7 @@ import kotlinx.android.parcel.Parcelize
 //    @ColumnInfo(name = "user_id")
 //    val userId: String,
 //    @ColumnInfo(name = "last_login_data")
-//    val lastLoginData: Timestamp,
+//    val lastLoginData: Date,
 //    @ColumnInfo(name = "last_update_data")
-//    val lastUpdateData: Timestamp
+//    val lastUpdateData: Date
 //    ): Parcelable

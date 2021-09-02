@@ -11,7 +11,7 @@ import com.feiradagua.feiradagua.model.`class`.Producer
 
 class UserSearchMainAdapter(
     private val producerList: MutableList<Producer>,
-    private val onCardClick: (Producer) -> Unit,
+    private val onCardClick: (Producer) -> Unit
 ): RecyclerView.Adapter<UserSearchMainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

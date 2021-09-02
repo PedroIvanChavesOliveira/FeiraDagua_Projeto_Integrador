@@ -11,7 +11,7 @@ class StoreInfosRepository {
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
     }
 
-    suspend fun getProducerProducts(id: String, /*lastDate: String*/): MutableList<Products> {
+    suspend fun getProducerProducts(id: String /*,lastDate: String*/): MutableList<Products> {
         val query = productsDB.whereEqualTo("producerId", id).get().await()
         return query.toObjects(Products::class.java)
 //        val query = productsDB.whereEqualTo("producerId", id)

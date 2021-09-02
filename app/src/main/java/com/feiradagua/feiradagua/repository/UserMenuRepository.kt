@@ -1,7 +1,7 @@
 package com.feiradagua.feiradagua.repository
 
 import android.content.Context
-//import com.feiradagua.feiradagua.database.FeiraDaguaRoomDatabase
+//import com.feiradagua.feiradagua.database.FeiraDaguaDatabase
 //import com.feiradagua.feiradagua.database.entitys.DataDao
 import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.utils.Constants
@@ -24,6 +24,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
+import java.util.*
 import kotlin.coroutines.coroutineContext
 
 class UserMenuRepository {
@@ -115,9 +116,10 @@ class UserMenuRepository {
 //        }.await().apply { return result }
     }
 
-//    private fun getUserDateFromRoom(context: Context, id: String): FieldValue = FeiraDaguaRoomDatabase.getDatabase(context).dataDao().getLastloginDateUser(id)
+//    private suspend fun getUserDateFromRoom(context: Context, id: String): Date = FeiraDaguaDatabase.getDatabase(context).dataDao().getLastloginDateUser(id)
 //
-//    fun insertUserDateInRoom(context: Context) {
-//        FeiraDaguaRoomDatabase.getDatabase(context).dataDao().insertLastLoginDateUser(FieldValue.serverTimestamp())
+//    suspend fun insertUserDateInRoom(context: Context) {
+//        val data = FeiraDaguaDatabase.getDatabase(context).dataDao().insertLastLoginDateUser(Calendar.getInstance().time)
+//        data
 //    }
 }

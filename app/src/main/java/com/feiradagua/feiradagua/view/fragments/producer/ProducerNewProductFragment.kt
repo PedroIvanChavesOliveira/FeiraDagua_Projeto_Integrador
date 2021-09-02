@@ -178,7 +178,7 @@ class ProducerNewProductFragment : Fragment() {
                                 .transparentTarget(true).targetCircleColor(R.color.backgroundColor)
                                 .cancelable(false)
                                 .descriptionTextColor(R.color.white).titleTextColor(R.color.white)
-                                .titleTextSize(20).descriptionTextSize(16).targetRadius(100),
+                                .titleTextSize(20).descriptionTextSize(16).targetRadius(100)
                 ).listener(
                         object : TapTargetSequence.Listener {
                             override fun onSequenceFinish() {

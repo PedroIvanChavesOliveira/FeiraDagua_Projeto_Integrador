@@ -13,7 +13,7 @@ class StoreInfosViewModel: ViewModel() {
         StoreInfosRepository()
     }
 
-    fun getProducts(id: String, /*lastDate: String*/) {
+    fun getProducts(id: String /*,lastDate: String*/) {
         viewModelScope.launch {
             productsList.postValue(repository.getProducerProducts(id))
         }

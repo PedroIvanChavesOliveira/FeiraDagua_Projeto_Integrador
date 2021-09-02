@@ -78,6 +78,7 @@
     <string name="string_products_tabLayout">Produtos</string>
     <string name="string_about_us_tabLayout">Sobre Nós</string>
     <string name="string_product_description_not_found">Descrição do produto não encontrada</string>
+    <string name="string_product_weigth_not_found">Tamanho da porção não informado</string>
     <string name="string_product_name_title">Nome do Produto</string>
     <string name="string_add_to_cart_button">Adicionar ao Carrinho</string>
     <string name="string_update_data">Atualizar Dados</string>
@@ -91,6 +92,8 @@
     <string name="string_product_description_hint">Digite a descrição do produto</string>
     <string name="string_product_price_title_update">Preço do Produto</string>
     <string name="string_product_price_hint">Digite o preço do produto</string>
+    <string name="string_product_weight_title_update">Tamanho da Porção</string>
+<!--    <string name="string_product_weight_hint">Digite o preço do produto</string>-->
 
     <string name="string_mask_cep">#####-###</string>
     <string name="string_mask_cellphone">(##) #####-####</string>
@@ -142,7 +145,13 @@
     <string-array name="string_array_cancel_order_options">
         <item>Sem Estoque Desses Produtos no Momento</item>
         <item>Data de Entrega Indisponível</item>
-        <item>Área de Entrega Indisponível</item>
+    </string-array>
+
+    <string-array name="string_spinner_weight_array">
+        <item>Unidade</item>
+        <item>Dúzia</item>
+        <item>1/2 Dúzia</item>
+        <item>Gramas</item>
     </string-array>
 
     <string name="string_title_notification_from_user">Novo Pedido &#128515;</string>
@@ -161,4 +170,7 @@
     <string name="string_chip_oyster">Ostras e Mariscos</string>
     <string name="string_chip_shrimp">Camarão</string>
     <string name="string_producer_not_found">Nenhum Produtor Encontrado em Sua Região!</string>
+    <string name="string_limit_products">*Obs: Inicialmente, os produtores só poderão registrar um total de 5 produtos</string>
+    <string name="string_limit_products_user">*Obs: Inicialmente, os produtores só poderão registrar 5 produtos no app. Caso não tiver encontrado o que buscava, entre em contato!!</string>
+    <string name="string_spinner_tag_weight">spinnerWeight</string>
 </resources>

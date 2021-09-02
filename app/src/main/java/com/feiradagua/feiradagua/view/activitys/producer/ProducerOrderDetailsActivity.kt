@@ -78,6 +78,9 @@ class ProducerOrderDetailsActivity : AppCompatActivity() {
                     .setNeutralButton(resources.getString(R.string.string_dialog_cancel)) { dialog, which ->
                         dialog.dismiss()
                     }
+                    .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
+                        messageSelected = singleItems[which]
+                    }
                     .setPositiveButton(resources.getString(R.string.string_dialog_send)) { dialog, which ->
                         PushNotification(
                             NotificationData(
@@ -94,9 +97,6 @@ class ProducerOrderDetailsActivity : AppCompatActivity() {
                                 }
                             }
                         }
-                    }
-                    .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
-                        messageSelected = singleItems[checkedItem]
                     }
                 .show()
             }

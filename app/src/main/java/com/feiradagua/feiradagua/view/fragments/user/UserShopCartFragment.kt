@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -119,10 +120,7 @@ class UserShopCartFragment : Fragment() {
             binding.animationCart.isVisible = true
             binding.btFinish.isEnabled = false
 
-            val paramsTv = binding.tvTotalValue.layoutParams as ConstraintLayout.LayoutParams
-            val paramsBt = binding.btFinish.layoutParams as ConstraintLayout.LayoutParams
-            paramsBt.endToEnd = binding.tvOrderNotFound.id
-            paramsTv.endToEnd = binding.tvOrderNotFound.id
+            setConstraints()
         }
     }
 
@@ -133,10 +131,16 @@ class UserShopCartFragment : Fragment() {
         binding.btFinish.isEnabled = false
         binding.tvTotalValue.text = "R$ 00,00"
 
-        val paramsTv = binding.tvTotalValue.layoutParams as ConstraintLayout.LayoutParams
-        val paramsBt = binding.btFinish.layoutParams as ConstraintLayout.LayoutParams
-        paramsBt.endToEnd = binding.tvOrderNotFound.id
-        paramsTv.endToEnd = binding.tvOrderNotFound.id
+        setConstraints()
+    }
+
+    private fun setConstraints() {
+        val constraintLayout: ConstraintLayout = binding.constraintLayout1
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(constraintLayout)
+        constraintSet.connect(binding.tvTotalValue.id, ConstraintSet.END, binding.tvOrderNotFound.id, ConstraintSet.END, 0)
+        constraintSet.connect(binding.btFinish.id, ConstraintSet.END, binding.tvOrderNotFound.id, ConstraintSet.END, 0)
+        constraintSet.applyTo(constraintLayout)
     }
 
     private fun sendOrderToProducer() {

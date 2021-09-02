@@ -23,6 +23,7 @@ import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.utils.TutorialPreferences
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerUpdateAndAddProductActivity
+import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserProductInfoActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserStoreInfosActivity
 import com.feiradagua.feiradagua.view.adapter.ProducerNewProductMainAdapter
@@ -46,6 +47,9 @@ class ProducerNewProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tutorial = arguments?.getBoolean(TUTORIAL) == true
+        ProducerMenuActivity.PRODUCTS?.let {
+            binding.btNewProduct.isEnabled = it.size < 5
+        }
         binding.btNewProduct.setOnClickListener {
             startUpdateProductActivity(null)
         }
@@ -66,6 +70,9 @@ class ProducerNewProductFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setUpRecyclerView()
+        ProducerMenuActivity.PRODUCTS?.let {
+            binding.btNewProduct.isEnabled = it.size < 5
+        }
     }
 
     private fun setUpRecyclerView() {
@@ -87,10 +94,13 @@ class ProducerNewProductFragment : Fragment() {
                                 viewModelNewProduct.deleteDone.observe(viewLifecycleOwner) {
                                     if(it) {
                                         Snackbar.make(this, R.string.string_snackbar_delete_done, Snackbar.LENGTH_SHORT)
-                                            .setBackgroundTint(ContextCompat.getColor(context, R.color.colorPrimary))
+                                            .setBackgroundTint(ContextCompat.getColor(context, R.color.textColor))
                                             .setTextColor(ContextCompat.getColor(context, R.color.white))
                                             .show()
                                         adapter?.notifyDataSetChanged()
+                                        ProducerMenuActivity.PRODUCTS?.let {
+                                            binding.btNewProduct.isEnabled = it.size < 5
+                                        }
                                     }
                                 }
                             }

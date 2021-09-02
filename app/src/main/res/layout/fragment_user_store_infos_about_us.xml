@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_baseline_perm_phone_msg_30"
+        android:backgroundTint="@color/whatsAppColor"
+        android:src="@drawable/ic_baseline_phone_30"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

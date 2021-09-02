@@ -43,6 +43,7 @@ class UserMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModelUserMenu.updateToken()
+//        viewModelUserMenu.insertUserDateInRoom(this)
         startTutorial = intent.getBooleanExtra(TUTORIAL, false)
         tutorialPosition = intent.getIntExtra(POSITION, 0)
         positionFromSplash = intent.getIntExtra(POSITION_SPLASH, 0)
@@ -72,18 +73,20 @@ class UserMenuActivity : AppCompatActivity() {
     }
 
     private fun setUserData() {
-        val userLastModified = getLastModifiedPreferences(this, 1)
-        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
+//        val userLastModified = getLastModifiedPreferences(this, 1)
+//        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
+        viewModelUserMenu.getUserDB()
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
 //                val producersLastModified = getLastModifiedPreferences(this, 4)
 //                producersLastModified?.let {date -> viewModelUserMenu.getProducers(it.deliveryArea, producersLastModified) }
-                viewModelUserMenu.getProducers(it.deliveryArea)
+                viewModelUserMenu.getProducers(it.deliveryArea, this, it.uid)
                 viewModelUserMenu.producerList.observe(this) { producer ->
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer
                     }
+//                    viewModelUserMenu.insertUserDateInRoom(this)
 //                    setLastModifiedPreferences(this, 4, Calendar.getInstance().time.toString())
                     initFragments(UserSearchFragment())
                     startNavBar()
@@ -93,14 +96,15 @@ class UserMenuActivity : AppCompatActivity() {
     }
 
     private fun setUserDataTutorial() {
-        val userLastModified = getLastModifiedPreferences(this, 1)
-        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
+//        val userLastModified = getLastModifiedPreferences(this, 1)
+//        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
+        viewModelUserMenu.getUserDB()
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
 //                val producersLastModified = getLastModifiedPreferences(this, 4)
 //                producersLastModified?.let {date -> viewModelUserMenu.getProducers(it.deliveryArea, producersLastModified) }
-                viewModelUserMenu.getProducers(it.deliveryArea)
+                viewModelUserMenu.getProducers(it.deliveryArea, this, it.uid)
                 viewModelUserMenu.producerList.observe(this) { producer ->
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer

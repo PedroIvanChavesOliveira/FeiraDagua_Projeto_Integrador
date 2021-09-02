@@ -21,6 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -53,8 +54,18 @@
                     android:layout_marginEnd="10dp"
                     app:layout_constraintStart_toStartOf="@+id/tvProductNameTitle"
                     app:layout_constraintTop_toBottomOf="@id/tvProductNameTitle"
-                    app:layout_constraintBottom_toTopOf="@id/tvProductValue"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductWeightValue"
                     app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvProductWeightValue"
+                    style="@style/TextViewSubTitleDefault"
+                    android:text="@string/string_product_weigth_not_found"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvProductNameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductNameValue"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductValue"
+                    app:layout_constraintEnd_toEndOf="@id/tvProductNameValue"/>
 
                 <TextView
                     android:id="@+id/tvProductValue"
@@ -63,7 +74,7 @@
                     android:text="R$ 00,00"
                     android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="@id/tvProductNameTitle"
-                    app:layout_constraintTop_toBottomOf="@id/tvProductNameValue"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductWeightValue"
                     />
 
                 <com.google.android.material.card.MaterialCardView

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'kotlin-android-extensions'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
@@ -89,13 +90,20 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
-    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-    implementation 'com.google.firebase:firebase-common-ktx:19.5.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:22.1.0'
+    implementation 'com.google.firebase:firebase-common-ktx:20.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.3'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //room
+//    implementation "androidx.room:room-runtime:2.3.0"
+////    kapt("androidx.room:room-compiler:2.3.0")
+//    annotationProcessor "android.arch.persistence.room:compiler:2.3.0"
+//    implementation "androidx.room:room-ktx:2.3.0"
+//    androidTestImplementation "androidx.room:room-testing:2.3.0"
 
     //retrofit
     implementation 'com.google.code.gson:gson:2.8.6'

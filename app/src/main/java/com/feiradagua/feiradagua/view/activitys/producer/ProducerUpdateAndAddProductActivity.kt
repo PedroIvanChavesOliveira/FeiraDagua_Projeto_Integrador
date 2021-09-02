@@ -3,7 +3,12 @@ package com.feiradagua.feiradagua.view.activitys.producer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
@@ -30,9 +35,11 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FieldValue
 import java.util.*
 
-class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
+class ProducerUpdateAndAddProductActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: ActivityProducerUpdateAndAddProductBinding
-    private var viewModelUpdateAndAddProduct = UpdateAndAddProductViewModel()
+    private val viewModelUpdateAndAddProduct: UpdateAndAddProductViewModel by viewModels()
+    private var weightOk: String = ""
+    private var gramasOk: String = ""
     private var tutorial = false
     private var getProducts: Products? = null
     private var nameOk = false
@@ -46,7 +53,6 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
         binding = ActivityProducerUpdateAndAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModelUpdateAndAddProduct = ViewModelProvider(this).get(UpdateAndAddProductViewModel::class.java)
         getProducts = intent.getParcelableExtra(PRODUCT_UPDATE)
         tutorial = intent.getBooleanExtra(TUTORIAL, false)
 
@@ -65,6 +71,7 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
                 textChangeUpdate(binding.tietDescriptionUpdate, binding.tilDescriptionUpdate, R.string.string_product_description_title_update, product)
                 textChangeUpdate(binding.tietProductValueUpdate, binding.tilProductValueUpdate, R.string.string_product_price_title_update, product)
 
+                setUpSpinnerUpdate(product.weight)
                 confirmUpdate(product)
             }?: run {
                 binding.btConfirmUpdate.isEnabled = false
@@ -72,6 +79,7 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
                 textChangeDefault(binding.tietDescriptionUpdate, binding.tilDescriptionUpdate, R.string.string_product_description_title_update)
                 textChangeDefault(binding.tietProductValueUpdate, binding.tilProductValueUpdate, R.string.string_product_price_title_update)
 
+                setUpSpinner()
                 confirmUpdate(null)
             }
             startCameraActivity(getProducts)
@@ -102,12 +110,42 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
         Glide.with(this).load(CameraAndGalleryActivity.PRODUCTS_PHOTO).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProductUpdateAndAdd)
     }
 
+    private fun setUpSpinner() {
+        ArrayAdapter.createFromResource(this, R.array.string_spinner_weight_array, R.layout.custom_spinner_text).also {adapter ->
+            adapter.setDropDownViewResource(R.layout.custom_spinner_layout)
+            binding.spinnerWeight.adapter = adapter
+        }
+
+        binding.spinnerWeight.onItemSelectedListener = this
+    }
+
+    private fun setUpSpinnerUpdate(value: String) {
+        var position: Int
+        ArrayAdapter.createFromResource(this, R.array.string_spinner_weight_array, R.layout.custom_spinner_text).also {adapter ->
+            adapter.setDropDownViewResource(R.layout.custom_spinner_layout)
+            binding.spinnerWeight.adapter = adapter
+            position = adapter.getPosition(value)
+        }
+
+        if(position == -1) {
+            binding.spinnerWeight.setSelection(3)
+            binding.sliderWeight.value = value.toFloat()
+        }
+        binding.spinnerWeight.onItemSelectedListener = this
+    }
+
     private fun confirmUpdate(product: Products?) {
         product?.let {
             binding.btConfirmUpdate.setOnClickListener {
-                val setProduct = Products(product.id,
-                    binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
-                    binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:product.photo)
+                val setProduct: Products = if(weightOk == "Gramas") {
+                    Products(product.id,
+                            binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
+                            binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, gramasOk, photo?:product.photo)
+                }else {
+                    Products(product.id,
+                            binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
+                            binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, weightOk, photo?:product.photo)
+                }
 //                    ProducerMenuActivity.PRODUCTS?.forEachIndexed { index, products ->
 //                        if(products.id == setProduct.id) {
 //                            ProducerMenuActivity.PRODUCTS?.set(index, setProduct)
@@ -122,9 +160,15 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
             }
         }?: run {
             binding.btConfirmUpdate.setOnClickListener {
-                val setProduct = Products(id,
-                    binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
-                    binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, photo?:"")
+                val setProduct: Products = if(weightOk == "Gramas") {
+                    Products(id,
+                            binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
+                            binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, gramasOk, photo?:"")
+                }else {
+                    Products(id,
+                            binding.tietProductNameUpdate.text.toString(), binding.tietDescriptionUpdate.text.toString(),
+                            binding.tietProductValueUpdate.text.toString().toDouble(), ProducerMenuActivity.PRODUCER.uid, weightOk,photo?:"")
+                }
 //                setLastModifiedPreferences(this, 3, Calendar.getInstance().time.toString())
                 viewModelUpdateAndAddProduct.addAndUpdateProduct(id, setProduct)
                 viewModelUpdateAndAddProduct.insertOk.observe(this) {
@@ -198,7 +242,7 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
 
     private fun activatingButton(product: Products?): Boolean {
         val isOk: Boolean
-        if (nameOk && descriptionOk && priceOk) {
+        if (nameOk && descriptionOk && priceOk && weightOk.isNotEmpty() && gramasOk.isNotEmpty()) {
             binding.btConfirmUpdate.isEnabled = true
             confirmUpdate(product)
             isOk = true
@@ -249,5 +293,23 @@ class ProducerUpdateAndAddProductActivity : AppCompatActivity() {
                     override fun onSequenceCanceled(lastTarget: TapTarget?) {}
                 }
         ).start()
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        weightOk = parent?.getItemAtPosition(position).toString()
+        if (weightOk == "Gramas") {
+            binding.sliderWeight.isVisible = true
+            sliderListener()
+        }else {
+            binding.sliderWeight.isVisible = false
+            gramasOk = "Null"
+        }
+    }
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+    private fun sliderListener() {
+        binding.sliderWeight.addOnChangeListener { slider, value, fromUser ->
+            gramasOk = value.toString()
+        }
     }
 }

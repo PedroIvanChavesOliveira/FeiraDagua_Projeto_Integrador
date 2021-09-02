@@ -1,6 +1,8 @@
 package com.feiradagua.feiradagua.repository
 
 import android.content.Context
+//import com.feiradagua.feiradagua.database.FeiraDaguaRoomDatabase
+//import com.feiradagua.feiradagua.database.entitys.DataDao
 import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.utils.Constants
 import com.feiradagua.feiradagua.utils.Constants.Firebase.CACHE
@@ -11,8 +13,10 @@ import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences
 import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.getLastModifiedPreferences
 import com.feiradagua.feiradagua.utils.checkingIfExistProducer
 import com.feiradagua.feiradagua.utils.convertToTimestamp
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -20,8 +24,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
+import kotlin.coroutines.coroutineContext
 
 class UserMenuRepository {
+
     private val auth by lazy {
         FirebaseAuth.getInstance().currentUser
     }
@@ -46,30 +52,31 @@ class UserMenuRepository {
         userDB.update("token", getToken()).await()
     }
 
-    suspend fun getUserDb(lastModified: String): DocumentSnapshot? {
-//        return userDB.get().await()
-        return userDB.get(CACHE).addOnCompleteListener {
-            if(it.isSuccessful) {
-                val exists = it.result?.exists()
-                val cacheDate = it.result?.getDate(LAST_MODIFIED_FIELD)?.toString()
-                if(exists == false) {
-                    userDB.get(SERVER)
-                }else {
-                    if (cacheDate != null) {
-                        if(cacheDate < lastModified) {
-                            userDB.get(SERVER)
-                        }
-                    }
-                }
-            }
-        }.await()
+    suspend fun getUserDb(/*lastModified: String*/): DocumentSnapshot? {
+        return userDB.get().await()
+//        return userDB.get(CACHE).addOnCompleteListener {
+//            if(it.isSuccessful) {
+//                val exists = it.result?.exists()
+//                val cacheDate = it.result?.getDate(LAST_MODIFIED_FIELD)?.toString()
+//                if(exists == false) {
+//                    userDB.get(SERVER)
+//                }else {
+//                    if (cacheDate != null) {
+//                        if(cacheDate < lastModified) {
+//                            userDB.get(SERVER)
+//                        }
+//                    }
+//                }
+//            }
+//        }.await()
     }
 
-    suspend fun getProducers(deliveryArea: String, /*lastDate: String*/): MutableList<Producer> {
+    suspend fun getProducers(deliveryArea: String, /*lastDate: String*/ context: Context, id: String): MutableList<Producer> {
         val query = producerDB.whereEqualTo("type", 2).whereArrayContains("deliveryLocation", deliveryArea).get().await()
         return query.toObjects(Producer::class.java)
+//        val userLastDate = getUserDateFromRoom(context, id)
 //        val query = producerDB.whereEqualTo("type", 2).whereArrayContains("deliveryLocation", deliveryArea)
-//        val orderedQuery = producerDB.orderBy(LAST_MODIFIED_FIELD, Query.Direction.DESCENDING).whereGreaterThan(LAST_MODIFIED_FIELD, lastDate)
+//        val orderedQuery = producerDB.orderBy(LAST_MODIFIED_FIELD, Query.Direction.DESCENDING).whereGreaterThan(LAST_MODIFIED_FIELD, userLastDate)
 //        val result: MutableList<Producer> = mutableListOf()
 //        orderedQuery.get(SERVER).addOnCompleteListener { task ->
 //            if(task.isSuccessful) {
@@ -107,4 +114,10 @@ class UserMenuRepository {
 //            }
 //        }.await().apply { return result }
     }
+
+//    private fun getUserDateFromRoom(context: Context, id: String): FieldValue = FeiraDaguaRoomDatabase.getDatabase(context).dataDao().getLastloginDateUser(id)
+//
+//    fun insertUserDateInRoom(context: Context) {
+//        FeiraDaguaRoomDatabase.getDatabase(context).dataDao().insertLastLoginDateUser(FieldValue.serverTimestamp())
+//    }
 }

@@ -10,5 +10,6 @@ class Products (
     var description: String = "",
     var price: Double = 0.0,
     var producerId: String = "",
+    var weight: String = "",
     var photo: String = ""
 ): Parcelable

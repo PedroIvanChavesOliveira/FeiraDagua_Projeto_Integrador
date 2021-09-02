@@ -139,6 +139,19 @@ fun MutableList<Cart>.updateCartList(item: Cart) {
     }
 }
 
+fun String.specialMessageProductWeight(): String {
+    return when(this) {
+        "Unidade" -> { "Porção: Unidade" }
+        "Dúzia" -> { "Porção: Dúzia" }
+        "1/2 Dúzia" -> { "Porção: 1/2 Dúzia" }
+        else -> {
+            val float = this.toFloat()
+            val formatted = "%.0f".format(float)
+            "Porção: $formatted gramas"
+        }
+    }
+}
+
 fun MutableList<Cart>.getItemFromIdCart(id: String): Cart? {
     this.forEach{
         if(it.id == id) {

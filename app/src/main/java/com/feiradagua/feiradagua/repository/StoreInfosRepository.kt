@@ -1,20 +1,10 @@
 package com.feiradagua.feiradagua.repository
 
-import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.Products
-import com.feiradagua.feiradagua.utils.Constants
-import com.feiradagua.feiradagua.utils.Constants.Firebase.CACHE
-import com.feiradagua.feiradagua.utils.Constants.Firebase.LAST_MODIFIED_FIELD
 import com.feiradagua.feiradagua.utils.Constants.Firebase.PRODUCTS_COLLECTION
-import com.feiradagua.feiradagua.utils.Constants.Firebase.SERVER
-import com.feiradagua.feiradagua.utils.checkingIfExist
-import com.feiradagua.feiradagua.utils.checkingIfExistProducer
-import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-
 
 class StoreInfosRepository {
     private val productsDB by lazy {

@@ -14,22 +14,22 @@ class TutorialData {
 
     fun setUpProductsRecyclerView(): MutableList<Products> {
         val product1 = Products("", "Tainha Ovada", "Tainha fresquinha com ovas. Cortamos ela de acordo com " +
-                " a sua vontade, seja em postas ou espalmada.",18.50, "", "")
+                " a sua vontade, seja em postas ou espalmada.",18.50, "", "1000.0", "")
         val product2 = Products("", "Ostra Em Natura", "Vendemos a dúzia da Ostra, coleta hoje e com um sabor" +
-                "indescritível de bom!!",15.0, "", "")
+                "indescritível de bom!!",15.0, "", "500.0", "")
         return mutableListOf(product1, product2)
     }
 
     fun setUpCartRecyclerView(): MutableList<Cart> {
         val cart = Cart("","Tainha Ovada","Tainha fresquinha com ovas. Cortamos ela de acordo com " +
-                " a sua vontade, seja em postas ou espalmada.", 18.50, 37.0, "", "")
+                " a sua vontade, seja em postas ou espalmada.", 18.50, 37.0, "", "Unidade", "")
 
         return mutableListOf(cart)
     }
 
     fun setUpNewProduct(): Products {
         return Products("", "Tainha Ovada", "Tainha fresquinha com ovas. Cortamos ela de acordo com " +
-                " a sua vontade, seja em postas ou espalmada.",18.50, "", "")
+                " a sua vontade, seja em postas ou espalmada.",18.50, "", "Unidade", "")
     }
 
     fun setUpOrderRecyclerView(): MutableList<Order> {

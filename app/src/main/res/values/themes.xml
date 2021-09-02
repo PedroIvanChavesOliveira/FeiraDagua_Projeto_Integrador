@@ -161,6 +161,25 @@
         <item name="itemTextColor">@drawable/custom_bottom_navigation_item</item>
     </style>
 
+    <style name="CardViewSpinner">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="strokeColor">@color/backgroundColor</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="SpinnerDefault">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="SpinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+    </style>
+
+    <style name="SpinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+    </style>
+
     <style name="LoginTheme" parent="FirebaseUI">
         <item name="colorPrimary">@color/backgroundColor</item>
         <item name="colorPrimaryDark">@color/backgroundColor</item>

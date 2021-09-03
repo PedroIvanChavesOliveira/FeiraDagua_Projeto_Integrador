@@ -10,9 +10,10 @@ class ExtraInfosProducerViewModel: ViewModel() {
         ExtraInfosProducerRepository()
     }
 
-    fun setExtraInfosDB(description: String, deliveryDate: MutableList<String>, deliveryLocation: MutableList<String>, payment: MutableList<String>) {
+    fun setExtraInfosDB(description: String, deliveryDate: MutableList<String>,
+                        deliveryLocation: MutableList<String>, payment: MutableList<String>, category: MutableList<String>) {
         viewModelScope.launch {
-            repository.setExtraInfosDB(description, deliveryDate, deliveryLocation, payment)
+            repository.setExtraInfosDB(description, deliveryDate, deliveryLocation, payment, category)
         }
     }
 }

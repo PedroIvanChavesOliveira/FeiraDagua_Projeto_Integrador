@@ -23,17 +23,15 @@
                 <action android:name="com.google.android.c2dm.permission.RECEIVE"/>
             </intent-filter>
         </service>
-
-        <activity android:name=".view.activitys.user.UserSendOrderActivity" />
         <activity android:name=".view.activitys.both.CameraAndGalleryActivity" />
         <activity android:name=".view.activitys.producer.ProducerUpdateProfileActivity" />
         <activity android:name=".view.activitys.producer.ProducerUpdateAndAddProductActivity" />
         <activity android:name=".view.activitys.producer.ProducerOrderDetailsActivity" />
         <activity android:name=".view.activitys.user.UserProductInfoActivity" />
         <activity android:name=".view.activitys.user.UserUpdateProfileActivity" />
-        <activity android:name=".view.activitys.user.UserStoreInfosActivity" />
+        <activity android:name=".view.activitys.user.UserStoreInfosActivity"/>
         <activity android:name=".view.activitys.producer.ProducerMenuActivity" />
-        <activity android:name=".view.activitys.producer.ExtraInfosProducerActivity"></activity>
+        <activity android:name=".view.activitys.producer.ExtraInfosProducerActivity"/>
         <activity android:name=".view.activitys.user.UserMenuActivity" />
         <activity android:name=".view.activitys.both.ExtraInfosActivity" />
         <activity android:name=".view.activitys.both.LoginActivity" />

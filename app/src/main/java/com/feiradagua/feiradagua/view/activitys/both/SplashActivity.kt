@@ -1,32 +1,26 @@
 package com.feiradagua.feiradagua.view.activitys.both
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.feiradagua.feiradagua.databinding.ActivitySplashBinding
+import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION_SPLASH
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.view.activitys.user.UserMenuActivity
 import com.feiradagua.feiradagua.viewModel.SplashViewModel
-import com.google.firebase.auth.FirebaseUser
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
-    private var viewModelSplash = SplashViewModel()
-
-//    companion object {
-//        lateinit var CURRENT_USER: FirebaseUser
-//    }
+    private val viewModelSplash:  SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModelSplash = ViewModelProvider(this).get(SplashViewModel::class.java)
         viewModelSplash.getUser()
 
         Handler(Looper.getMainLooper()).postDelayed({
@@ -46,7 +40,6 @@ class SplashActivity : AppCompatActivity() {
                             initLoginActivity()
                         }
                     }
-//                    CURRENT_USER = user
                 }?: run {
                     initLoginActivity()
                 }
@@ -60,12 +53,16 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initMenuUserActivity() {
-        startActivity(Intent(this, UserMenuActivity::class.java))
+        val intent = Intent(this, UserMenuActivity::class.java)
+        intent.putExtra(POSITION_SPLASH, 1)
+        startActivity(intent)
         finish()
     }
 
     private fun initMenuProducerActivity() {
-        startActivity(Intent(this, ProducerMenuActivity::class.java))
+        val intent = Intent(this, ProducerMenuActivity::class.java)
+        intent.putExtra(POSITION_SPLASH, 1)
+        startActivity(intent)
         finish()
     }
 }

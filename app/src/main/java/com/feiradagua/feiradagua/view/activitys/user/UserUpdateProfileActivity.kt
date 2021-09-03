@@ -13,19 +13,23 @@ import com.feiradagua.feiradagua.model.`class`.Mask
 import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.model.`class`.Registered
 import com.feiradagua.feiradagua.model.`class`.User
-import com.feiradagua.feiradagua.utils.Constants
-import com.feiradagua.feiradagua.utils.splitAdress
+import com.feiradagua.feiradagua.utils.*
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
 import com.feiradagua.feiradagua.view.activitys.both.CameraAndGalleryActivity
 import com.feiradagua.feiradagua.view.activitys.producer.ProducerMenuActivity
 import com.feiradagua.feiradagua.viewModel.UserUpdateProfileViewModel
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.FieldValue
 import kotlinx.android.synthetic.main.activity_extra_infos.*
+import java.util.*
 
 class UserUpdateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserUpdateProfileBinding
     private val viewModelUserUpdate: UserUpdateProfileViewModel by viewModels()
     private var photo: String? = null
+    private var deliveryLocation = ""
     private var completedAdress = ""
+    private var isNameOk = false
     private var isCellphoneOk = false
     private var isCepOk = false
     private var isCityOk = false
@@ -40,6 +44,7 @@ class UserUpdateProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         textChangeDefault(binding.tietCellNumberUpdate, binding.tilCellNumberUpdate, R.string.string_cellphone)
+        textChangeDefault(binding.tietNameUpdate, binding.tilNameUpdate, R.string.string_name)
         textChangeDefault(binding.tietCepUpdate, binding.tilCepUpdate, R.string.string_cep_error)
         textChangeDefault(binding.tietCityUpdate, binding.tilCityUpdate, R.string.string_city)
         textChangeDefault(binding.tietDistrictUpdate, binding.tilDistrictUpdate, R.string.string_district)
@@ -52,6 +57,7 @@ class UserUpdateProfileActivity : AppCompatActivity() {
         addingMaskOnCepAndCellphone()
         startingCameraActivity()
         buttonUpdateListener()
+        chipDeliveryLocationSelection()
     }
 
     private fun setUpInfos() {
@@ -67,6 +73,8 @@ class UserUpdateProfileActivity : AppCompatActivity() {
         binding.tietNumberUpdate.splitAdress(user.adress)
         binding.tietStreetUpdate.splitAdress(user.adress)
         binding.tietUfUpdate.splitAdress(user.adress)
+        deliveryLocation = user.deliveryArea
+        selectChipByTag(user.deliveryArea)
     }
 
     override fun onRestart() {
@@ -75,11 +83,23 @@ class UserUpdateProfileActivity : AppCompatActivity() {
         Glide.with(this).load(photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivProfileUpdate)
     }
 
+    private fun selectChipByTag(tag: String) {
+        binding.chipFlorianopolisCenter.checkByTagUser(tag)
+        binding.chipFlorianopolisNorth.checkByTagUser(tag)
+        binding.chipFlorianopolisEast.checkByTagUser(tag)
+        binding.chipFlorianopolisSouth.checkByTagUser(tag)
+        binding.chipPalhoca.checkByTagUser(tag)
+        binding.chipImbituba.checkByTagUser(tag)
+        binding.chipBiguacu.checkByTagUser(tag)
+        binding.chipGaropaba.checkByTagUser(tag)
+    }
+
     private fun buttonUpdateListener() {
         binding.btContinueUpdate.setOnClickListener {
             val user = UserMenuActivity.USER
             val setUser = User(user.uid, binding.tietNameUpdate.text.toString(),user.email,
-                binding.tietCellNumberUpdate.text.toString(),photo?:user.photo,user.type,completedAdress,user.token )
+                binding.tietCellNumberUpdate.text.toString(),photo?:user.photo,user.type,completedAdress, user.token, deliveryLocation )
+            setLastModifiedPreferences(this, 1, Calendar.getInstance().time.toString())
             viewModelUserUpdate.updateUser(setUser)
             viewModelUserUpdate.updateUser.observe(this) {
                 if(it) {
@@ -95,15 +115,22 @@ class UserUpdateProfileActivity : AppCompatActivity() {
             if(cepValue.length == 8) {
                 viewModelUserUpdate.viaCepAPIResponse(cepValue.toInt())
                 viewModelUserUpdate.viaCepResponseSuccess.observe(this) {cep ->
-                    binding.tietCityUpdate.setText(cep.localidade)
-                    binding.tietStreetUpdate.setText(cep.logradouro)
-                    binding.tietDistrictUpdate.setText(cep.bairro)
-                    binding.tietUfUpdate.setText(cep.uf)
+                    if(cep.bairro.isNullOrEmpty()) {
+                        binding.tilCepUpdate.error = "Este CEP não é válido"
+                        isCepOk = false
+                    }else {
+                        binding.tilCepUpdate.isErrorEnabled = false
+                        isCepOk = true
+                        binding.tietCityUpdate.setText(cep.localidade)
+                        binding.tietStreetUpdate.setText(cep.logradouro)
+                        binding.tietDistrictUpdate.setText(cep.bairro)
+                        binding.tietUfUpdate.setText(cep.uf)
 
-                    binding.tietCityUpdate.isEnabled = false
-                    binding.tietStreetUpdate.isEnabled = false
-                    binding.tietDistrictUpdate.isEnabled = false
-                    binding.tietUfUpdate.isEnabled = false
+                        binding.tietCityUpdate.isEnabled = false
+                        binding.tietStreetUpdate.isEnabled = false
+                        binding.tietDistrictUpdate.isEnabled = false
+                        binding.tietUfUpdate.isEnabled = false
+                    }
                 }
             }else {
                 binding.tietCityUpdate.isEnabled = true
@@ -139,8 +166,24 @@ class UserUpdateProfileActivity : AppCompatActivity() {
                     setByTag(editText.tag as String, false)
                 }
             }
+
+            if(editText.tag == getString(R.string.string_whatsapp_number_hint)) {
+                if(text?.length == 15) {
+                    if(validatingPhoneNumber(text.toString())) {
+                        isNumberOk = true
+                        textInputLayout.isErrorEnabled = false
+                    }else {
+                        isNumberOk = false
+                        textInputLayout.error = getString(R.string.string_error_phone_not_valid)
+                    }
+                }
+            }
             activatingButton()
         }
+    }
+
+    private fun validatingPhoneNumber(phone: String): Boolean {
+        return phone.validatingPhone()
     }
 
     private fun startingCameraActivity() {
@@ -160,13 +203,14 @@ class UserUpdateProfileActivity : AppCompatActivity() {
             getString(R.string.string_number_hint) -> isNumberOk = isOk
             getString(R.string.string_city_hint) -> isCityOk = isOk
             getString(R.string.string_uf_hint) -> isUfOk = isOk
+            getString(R.string.string_name_hint_user) -> isNameOk = isOk
         }
     }
 
     private fun activatingButton(): Boolean {
         val isOk: Boolean
         val cepValue = Mask.unmask(binding.tietCepUpdate.text.toString())
-        if (isCellphoneOk && isCepOk && isStreetOk && isDistrictOk && isNumberOk && isCityOk && isUfOk) {
+        if (isCellphoneOk && isCepOk && isStreetOk && isDistrictOk && isNumberOk && isCityOk && isUfOk && isNameOk && deliveryLocation.isNotEmpty()) {
             binding.btContinueUpdate.isEnabled = true
             completedAdress = if(!binding.tietComplementUpdate.text.isNullOrEmpty()) {
                 "${binding.tietStreetUpdate.text}, ${binding.tietNumberUpdate.text}," +
@@ -183,5 +227,43 @@ class UserUpdateProfileActivity : AppCompatActivity() {
         }
 
         return isOk
+    }
+
+    private fun chipDeliveryLocationSelection() {
+        binding.chipFlorianopolisCenter.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+        binding.chipFlorianopolisEast.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+        binding.chipFlorianopolisNorth.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+        binding.chipFlorianopolisSouth.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+        binding.chipBiguacu.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+        binding.chipImbituba.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+        binding.chipPalhoca.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+        binding.chipGaropaba.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingDeliveryLocation(isChecked, buttonView.tag.toString())
+        }
+    }
+
+    private fun checkingDeliveryLocation(check: Boolean, tag: String) {
+        if(deliveryLocation == tag && !check) {
+            deliveryLocation = ""
+        }else {
+            if(check) {
+                deliveryLocation = tag
+            }
+        }
+        activatingButton()
     }
 }

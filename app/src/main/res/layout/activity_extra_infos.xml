@@ -237,7 +237,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietComplement"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="number"
+                        android:inputType="text"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -283,7 +283,7 @@
                     app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
                     app:layout_constraintTop_toBottomOf="@id/tvUfTitle"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumber"
-                    app:layout_constraintBottom_toTopOf="@id/btContinue">
+                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryAreaTitle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietUf"
@@ -293,6 +293,79 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/tvDeliveryAreaTitle"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_delivery_title_user"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tilUf"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumber"
+                    app:layout_constraintBottom_toTopOf="@id/chipGroupDeliveryArea"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupDeliveryArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:singleSelection="true"
+                    app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumber"
+                    app:layout_constraintTop_toBottomOf="@id/tvDeliveryAreaTitle"
+                    app:layout_constraintBottom_toTopOf="@id/btContinue">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisNorth"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_north"
+                        android:tag="@string/string_florianopolis_north"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisCenter"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_center"
+                        android:tag="@string/string_florianopolis_center"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisSouth"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_south"
+                        android:tag="@string/string_florianopolis_south"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFlorianopolisEast"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_florianopolis_east"
+                        android:tag="@string/string_florianopolis_east"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPalhoca"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_palhoca"
+                        android:tag="@string/string_palhoca"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBiguacu"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_biguacu"
+                        android:tag="@string/string_biguacu"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipImbituba"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_imbituba"
+                        android:tag="@string/string_imbituba"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipGaropaba"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_garopaba"
+                        android:tag="@string/string_garopaba"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
                 <Button
                     android:id="@+id/btContinue"
                     style="@style/ButtonDefault"
@@ -301,7 +374,7 @@
                     android:enabled="false"
                     app:layout_constraintStart_toStartOf="@id/tvOptionTitle"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumber"
-                    app:layout_constraintTop_toBottomOf="@id/tilUf"
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupDeliveryArea"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

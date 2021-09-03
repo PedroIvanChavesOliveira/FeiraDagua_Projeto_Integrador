@@ -1,15 +1,24 @@
 package com.feiradagua.feiradagua.utils
 
-import com.feiradagua.feiradagua.R
+import com.feiradagua.feiradagua.model.*
 import com.feiradagua.feiradagua.model.`class`.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
-import java.io.File
-import java.io.InputStream
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
+
 
 fun generateRandomUUID(): String {
     return UUID.randomUUID().toString().replace("-", "").toUpperCase(Locale.ROOT)
+}
+
+fun String.validatingPhone(): Boolean {
+    return this.matches("""^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$""".toRegex())
+}
+
+fun String.convertToTimestamp() {
+    SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.getDefault()).parse(this)
 }
 
 fun MutableList<String>.removeItem(element: String) {
@@ -31,6 +40,14 @@ fun Chip.checkByTag(tag: String) {
     this.isEnabled = false
 }
 
+fun Chip.checkByTagFilter(tag: String, isChecked: Boolean): String {
+    return if(this.tag == tag && isChecked) {
+        this.text.toString()
+    }else {
+        ""
+    }
+}
+
 fun Chip.checkByTagUpdate(tag: String, array: MutableList<String>) {
     if(this.tag == tag) {
         this.isChecked = true
@@ -38,9 +55,41 @@ fun Chip.checkByTagUpdate(tag: String, array: MutableList<String>) {
     }
 }
 
-fun MutableList<Products>.checkingIfExist(id: String): Boolean {
+fun Chip.checkByTagUser(tag: String) {
+    if(this.tag == tag) {
+        this.isChecked = true
+    }
+}
+
+fun MutableList<String>.filterByCategory(category: String): Boolean {
+    this.forEach {
+        if(it == category) {
+            return true
+        }
+    }
+    return false
+}
+
+fun MutableList<Producer>.compareListsAndFilter(list: MutableList<Producer>) {
+    list.forEach { second ->
+        if(!this.contains(second)) {
+            this.add(second)
+        }
+    }
+}
+
+fun MutableList<Products>.checkingIfExist(id: String?): Boolean {
     this.forEach {
         if(id == it.id) {
+            return true
+        }
+    }
+    return false
+}
+
+fun MutableList<Producer>.checkingIfExistProducer(id: String?): Boolean {
+    this.forEach {
+        if(id == it.uid) {
             return true
         }
     }
@@ -79,6 +128,7 @@ fun User.updateUser(user: User) {
     this.phone = user.phone
     this.token = user.token
     this.type = user.type
+    this.deliveryArea = user.deliveryArea
 }
 
 fun MutableList<Cart>.updateCartList(item: Cart) {
@@ -87,6 +137,28 @@ fun MutableList<Cart>.updateCartList(item: Cart) {
             cart.totalPrice = item.totalPrice
         }
     }
+}
+
+fun String.specialMessageProductWeight(): String {
+    return when(this) {
+        "Unidade" -> { "Porção: Unidade" }
+        "Dúzia" -> { "Porção: Dúzia" }
+        "1/2 Dúzia" -> { "Porção: 1/2 Dúzia" }
+        else -> {
+            val float = this.toFloat()
+            val formatted = "%.0f".format(float)
+            "Porção: $formatted gramas"
+        }
+    }
+}
+
+fun MutableList<Cart>.getItemFromIdCart(id: String): Cart? {
+    this.forEach{
+        if(it.id == id) {
+            return it
+        }
+    }
+    return null
 }
 
 fun MutableList<Cart>.deleteItemFromCartList(item: Cart) {
@@ -98,10 +170,10 @@ fun MutableList<Cart>.getTotalPrice(): String {
     this.forEach { item ->
         totalValue += item.totalPrice
     }
-    return "R$ $totalValue"
+    return "R$ %.2f".format(totalValue)
 }
 
-fun MutableList<Cart>.getTotalPriceValue(): Double {
+fun MutableList<ProductOrder>.getTotalPriceValue(): Double {
     var totalValue = 0.0
     this.forEach { item ->
         totalValue += item.totalPrice
@@ -129,6 +201,34 @@ fun MutableList<Producer>.getProducersToken(producersIds: MutableList<String>): 
     return list
 }
 
+fun Order.getOrderProducts(product: MutableList<Products>?): MutableList<Products> {
+    val list = mutableListOf<Products>()
+    product?.forEach { prod ->
+        this.products.forEach {
+            if(prod.id == it.id){
+                list.add(prod)
+            }
+        }
+    }
+    return list
+}
+
+fun MutableList<Cart>.confirmIfProductExistsInCart(id: String): Boolean {
+    return !this.none { it.id == id }
+}
+
+fun MutableList<Order>.deleteOrderSolved(id: String) {
+    this.removeAll{it.id == id}
+}
+
+fun Order.getTotalPriceOfProduct(): MutableMap<String, Double> {
+    val list = mutableMapOf<String, Double>()
+    this.products.forEach {
+        list[it.id] = it.totalPrice
+    }
+    return list
+}
+
 fun MutableList<Producer>.getProducer(id: String?): Producer? {
     this.forEach {
         if(it.uid == id) {
@@ -138,11 +238,22 @@ fun MutableList<Producer>.getProducer(id: String?): Producer? {
     return null
 }
 
-fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {
+//fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {
+//    val list = mutableListOf<ProductOrder>()
+//    this.forEach {
+//        val productOrder = ProductOrder(it.id, it.totalPrice)
+//        list.add(productOrder)
+//    }
+//    return list
+//}
+
+fun MutableList<Cart>.getProductsInfosList(producerId: String): MutableList<ProductOrder> {
     val list = mutableListOf<ProductOrder>()
     this.forEach {
-        val productOrder = ProductOrder(it.id, it.totalPrice)
-        list.add(productOrder)
+        if(it.producerId == producerId) {
+            val productOrder = ProductOrder(it.id, it.totalPrice)
+            list.add(productOrder)
+        }
     }
     return list
 }
@@ -152,29 +263,64 @@ fun MutableList<Products>.deleteProduct(id: String) {
 }
 
 fun TextInputEditText.splitAdress(text: String) {
-    val splited = text.split(",","-")
+    val splited = text.split(",", "-")
     this.filterEditTextByTag(splited)
 }
 
 private fun TextInputEditText.filterEditTextByTag(splited: List<String>) {
     if(splited.size == 7) {
         when(this.tag) {
-            "Informe o seu endereço" -> {this.setText(splited[0])}
-            "Informe o seu bairro" -> {this.setText(splited[3])}
-            "Informe seu número" -> {this.setText(splited[1])}
-            "Informe seu complemento" -> {this.setText(splited[2])}
-            "Informe a sua cidade" -> {this.setText(splited[4])}
-            "Informe a UF do seu Estado" -> {this.setText(splited[5])}
-            "Informe o seu CEP" -> {this.setText(splited[6])}
+            "Informe o seu endereço" -> {
+                this.setText(splited[0])
+            }
+            "Informe o seu bairro" -> {
+                this.setText(splited[3])
+            }
+            "Informe o número da sua residência" -> {
+                this.setText(splited[1])
+            }
+            "Informe o número da sua empresa" -> {
+                this.setText(splited[1])
+            }
+            "Informe o complemento de sua residência" -> {
+                this.setText(splited[2])
+            }
+            "Informe o complemento de sua empresa" -> {
+                this.setText(splited[2])
+            }
+            "Informe a cidade em que você reside" -> {
+                this.setText(splited[4])
+            }
+            "Informe a UF do seu Estado" -> {
+                this.setText(splited[5])
+            }
+            "Informe o seu CEP" -> {
+                this.setText(splited[6])
+            }
         }
     }else {
         when(this.tag) {
-            "Informe o seu endereço" -> {this.setText(splited[0])}
-            "Informe o seu bairro" -> {this.setText(splited[2])}
-            "Informe seu número" -> {this.setText(splited[1])}
-            "Informe a sua cidade" -> {this.setText(splited[3])}
-            "Informe a UF do seu Estado" -> {this.setText(splited[4])}
-            "Informe o seu CEP" -> {this.setText(splited[5])}
+            "Informe o seu endereço" -> {
+                this.setText(splited[0])
+            }
+            "Informe o seu bairro" -> {
+                this.setText(splited[2])
+            }
+            "Informe o número da sua residência" -> {
+                this.setText(splited[1])
+            }
+            "Informe o número da sua empresa" -> {
+                this.setText(splited[1])
+            }
+            "Informe a cidade em que você reside" -> {
+                this.setText(splited[3])
+            }
+            "Informe a UF do seu Estado" -> {
+                this.setText(splited[4])
+            }
+            "Informe o seu CEP" -> {
+                this.setText(splited[5])
+            }
         }
     }
 }

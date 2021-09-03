@@ -8,18 +8,63 @@
     tools:context=".view.activitys.user.UserStoreInfosActivity"
     android:background="@color/backgroundColor">
 
+    <TextView
+        android:id="@+id/tvObsProducts"
+        style="@style/TextViewSubTitleDefault"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/string_limit_products_user"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nestedScrollView"
+        />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvObsProducts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationProduct"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:lottie_rawRes="@raw/lottie_product_animation"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvProductNotFound"/>
+
+            <TextView
+                android:id="@+id/tvProductNotFound"
+                style="@style/TextViewTitleDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/string_product_not_found"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_margin="20dp"
+                app:layout_constraintStart_toStartOf="@id/animationProduct"
+                app:layout_constraintTop_toBottomOf="@id/animationProduct"
+                app:layout_constraintEnd_toEndOf="@id/animationProduct"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvStoreHome"
@@ -41,7 +86,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_baseline_perm_phone_msg_30"
+        android:src="@drawable/ic_baseline_phone_30"
+        android:backgroundTint="@color/whatsAppColor"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

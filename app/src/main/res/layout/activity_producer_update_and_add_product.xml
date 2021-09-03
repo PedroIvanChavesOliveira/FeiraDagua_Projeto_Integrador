@@ -113,7 +113,7 @@
                     app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
                     app:layout_constraintTop_toBottomOf="@id/tvProductValueTitleUpdate"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/btConfirmUpdate">
+                    app:layout_constraintBottom_toTopOf="@id/tvProductWeightTitleUpdate">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietProductValueUpdate"
@@ -123,6 +123,43 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/tvProductWeightTitleUpdate"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_product_weight_title_update"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tilProductValueUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/cardSpinnerWeight"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardSpinnerWeight"
+                    style="@style/CardViewSpinner"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/tvProductWeightTitleUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/sliderWeight"
+                    app:layout_constraintEnd_toEndOf="@+id/tilProductValueUpdate">
+
+                    <Spinner
+                        android:id="@+id/spinnerWeight"
+                        style="@style/SpinnerDefault"
+                        android:tag="@string/string_spinner_tag_weight" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:valueFrom="0.0"
+                    android:valueTo="1000.0"
+                    android:stepSize="100.0"
+                    app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/cardSpinnerWeight"
+                    app:layout_constraintEnd_toEndOf="@id/tilProductValueUpdate"
+                    app:layout_constraintBottom_toTopOf="@id/btConfirmUpdate"/>
+
                 <Button
                     android:id="@+id/btConfirmUpdate"
                     style="@style/ButtonDefault"
@@ -130,7 +167,7 @@
                     android:text="@string/string_update_data"
                     app:layout_constraintStart_toStartOf="@id/tvProductNameTitleUpdate"
                     app:layout_constraintEnd_toEndOf="@id/tilProductNameUpdate"
-                    app:layout_constraintTop_toBottomOf="@id/tilProductValueUpdate"
+                    app:layout_constraintTop_toBottomOf="@id/sliderWeight"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

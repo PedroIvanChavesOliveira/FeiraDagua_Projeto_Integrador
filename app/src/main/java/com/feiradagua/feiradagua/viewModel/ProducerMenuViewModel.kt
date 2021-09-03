@@ -17,9 +17,9 @@ class ProducerMenuViewModel: ViewModel() {
         ProducerMenuRepository()
     }
 
-    fun getProducerDB() {
+    fun getProducerDB(lastDate: String) {
         viewModelScope.launch {
-            repository.getProducerDb()?.let {
+            repository.getProducerDb(lastDate)?.let {
                 producerInfo.postValue(it.toObject(Producer::class.java))
             }?: run {
                 producerInfo.postValue(null)
@@ -33,16 +33,9 @@ class ProducerMenuViewModel: ViewModel() {
         }
     }
 
-    fun getProductsDB() {
+    fun getProductsDB(/*lastDate: String*/) {
         viewModelScope.launch {
             repository.getProductsDB()?.let {
-//                val productsList = mutableListOf<Products>()
-//                it.documents.forEach { doc ->
-//                    doc.toObject(Products::class.java)?.let { products ->
-//                        productsList.add(products)
-//                    }
-//                }
-//                products.postValue(productsList)
                 products.postValue(it.toObjects(Products::class.java))
             }?: run {
                 products.postValue(null)
@@ -50,16 +43,9 @@ class ProducerMenuViewModel: ViewModel() {
         }
     }
 
-    fun getOrdersDB() {
+    fun getOrdersDB(/*lastDate: String*/) {
         viewModelScope.launch {
             repository.getOrdersDB()?.let {
-//                val ordersList = mutableListOf<Order>()
-//                it.documents.forEach { doc ->
-//                    doc.toObject(Order::class.java)?.let { order ->
-//                        ordersList.add(order)
-//                    }
-//                }
-//                orders.postValue(ordersList)
                 orders.postValue(it.toObjects(Order::class.java))
             }?: run {
                 orders.postValue(null)

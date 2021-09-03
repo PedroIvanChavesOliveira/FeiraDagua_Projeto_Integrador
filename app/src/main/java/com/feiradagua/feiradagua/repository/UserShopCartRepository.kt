@@ -4,12 +4,15 @@ import com.feiradagua.feiradagua.api.APIService
 import com.feiradagua.feiradagua.api.ResponseAPI
 import com.feiradagua.feiradagua.model.`class`.Order
 import com.feiradagua.feiradagua.model.`class`.notification.PushNotification
+import com.feiradagua.feiradagua.utils.Constants.Firebase.LAST_MODIFIED_FIELD
 import com.feiradagua.feiradagua.utils.Constants.Firebase.ORDERS_COLLECTION
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
+import java.util.*
 
 class UserShopCartRepository {
     private val orderDB by lazy {
@@ -17,7 +20,9 @@ class UserShopCartRepository {
     }
 
     suspend fun sendNewOrder(id: String, order: Order): Boolean {
-        orderDB.document(id).set(order, SetOptions.merge()).await()
+        orderDB.document(id).set(order, SetOptions.merge()).addOnSuccessListener {
+//            orderDB.document(id).update(mapOf(LAST_MODIFIED_FIELD to Calendar.getInstance().time.toString()))
+        }.await()
         return true
     }
 

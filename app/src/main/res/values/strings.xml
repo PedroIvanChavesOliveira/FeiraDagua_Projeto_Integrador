@@ -13,17 +13,22 @@
     <string name="string_street_hint">Informe o seu endereço</string>
     <string name="string_district_title">Qual é o seu bairro?</string>
     <string name="string_district_hint">Informe o seu bairro</string>
-    <string name="string_number_title">Qual é o seu número?</string>
-    <string name="string_number_hint">Informe seu número</string>
-    <string name="string_complement_title">Possui complemento?</string>
-    <string name="string_complement_hint">Informe seu complemento</string>
-    <string name="string_city_title">Qual a sua cidade?</string>
-    <string name="string_city_hint">Informe a sua cidade</string>
+    <string name="string_number_title">Qual é o número de sua residência?</string>
+    <string name="string_number_hint">Informe o número da sua residência</string>
+    <string name="string_number_title_producer">Qual é o número de sua empresa?</string>
+    <string name="string_number_hint_producer">Informe o número da sua empresa</string>
+    <string name="string_complement_title">Sua residência possui um complemento?</string>
+    <string name="string_complement_hint">Informe o complemento de sua residência</string>
+    <string name="string_complement_title_producer">Sua empresa possui um complemento?</string>
+    <string name="string_complement_hint_producer">Informe o complemento de sua empresa</string>
+    <string name="string_city_title">Qual a cidade onde você reside?</string>
+    <string name="string_city_hint">Informe a cidade em que você reside</string>
     <string name="string_next_button">Avançar</string>
     <string name="string_finish_order">Finalizar Pedido</string>
     <string name="string_presentation_title">Diga um pouco mais sobre vocês!!</string>
     <string name="string_presentation_hint">Insira uma apresentação</string>
     <string name="string_delivery_title">Diga-nos sua área de entrega</string>
+    <string name="string_delivery_title_user">Para filtrarmos melhor os produtores, nos informe a região em que reside</string>
     <string name="string_florianopolis_north">Florianópolis - Norte</string>
     <string name="string_florianopolis_center">Florianópolis - Centro</string>
     <string name="string_florianopolis_south">Florianópolis - Sul</string>
@@ -37,6 +42,8 @@
     <string name="string_debit_card">Cartão de Débito</string>
     <string name="string_credit_card">Cartão de Crédito</string>
     <string name="string_payment_title">Diga-nos as formas de pagamento</string>
+    <string name="string_category_title">Diga-nos em quais categorias o seu comércio se enquadra</string>
+    <string name="string_category_producer_profile_title">Categorias</string>
     <string name="string_d">D</string>
     <string name="string_s">S</string>
     <string name="string_t">T</string>
@@ -57,6 +64,8 @@
     <string name="string_cellphone_not_found">Celular não encontrado</string>
     <string name="string_adress_title">Endereço</string>
     <string name="string_adress_not_found">Endereço não encontrado</string>
+    <string name="string_delivery_area_title_user">Região de Entrega</string>
+    <string name="string_delivery_area_not_found">Endereço de entrega não encontrado</string>
     <string name="string_update_profile_button">Atualizar Perfil</string>
     <string name="string_contact_title">Contato</string>
     <string name="string_contact_not_found">Contato não encontrado</string>
@@ -69,11 +78,13 @@
     <string name="string_products_tabLayout">Produtos</string>
     <string name="string_about_us_tabLayout">Sobre Nós</string>
     <string name="string_product_description_not_found">Descrição do produto não encontrada</string>
+    <string name="string_product_weigth_not_found">Tamanho da porção não informado</string>
     <string name="string_product_name_title">Nome do Produto</string>
     <string name="string_add_to_cart_button">Adicionar ao Carrinho</string>
     <string name="string_update_data">Atualizar Dados</string>
     <string name="string_client_title">Cliente</string>
     <string name="string_accept_order_button">Aceitar Pedido</string>
+    <string name="string_decline_order_button">Recusar Pedido</string>
     <string name="string_delivery_title_order_details">Entrega</string>
     <string name="string_new_product">Novo Produto</string>
     <string name="string_product_name_hint">Digite o nome do produto</string>
@@ -81,14 +92,18 @@
     <string name="string_product_description_hint">Digite a descrição do produto</string>
     <string name="string_product_price_title_update">Preço do Produto</string>
     <string name="string_product_price_hint">Digite o preço do produto</string>
+    <string name="string_product_weight_title_update">Tamanho da Porção</string>
+<!--    <string name="string_product_weight_hint">Digite o preço do produto</string>-->
 
     <string name="string_mask_cep">#####-###</string>
     <string name="string_mask_cellphone">(##) #####-####</string>
     <string name="string_mask_uf">##</string>
     <string name="string_error_message">O campo %1$s é obrigatório</string>
     <string name="string_error_message_cep">O CEP deve conter 8 dígitos</string>
+    <string name="string_error_phone_not_valid">O Celular não é válido</string>
     <string name="string_error_value_equals_zero">O preço não pode ser R$ 0.00</string>
     <string name="string_cellphone">Celular</string>
+    <string name="string_name">Nome</string>
     <string name="string_cep_error">CEP</string>
     <string name="string_city">Cidade</string>
     <string name="string_district">Bairro</string>
@@ -109,15 +124,53 @@
     <string name="string_dialog_title">Deletar Produto</string>
     <string name="string_dialog_message">Deseja excluir esse produto?</string>
     <string name="string_dialog_message_cart">Deseja excluir esse produto do carrinho?</string>
+    <string name="string_dialog_send">Enviar</string>
+    <string name="string_dialog_title_order">Por quais motivos recusou este pedido?</string>
+    <string name="string_dialog_email_message">
+        Foi enviado um e-mail de verificação para o seguinte e-mail: %1$s. Para continuar a usar o App essa ação é necessária!!
+    </string>
+    <string name="string_dialog_ok">Irei Verificar</string>
+    <string name="string_dialog_title_email">Verifique o seu E-mail</string>
     <string name="string_snackbar_delete_done">Produto excluído com sucesso</string>
     <string name="string_snackbar_order_sent">Pedido Enviado ao Produtor! Aguarde um retorno!</string>
     <string name="string_my_products">Meus Produtos</string>
     <string name="string_product_not_found">Nenhum Produto Cadastrado!</string>
     <string name="string_name_title_update">Qual o nome da sua empresa?</string>
     <string name="string_name_hint">Digite o nome da sua empresa</string>
+    <string name="string_name_title_update_user">Qual é o seu nome?</string>
+    <string name="string_name_hint_user">Digite o seu nome</string>
     <string name="string_name_title_profile">Olá, %1$s!</string>
     <string name="string_product_not_found_order">Nenhum Produto Adicionado ao Carrinho</string>
 
-    <string name="string_title_notification_from_user">Novo Pedido</string>
+    <string-array name="string_array_cancel_order_options">
+        <item>Sem Estoque Desses Produtos no Momento</item>
+        <item>Data de Entrega Indisponível</item>
+    </string-array>
+
+    <string-array name="string_spinner_weight_array">
+        <item>Unidade</item>
+        <item>Dúzia</item>
+        <item>1/2 Dúzia</item>
+        <item>Gramas</item>
+    </string-array>
+
+    <string name="string_title_notification_from_user">Novo Pedido &#128515;</string>
     <string name="string_message_notification_from_user">O cliente %1$s realizou um novo pedido</string>
+    <string name="string_title_notification_from_producer_decline">Pedido Não Aceito &#128577;</string>
+    <string name="string_message_notification_from_producer_decline">
+        Infelizmente o produtor não aceitou o seu pedido devido o seguinte problema: %1$s.
+    </string>
+    <string name="string_title_notification_from_producer_accept">Pedido Aceito &#127881;</string>
+    <string name="string_message_notification_from_producer_accept">
+        Aceitaram o Seu Pedido, em Breve o Produtor irá Entrar em Contato!!
+    </string>
+    <string name="string_back_arrow">Voltar</string>
+    <string name="string_chip_fish">Peixes</string>
+    <string name="string_chip_aquaponic">Hidroponia e/ou Aquaponia</string>
+    <string name="string_chip_oyster">Ostras e Mariscos</string>
+    <string name="string_chip_shrimp">Camarão</string>
+    <string name="string_producer_not_found">Nenhum Produtor Encontrado em Sua Região!</string>
+    <string name="string_limit_products">*Obs: Inicialmente, os produtores só poderão registrar um total de 5 produtos</string>
+    <string name="string_limit_products_user">*Obs: Inicialmente, os produtores só poderão registrar 5 produtos no app. Caso não tiver encontrado o que buscava, entre em contato!!</string>
+    <string name="string_spinner_tag_weight">spinnerWeight</string>
 </resources>

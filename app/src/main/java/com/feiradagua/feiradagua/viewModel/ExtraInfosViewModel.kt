@@ -28,6 +28,12 @@ class ExtraInfosViewModel: ViewModel() {
         }
     }
 
+    fun setExtrasInfosUser(type: Int, adress: String, registered: Registered, phone: String, deliveryArea: String) {
+        viewModelScope.launch {
+            repository.setExtraInfosUserDB(type, adress, registered, phone, deliveryArea)
+        }
+    }
+
     fun viaCepAPIResponse(cep: Int) {
         viewModelScope.launch {
             when(val response = business.viaCepResponse(cep)) {
@@ -37,13 +43,13 @@ class ExtraInfosViewModel: ViewModel() {
         }
     }
 
-    fun getUserPhoto() {
-        viewModelScope.launch {
-            business.getUserDB()?.let {
-                userPhoto.postValue(it)
-            }?: run {
-                userPhoto.postValue(null)
-            }
-        }
-    }
+//    fun getUserPhoto() {
+//        viewModelScope.launch {
+//            business.getUserDB()?.let {
+//                userPhoto.postValue(it)
+//            }?: run {
+//                userPhoto.postValue(null)
+//            }
+//        }
+//    }
 }

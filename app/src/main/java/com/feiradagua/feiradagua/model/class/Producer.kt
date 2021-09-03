@@ -12,7 +12,6 @@ class Producer (
     var deliveryDate: MutableList<String> = mutableListOf(),
     var deliveryLocation: MutableList<String> = mutableListOf(),
     var payment: MutableList<String> = mutableListOf(),
+    var category: MutableList<String> = mutableListOf(),
     var token: String? = ""
-//    var products: MutableList<String>? = mutableListOf(),
-//    var orders: MutableList<String> = mutableListOf()
 )

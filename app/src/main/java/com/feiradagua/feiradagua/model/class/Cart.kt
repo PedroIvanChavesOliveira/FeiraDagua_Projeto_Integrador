@@ -11,5 +11,6 @@ class Cart (
     var price: Double = 0.0,
     var totalPrice: Double = 0.0,
     var producerId: String = "",
+    var weight: String = "",
     var photo: String = ""
 ): Parcelable

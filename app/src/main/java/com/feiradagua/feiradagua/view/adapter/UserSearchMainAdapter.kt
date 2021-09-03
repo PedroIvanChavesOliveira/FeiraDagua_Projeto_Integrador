@@ -11,7 +11,7 @@ import com.feiradagua.feiradagua.model.`class`.Producer
 
 class UserSearchMainAdapter(
     private val producerList: MutableList<Producer>,
-    private val onCardClick: (Producer) -> Unit,
+    private val onCardClick: (Producer) -> Unit
 ): RecyclerView.Adapter<UserSearchMainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -29,10 +29,17 @@ class UserSearchMainAdapter(
 
     class ViewHolder(val binding: RecyclerViewProductsCardBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(producer: Producer, onCardClick: (Producer) -> Unit) {
+            var text = ""
             Glide.with(itemView).load(producer.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivStore)
             binding.tvProducerNameTitle.text = producer.name
-            binding.tvProducerCategoryTitle.text = "Sem Categoria"
-
+            producer.category.forEachIndexed {index, cat ->
+                text = if(producer.category.size -1 == index) {
+                    "$text $cat"
+                }else {
+                    "$text $cat,"
+                }
+            }
+            binding.tvProducerCategoryTitle.text = text
             itemView.setOnClickListener {
                 onCardClick(producer)
             }

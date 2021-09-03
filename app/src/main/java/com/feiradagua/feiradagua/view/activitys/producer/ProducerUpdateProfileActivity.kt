@@ -13,9 +13,12 @@ import com.feiradagua.feiradagua.model.`class`.Mask
 import com.feiradagua.feiradagua.model.`class`.Producer
 import com.feiradagua.feiradagua.utils.*
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
+import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
 import com.feiradagua.feiradagua.view.activitys.both.CameraAndGalleryActivity
 import com.feiradagua.feiradagua.viewModel.ProducerUpdateProfileViewModel
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.FieldValue
+import java.util.*
 
 class ProducerUpdateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProducerUpdateProfileBinding
@@ -23,6 +26,7 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
     private var deliveryDateArray = mutableListOf<String>()
     private var deliveryLocationArray = mutableListOf<String>()
     private var paymentArray = mutableListOf<String>()
+    private var categoryArray = mutableListOf<String>()
     private var completedAdress = ""
     private var isCellphoneOk = false
     private var isCepOk = false
@@ -50,6 +54,7 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         chipDeliveryDateSelection()
         chipDeliveryLocationSelection()
         chipPaymentSelection()
+        chipCategorySelection()
         presentationMessage()
         startingCameraActivity()
         addingMaskOnCepAndCellphone()
@@ -69,15 +74,22 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
             if(cepValue.length == 8) {
                 viewModelProducerUpdate.viaCepAPIResponse(cepValue.toInt())
                 viewModelProducerUpdate.viaCepResponseSuccess.observe(this) {cep ->
-                    binding.tietCityUpdateProducer.setText(cep.localidade)
-                    binding.tietStreetUpdateProducer.setText(cep.logradouro)
-                    binding.tietDistrictUpdateProducer.setText(cep.bairro)
-                    binding.tietUfUpdateProducer.setText(cep.uf)
+                    if(cep.bairro.isNullOrEmpty()) {
+                        binding.tilCepUpdateProducer.error = "Este CEP não é válido"
+                        isCepOk = false
+                    }else {
+                        binding.tilCepUpdateProducer.isErrorEnabled = false
+                        isCepOk = true
+                        binding.tietCityUpdateProducer.setText(cep.localidade)
+                        binding.tietStreetUpdateProducer.setText(cep.logradouro)
+                        binding.tietDistrictUpdateProducer.setText(cep.bairro)
+                        binding.tietUfUpdateProducer.setText(cep.uf)
 
-                    binding.tietCityUpdateProducer.isEnabled = false
-                    binding.tietStreetUpdateProducer.isEnabled = false
-                    binding.tietDistrictUpdateProducer.isEnabled = false
-                    binding.tietUfUpdateProducer.isEnabled = false
+                        binding.tietCityUpdateProducer.isEnabled = false
+                        binding.tietStreetUpdateProducer.isEnabled = false
+                        binding.tietDistrictUpdateProducer.isEnabled = false
+                        binding.tietUfUpdateProducer.isEnabled = false
+                    }
                 }
             }else {
                 binding.tietCityUpdateProducer.isEnabled = true
@@ -100,7 +112,8 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
             val setProducer = Producer(producer.uid, binding.tietNameUpdateProducer.text.toString(),
                 producer.email, binding.tietCellNumberUpdateProducer.text.toString(), photo?:producer.photo,
                 producer.type, completedAdress, binding.tietPresentationUpdateProducer.text.toString(),
-                deliveryDateArray, deliveryLocationArray, paymentArray)
+                deliveryDateArray, deliveryLocationArray, paymentArray, categoryArray, producer.token)
+            setLastModifiedPreferences(this, 1, Calendar.getInstance().time.toString())
             viewModelProducerUpdate.updateProducer(setProducer)
             viewModelProducerUpdate.updateProducer.observe(this) {
                 finish()
@@ -117,8 +130,24 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
                 textInputLayout.isErrorEnabled = false
                 setByTag(editText.tag as String, true)
             }
+
+            if(editText.tag == getString(R.string.string_whatsapp_number_hint)) {
+                if(text?.length == 15) {
+                    if(validatingPhoneNumber(text.toString())) {
+                        isNumberOk = true
+                        textInputLayout.isErrorEnabled = false
+                    }else {
+                        isNumberOk = false
+                        textInputLayout.error = getString(R.string.string_error_phone_not_valid)
+                    }
+                }
+            }
             activatingButton()
         }
+    }
+
+    private fun validatingPhoneNumber(phone: String): Boolean {
+        return phone.validatingPhone()
     }
 
     private fun startingCameraActivity() {
@@ -135,7 +164,7 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
             getString(R.string.string_cep_hint) -> isCepOk = isOk
             getString(R.string.string_street_hint) -> isStreetOk = isOk
             getString(R.string.string_district_hint) -> isDistrictOk = isOk
-            getString(R.string.string_number_hint) -> isNumberOk = isOk
+            getString(R.string.string_number_hint_producer) -> isNumberOk = isOk
             getString(R.string.string_city_hint) -> isCityOk = isOk
             getString(R.string.string_uf_hint) -> isUfOk = isOk
         }
@@ -144,15 +173,17 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
     private fun activatingButton(): Boolean {
         val isOk: Boolean
         val cepValue = Mask.unmask(binding.tietCepUpdateProducer.text.toString())
-        if (isCellphoneOk && isCepOk && isStreetOk && isDistrictOk && isNumberOk && isCityOk && isUfOk && deliveryDateArray.isNotEmpty() && deliveryLocationArray.isNotEmpty() && paymentArray.isNotEmpty()) {
+        if (isCellphoneOk && isCepOk && isStreetOk && isDistrictOk && isNumberOk && isCityOk && isUfOk &&
+                deliveryDateArray.isNotEmpty() && deliveryLocationArray.isNotEmpty()
+                && paymentArray.isNotEmpty() && categoryArray.isNotEmpty()) {
             binding.btContinueUpdateProducer.isEnabled = true
             completedAdress = if(!binding.tietComplementUpdateProducer.text.isNullOrEmpty()) {
-                "${binding.tietStreetUpdateProducer.text}, ${binding.tietNumberUpdateProducer.text}," +
-                        " ${binding.tietComplementUpdateProducer.text}, ${binding.tietDistrictUpdateProducer.text}," +
-                        " ${binding.tietCityUpdateProducer.text} - ${binding.tietUfUpdateProducer.text} - $cepValue"
+                "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                        "${binding.tietComplementUpdateProducer.text},${binding.tietDistrictUpdateProducer.text}," +
+                        "${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-$cepValue"
             }else {
-                "${binding.tietStreetUpdateProducer.text}, ${binding.tietNumberUpdateProducer.text}," +
-                        " ${binding.tietDistrictUpdateProducer.text}, ${binding.tietCityUpdateProducer.text} - ${binding.tietUfUpdateProducer.text} - $cepValue"
+                "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                        "${binding.tietDistrictUpdateProducer.text},${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-$cepValue"
             }
             isOk = true
         } else {
@@ -188,6 +219,20 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         producer.payment.forEach { loc ->
             getChipTagPayment(loc, paymentArray)
         }
+        producer.category.forEach { loc ->
+            getChipTagCategory(loc, categoryArray)
+        }
+
+        completedAdress = if(!binding.tietComplementUpdateProducer.text.isNullOrEmpty()) {
+            "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                    "${binding.tietComplementUpdateProducer.text},${binding.tietDistrictUpdateProducer.text}," +
+                    "${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-${binding.tietCepUpdateProducer.text}"
+        }else {
+            "${binding.tietStreetUpdateProducer.text},${binding.tietNumberUpdateProducer.text}," +
+                    "${binding.tietDistrictUpdateProducer.text},${binding.tietCityUpdateProducer.text}-${binding.tietUfUpdateProducer.text}-${binding.tietCepUpdateProducer.text}"
+        }
+
+        binding.btContinueUpdateProducer.isEnabled = true
     }
 
     private fun presentationMessage(): String {
@@ -264,6 +309,21 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun chipCategorySelection() {
+        binding.chipFish.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipOyster.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipAquaponic.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+        binding.chipShrimp.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkingArrays(categoryArray, isChecked, buttonView.tag.toString())
+        }
+    }
+
     private fun checkingArrays(array: MutableList<String>, isChecked: Boolean, tag: String) {
         if(isChecked) {
             array.addItem(tag)
@@ -299,5 +359,12 @@ class ProducerUpdateProfileActivity : AppCompatActivity() {
         binding.chipBankTransfer.checkByTagUpdate(tag, array)
         binding.chipDebitCard.checkByTagUpdate(tag, array)
         binding.chipCreditCard.checkByTagUpdate(tag, array)
+    }
+
+    private fun getChipTagCategory(tag: String, array: MutableList<String>) {
+        binding.chipFish.checkByTagUpdate(tag, array)
+        binding.chipOyster.checkByTagUpdate(tag, array)
+        binding.chipShrimp.checkByTagUpdate(tag, array)
+        binding.chipAquaponic.checkByTagUpdate(tag, array)
     }
 }

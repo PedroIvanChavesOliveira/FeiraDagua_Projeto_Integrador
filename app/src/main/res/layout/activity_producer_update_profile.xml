@@ -172,7 +172,7 @@
                 <TextView
                     android:id="@+id/tvNumberTitleUpdateProducer"
                     style="@style/TextViewTitleDefault"
-                    android:text="@string/string_number_title"
+                    android:text="@string/string_number_title_producer"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tilDistrictUpdateProducer"
                     app:layout_constraintBottom_toTopOf="@id/tilNumberUpdateProducer"/>
@@ -180,7 +180,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilNumberUpdateProducer"
                     style="@style/TextInputDefault"
-                    android:hint="@string/string_number_hint"
+                    android:hint="@string/string_number_hint_producer"
                     android:layout_marginBottom="10dp"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tvNumberTitleUpdateProducer"
@@ -191,13 +191,13 @@
                         android:id="@+id/tietNumberUpdateProducer"
                         style="@style/TextInputEditTextDefault"
                         android:inputType="number"
-                        android:tag="@string/string_number_hint"/>
+                        android:tag="@string/string_number_hint_producer"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/tvComplementTitleUpdateProducer"
                     style="@style/TextViewTitleDefault"
-                    android:text="@string/string_complement_title"
+                    android:text="@string/string_complement_title_producer"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tilNumberUpdateProducer"
                     app:layout_constraintBottom_toTopOf="@id/tilComplementUpdateProducer"/>
@@ -205,7 +205,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilComplementUpdateProducer"
                     style="@style/TextInputDefault"
-                    android:hint="@string/string_complement_hint"
+                    android:hint="@string/string_complement_hint_producer"
                     android:layout_marginBottom="10dp"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tvComplementTitleUpdateProducer"
@@ -215,8 +215,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietComplementUpdateProducer"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="number"
-                        android:tag="@string/string_complement_hint"/>
+                        android:inputType="text"
+                        android:tag="@string/string_complement_hint_producer"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -293,7 +293,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tietPresentationUpdateProducer"
                         style="@style/TextInputEditTextDefault"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -386,7 +386,7 @@
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tvPaymentTitleUpdateProducer"
-                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryPeriodTitleUpdateProducer">
+                    app:layout_constraintBottom_toTopOf="@id/tvCategoryTitleUpdateProducer">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPix"
@@ -415,69 +415,125 @@
                 </com.google.android.material.chip.ChipGroup>
 
                 <TextView
+                    android:id="@+id/tvCategoryTitleUpdateProducer"
+                    style="@style/TextViewTitleDefault"
+                    android:text="@string/string_category_title"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupPaymentUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/chipGroupCategoryUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategoryUpdateProducer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
+                    app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/tvCategoryTitleUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/tvDeliveryPeriodTitleUpdateProducer">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFish"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_fish"
+                        android:tag="@string/string_chip_fish"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAquaponic"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_aquaponic"
+                        android:tag="@string/string_chip_aquaponic"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipOyster"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_oyster"
+                        android:tag="@string/string_chip_oyster"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipShrimp"
+                        style="@style/ChipDefault"
+                        android:text="@string/string_chip_shrimp"
+                        android:tag="@string/string_chip_shrimp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
                     android:id="@+id/tvDeliveryPeriodTitleUpdateProducer"
                     style="@style/TextViewTitleDefault"
                     android:text="@string/string_delivery_period_title"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
-                    app:layout_constraintTop_toBottomOf="@id/chipGroupPaymentUpdateProducer"
-                    app:layout_constraintBottom_toTopOf="@id/chipGroupDeliveryPeriodUpdateProducer"/>
+                    app:layout_constraintTop_toBottomOf="@id/chipGroupCategoryUpdateProducer"
+                    app:layout_constraintBottom_toTopOf="@id/scrollChipGroupDeliveryPeriodUpdateProducer"/>
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupDeliveryPeriodUpdateProducer"
+                <HorizontalScrollView
+                    android:id="@+id/scrollChipGroupDeliveryPeriodUpdateProducer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:singleLine="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:scrollbars="none"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
                     app:layout_constraintTop_toBottomOf="@id/tvDeliveryPeriodTitleUpdateProducer"
                     app:layout_constraintBottom_toTopOf="@id/btContinueUpdateProducer">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSunday"
-                        style="@style/ChipDefault"
-                        android:text="@string/string_d"
-                        android:tag="Domingo"/>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupDeliveryPeriodUpdateProducer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleLine="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMonday"
-                        style="@style/ChipDefault"
-                        android:text="@string/string_s"
-                        android:tag="Segunda"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipSunday"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_d"
+                            android:tag="Domingo"/>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipThursday"
-                        style="@style/ChipDefault"
-                        android:text="@string/string_t"
-                        android:tag="Terça"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMonday"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_s"
+                            android:tag="Segunda"/>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipWednesday"
-                        style="@style/ChipDefault"
-                        android:text="@string/string_q"
-                        android:tag="Quarta"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipThursday"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_t"
+                            android:tag="Terça"/>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipTuesday"
-                        style="@style/ChipDefault"
-                        android:text="@string/string_q"
-                        android:tag="Quinta"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipWednesday"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_q"
+                            android:tag="Quarta"/>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipFriday"
-                        style="@style/ChipDefault"
-                        android:text="@string/string_s"
-                        android:tag="Sexta"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTuesday"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_q"
+                            android:tag="Quinta"/>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSaturday"
-                        style="@style/ChipDefault"
-                        android:text="@string/string_s"
-                        android:tag="Sábado"/>
-                </com.google.android.material.chip.ChipGroup>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipFriday"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_s"
+                            android:tag="Sexta"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipSaturday"
+                            style="@style/ChipDefault"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/string_s"
+                            android:tag="Sábado"/>
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
 
                 <Button
                     android:id="@+id/btContinueUpdateProducer"
@@ -486,7 +542,7 @@
                     android:text="@string/string_update_data"
                     app:layout_constraintStart_toStartOf="@id/tvCellTitleUpdateProducer"
                     app:layout_constraintEnd_toEndOf="@id/tilCellNumberUpdateProducer"
-                    app:layout_constraintTop_toBottomOf="@id/chipGroupDeliveryPeriodUpdateProducer"
+                    app:layout_constraintTop_toBottomOf="@id/scrollChipGroupDeliveryPeriodUpdateProducer"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

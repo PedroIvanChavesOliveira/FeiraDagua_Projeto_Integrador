@@ -8,5 +8,6 @@ class User (
     var photo: String? = "",
     var type: Int? = 0,
     var adress: String = "",
-    var token: String? = ""
+    var token: String? = "",
+    var deliveryArea: String = ""
 )

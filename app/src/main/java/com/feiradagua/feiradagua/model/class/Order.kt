@@ -12,6 +12,6 @@ class Order (
     val totalPrice: Double = 0.0,
     val deliveryDate: String = "",
     val confirmation: Int = 0,
-    val producerId: MutableList<String> = mutableListOf(),
+    val producerId: String = "",
     val userId: String = ""
 ): Parcelable

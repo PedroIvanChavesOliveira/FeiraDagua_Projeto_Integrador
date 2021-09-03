@@ -2,6 +2,7 @@ package com.feiradagua.feiradagua.utils
 
 import android.Manifest
 import com.feiradagua.feiradagua.BuildConfig
+import com.google.firebase.firestore.Source
 
 class Constants {
     object Login {
@@ -13,6 +14,30 @@ class Constants {
         const val REGISTERED_COLLECTION = "Registered"
         const val ORDERS_COLLECTION = "Orders"
         const val PRODUCTS_COLLECTION = "Products"
+        const val LAST_MODIFIED_FIELD = "lastModified"
+        val CACHE = Source.CACHE
+        val SERVER = Source.SERVER
+    }
+
+    object  SharedPreferences {
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIRST = "ShowTutorial1"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SECOND = "ShowTutorial2"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_THIRD = "ShowTutorial3"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FORTH = "ShowTutorial4"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIFTH= "ShowTutorial5"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SIXTH = "ShowTutorial6"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIRST_PRODUCER = "ShowTutorial1Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SECOND_PRODUCER = "ShowTutorial2Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_THIRD_PRODUCER = "ShowTutorial3Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FORTH_PRODUCER = "ShowTutorial4Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_FIFTH_PRODUCER = "ShowTutorial5Producer"
+        const val SHAREDPREFERENCES_TUTORIAL_NAME_SIXTH_PRODUCER = "ShowTutorial6Producer"
+        const val SHAREDPREFERENCES_TIMESTAMP_USERS = "SharedPreferencesUsersCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_ORDERS = "SharedPreferencesOrdersCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_PRODUCTS = "SharedPreferencesProductsCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_PRODUCERS_LIST = "SharedPreferencesProductsCollection"
+        const val SHAREDPREFERENCES_TIMESTAMP_KEY = "TimestampKey"
+        const val SHAREDPREFERENCES_TUTORIAL_KEY = "show"
     }
 
     object  Notification {
@@ -29,6 +54,7 @@ class Constants {
 
     object Intents {
         const val POSITION = "Position"
+        const val POSITION_SPLASH = "PositionSplash"
         const val EXTRA_INFOS = "ExtraInfos"
         const val ORDER_DETAILS = "OrderDetails"
         const val PRODUCT_UPDATE = "ProductUpdate"
@@ -36,6 +62,7 @@ class Constants {
         const val PRODUCT_ID = "ProductId"
         const val PRODUCER_ID = "ProducerId"
         const val CART_INFO = "CartInfo"
+        const val TUTORIAL = "Tutorial"
     }
 
     object VoiceRecognation {

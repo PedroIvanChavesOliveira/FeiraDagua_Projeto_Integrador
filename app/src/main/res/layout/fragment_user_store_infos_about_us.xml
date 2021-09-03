@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_baseline_perm_phone_msg_30"
+        android:backgroundTint="@color/whatsAppColor"
+        android:src="@drawable/ic_baseline_phone_30"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -250,7 +251,7 @@
                         app:layout_constraintStart_toStartOf="@id/tvPresentationTitle"
                         app:layout_constraintEnd_toEndOf="@id/viewSeparator1"
                         app:layout_constraintTop_toBottomOf="@id/tvPaymentTitle"
-                        app:layout_constraintBottom_toTopOf="@id/viewSeparator3">
+                        app:layout_constraintBottom_toTopOf="@id/tvCategoryTitle">
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipPix"
@@ -278,6 +279,53 @@
 
                     </com.google.android.material.chip.ChipGroup>
 
+                    <TextView
+                        android:id="@+id/tvCategoryTitle"
+                        style="@style/TextViewTitleDefault"
+                        android:text="@string/string_category_producer_profile_title"
+                        app:layout_constraintStart_toStartOf="@id/tvPresentationTitle"
+                        app:layout_constraintTop_toBottomOf="@id/chipGroupPayment"
+                        app:layout_constraintBottom_toTopOf="@id/chipGroupCategory"
+                        app:layout_constraintEnd_toEndOf="@id/viewSeparator1"/>
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="@id/tvPresentationTitle"
+                        app:layout_constraintEnd_toEndOf="@id/viewSeparator1"
+                        app:layout_constraintTop_toBottomOf="@id/tvCategoryTitle"
+                        app:layout_constraintBottom_toTopOf="@id/viewSeparator3">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipFish"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_chip_fish"
+                            android:tag="@string/string_chip_fish"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipAquaponic"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_chip_aquaponic"
+                            android:tag="@string/string_chip_aquaponic"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipOyster"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_chip_oyster"
+                            android:tag="@string/string_chip_oyster"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipShrimp"
+                            style="@style/ChipDefault"
+                            android:text="@string/string_chip_shrimp"
+                            android:tag="@string/string_chip_shrimp"/>
+
+                    </com.google.android.material.chip.ChipGroup>
+
                     <View
                         android:id="@+id/viewSeparator3"
                         android:layout_width="match_parent"
@@ -288,7 +336,7 @@
                         android:background="@android:color/darker_gray"
                         app:layout_constraintStart_toStartOf="@id/tvContactTitle"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/chipGroupPayment"
+                        app:layout_constraintTop_toBottomOf="@id/chipGroupCategory"
                         app:layout_constraintBottom_toTopOf="@id/tvDeliveryAreaTitle"/>
 
                     <TextView
@@ -298,64 +346,72 @@
                         android:layout_marginTop="10dp"
                         app:layout_constraintStart_toStartOf="@+id/tvContactTitle"
                         app:layout_constraintTop_toBottomOf="@id/viewSeparator3"
-                        app:layout_constraintBottom_toTopOf="@id/chipGroupDeliveryPeriod"/>
+                        app:layout_constraintBottom_toTopOf="@id/scrollChipGroupDeliveryPeriod"/>
 
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroupDeliveryPeriod"
+                    <HorizontalScrollView
+                        android:id="@+id/scrollChipGroupDeliveryPeriod"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:singleLine="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
+                        android:scrollbars="none"
                         app:layout_constraintStart_toStartOf="@id/tvPresentationTitle"
                         app:layout_constraintEnd_toEndOf="@id/viewSeparator1"
                         app:layout_constraintTop_toBottomOf="@id/tvDeliveryPeriodTitle"
                         app:layout_constraintBottom_toBottomOf="parent">
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipSunday"
-                            style="@style/ChipDefault"
-                            android:text="@string/string_d"
-                            android:tag="Domingo"/>
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroupDeliveryPeriod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:singleLine="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp">
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipMonday"
-                            style="@style/ChipDefault"
-                            android:text="@string/string_s"
-                            android:tag="Segunda"/>
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipSunday"
+                                style="@style/ChipDefault"
+                                android:text="@string/string_d"
+                                android:tag="Domingo"/>
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipThursday"
-                            style="@style/ChipDefault"
-                            android:text="@string/string_t"
-                            android:tag="Terça"/>
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipMonday"
+                                style="@style/ChipDefault"
+                                android:text="@string/string_s"
+                                android:tag="Segunda"/>
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipWednesday"
-                            style="@style/ChipDefault"
-                            android:text="@string/string_q"
-                            android:tag="Quarta"/>
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipThursday"
+                                style="@style/ChipDefault"
+                                android:text="@string/string_t"
+                                android:tag="Terça"/>
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipTuesday"
-                            style="@style/ChipDefault"
-                            android:text="@string/string_q"
-                            android:tag="Quinta"/>
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipWednesday"
+                                style="@style/ChipDefault"
+                                android:text="@string/string_q"
+                                android:tag="Quarta"/>
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipFriday"
-                            style="@style/ChipDefault"
-                            android:text="@string/string_s"
-                            android:tag="Sexta"/>
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipTuesday"
+                                style="@style/ChipDefault"
+                                android:text="@string/string_q"
+                                android:tag="Quinta"/>
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipSaturday"
-                            style="@style/ChipDefault"
-                            android:text="@string/string_s"
-                            android:tag="Sábado"/>
-                    </com.google.android.material.chip.ChipGroup>
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipFriday"
+                                style="@style/ChipDefault"
+                                android:text="@string/string_s"
+                                android:tag="Sexta"/>
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipSaturday"
+                                style="@style/ChipDefault"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/string_s"
+                                android:tag="Sábado"/>
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.core.widget.NestedScrollView>

@@ -12,7 +12,7 @@ class ProducerNewProductMainAdapter(
         private val products: MutableList<Products>,
         private val onCardClick: (Products) -> Unit,
         private val onDeleteClick: (Products) -> Unit,
-        private val onUpdateClick: (Products) -> Unit,
+        private val onUpdateClick: (Products) -> Unit
 ): RecyclerView.Adapter<ProducerNewProductMainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -33,7 +33,7 @@ class ProducerNewProductMainAdapter(
                  onDeleteClick: (Products) -> Unit, onUpdateClick: (Products) -> Unit) {
 
             Glide.with(itemView).load(product.photo).placeholder(R.drawable.logo_feira_dagua_remove).into(binding.ivStore)
-            binding.tvProducerCategoryTitle.text = "R$ ${product.price}"
+            binding.tvProducerCategoryTitle.text = "R$ %.2f".format(product.price)
             binding.tvProducerNameTitle.text = product.name
 
             itemView.setOnClickListener {

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/backgroundColor">
+
+        <TextView
+            android:id="@+id/tvMyOrdersTitle"
+            style="@style/TextViewTitleProductorHome"
+            android:text="@string/string_user_historic_title"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rvUserOrders"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvUserOrders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            tools:listitem="@layout/recycler_view_user_myorders"
+            tools:itemCount="2"
+            app:layout_constraintTop_toBottomOf="@id/tvMyOrdersTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvMyOrdersTitle"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -75,6 +75,7 @@
     <string name="string_delivery_area_title">Área de Entrega</string>
     <string name="string_update_products">Atualizar Produtos</string>
     <string name="string_pending_orders_title">Pedidos Pendentes</string>
+    <string name="string_user_historic_title">Histórico de Pedidos</string>
     <string name="string_products_tabLayout">Produtos</string>
     <string name="string_about_us_tabLayout">Sobre Nós</string>
     <string name="string_product_description_not_found">Descrição do produto não encontrada</string>
@@ -93,7 +94,7 @@
     <string name="string_product_price_title_update">Preço do Produto</string>
     <string name="string_product_price_hint">Digite o preço do produto</string>
     <string name="string_product_weight_title_update">Tamanho da Porção</string>
-<!--    <string name="string_product_weight_hint">Digite o preço do produto</string>-->
+    <!--    <string name="string_product_weight_hint">Digite o preço do produto</string>-->
 
     <string name="string_mask_cep">#####-###</string>
     <string name="string_mask_cellphone">(##) #####-####</string>

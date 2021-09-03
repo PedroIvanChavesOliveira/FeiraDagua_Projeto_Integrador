@@ -44,15 +44,18 @@ class OrderDetailsRepository {
     }
 
     suspend fun updateOrderConfirmation(id: String, confirmation: Int): Boolean {
-        return if(confirmation == -1) {
-            orderDB.document(id).delete().await()
-            ProducerMenuActivity.ORDERS?.deleteOrderSolved(id)
-            true
-        }else {
-            orderDB.document(id).update(mapOf("confirmation" to confirmation, LAST_MODIFIED_FIELD to Calendar.getInstance().time.toString())).await()
-            ProducerMenuActivity.ORDERS?.deleteOrderSolved(id)
-            true
-        }
+        orderDB.document(id).update(mapOf("confirmation" to confirmation)).await()
+        ProducerMenuActivity.ORDERS?.deleteOrderSolved(id)
+        return true
+//        return if(confirmation == 2) {
+//            orderDB.document(id).delete().await()
+//            ProducerMenuActivity.ORDERS?.deleteOrderSolved(id)
+//            true
+//        }else {
+//            orderDB.document(id).update(mapOf("confirmation" to confirmation)).await()
+//            ProducerMenuActivity.ORDERS?.deleteOrderSolved(id)
+//            true
+//        }
     }
 
     suspend fun sendNotification(notification: PushNotification) {

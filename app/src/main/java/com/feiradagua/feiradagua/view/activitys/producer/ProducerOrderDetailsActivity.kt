@@ -90,7 +90,7 @@ class ProducerOrderDetailsActivity : AppCompatActivity() {
                                     messageSelected)
                             ), token).also {
                             viewModelOrderDetails.sendNotification(it)
-                            viewModelOrderDetails.updateOrderConfirmation(order.id, -1)
+                            viewModelOrderDetails.updateOrderConfirmation(order.id, 2)
                             viewModelOrderDetails.updateOk.observe(this) {
                                 if(it) {
                                     finish()

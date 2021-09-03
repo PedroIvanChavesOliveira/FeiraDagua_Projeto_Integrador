@@ -7,15 +7,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.databinding.ActivityMenuUserBinding
-import com.feiradagua.feiradagua.model.`class`.Cart
-import com.feiradagua.feiradagua.model.`class`.Producer
-import com.feiradagua.feiradagua.model.`class`.Products
-import com.feiradagua.feiradagua.model.`class`.User
+import com.feiradagua.feiradagua.model.`class`.*
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION
 import com.feiradagua.feiradagua.utils.Constants.Intents.POSITION_SPLASH
 import com.feiradagua.feiradagua.utils.Constants.Intents.TUTORIAL
 import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.getLastModifiedPreferences
 import com.feiradagua.feiradagua.utils.FirebaseTimestampPreferences.setLastModifiedPreferences
+import com.feiradagua.feiradagua.view.fragments.user.UserMyOrdersHistoricFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserProfileFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserSearchFragment
 import com.feiradagua.feiradagua.view.fragments.user.UserShopCartFragment
@@ -35,6 +33,7 @@ class UserMenuActivity : AppCompatActivity() {
         lateinit var USER: User
         var PRODUCERS: MutableList<Producer>? = mutableListOf()
         var MY_CART: MutableList<Cart> = mutableListOf()
+        var HISTORIC: MutableList<Order> = mutableListOf()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +75,7 @@ class UserMenuActivity : AppCompatActivity() {
 //        val userLastModified = getLastModifiedPreferences(this, 1)
 //        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
         viewModelUserMenu.getUserDB()
+        viewModelUserMenu.getHistoricDb()
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
@@ -86,10 +86,14 @@ class UserMenuActivity : AppCompatActivity() {
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer
                     }
+                    viewModelUserMenu.orderList.observe(this) { orderList ->
+                        orderList.sortBy { it.deliveryDate }
+                        HISTORIC = orderList
+                        initFragments(UserSearchFragment())
+                        startNavBar()
+                    }
 //                    viewModelUserMenu.insertUserDateInRoom(this)
 //                    setLastModifiedPreferences(this, 4, Calendar.getInstance().time.toString())
-                    initFragments(UserSearchFragment())
-                    startNavBar()
                 }
             }
         }
@@ -99,6 +103,7 @@ class UserMenuActivity : AppCompatActivity() {
 //        val userLastModified = getLastModifiedPreferences(this, 1)
 //        userLastModified?.let { viewModelUserMenu.getUserDB(userLastModified) }
         viewModelUserMenu.getUserDB()
+        viewModelUserMenu.getHistoricDb()
         viewModelUserMenu.userInfo.observe(this) { user ->
             user?.let {
                 USER = it
@@ -109,8 +114,11 @@ class UserMenuActivity : AppCompatActivity() {
                     if(!producer.isNullOrEmpty()) {
                         PRODUCERS = producer
                     }
+                    viewModelUserMenu.orderList.observe(this) { orderList ->
+                        HISTORIC = orderList
+                        initFragments(UserSearchFragment())
+                    }
 //                    setLastModifiedPreferences(this, 4, Calendar.getInstance().time.toString())
-                    initFragmentsTutorial(UserSearchFragment())
                 }
             }
         }
@@ -129,6 +137,10 @@ class UserMenuActivity : AppCompatActivity() {
                 }
                 R.id.profileUser -> {
                     initFragments(UserProfileFragment())
+                    true
+                }
+                R.id.historic -> {
+                    initFragments(UserMyOrdersHistoricFragment())
                     true
                 }
                 else -> false

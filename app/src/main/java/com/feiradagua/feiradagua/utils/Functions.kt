@@ -1,5 +1,8 @@
 package com.feiradagua.feiradagua.utils
 
+import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.feiradagua.feiradagua.R
 import com.feiradagua.feiradagua.model.*
 import com.feiradagua.feiradagua.model.`class`.*
 import com.google.android.material.chip.Chip
@@ -236,6 +239,33 @@ fun MutableList<Producer>.getProducer(id: String?): Producer? {
         }
     }
     return null
+}
+
+fun Order.getProducerInfos(list: MutableList<Producer>?): Producer {
+    var producer = Producer()
+    list?.forEach { prod ->
+        if(prod.uid == this.producerId) {
+            producer = prod
+        }
+    }
+    return producer
+}
+
+fun TextView.setStatusFromOrder(confirmation: Int) {
+     when(confirmation) {
+        0 -> {
+            this.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_swap_horizontal_circle_24,0,0,0)
+            this.text = "Pedido Em Andamento"
+        }
+        1 -> {
+            this.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_check_circle_20,0,0,0)
+            this.text = "Pedido Aceito"
+        }
+        2 -> {
+            this.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_cancel_20,0,0,0)
+            this.text = "Pedido Recusado"
+        }
+    }
 }
 
 //fun MutableList<Cart>.getProductsInfosList(): MutableList<ProductOrder> {

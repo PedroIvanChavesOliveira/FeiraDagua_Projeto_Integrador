@@ -1,6 +1,7 @@
 package com.feiradagua.feiradagua.repository
 
 import android.content.Context
+import com.feiradagua.feiradagua.model.`class`.Order
 //import com.feiradagua.feiradagua.database.FeiraDaguaDatabase
 //import com.feiradagua.feiradagua.database.entitys.DataDao
 import com.feiradagua.feiradagua.model.`class`.Producer
@@ -41,6 +42,10 @@ class UserMenuRepository {
         Firebase.firestore.collection(USER_COLLECTION)
     }
 
+    private val ordersDB by lazy {
+        Firebase.firestore.collection(Constants.Firebase.ORDERS_COLLECTION)
+    }
+
     private val userDB by lazy {
         Firebase.firestore.collection(USER_COLLECTION).document("${auth?.uid}" ?: "")
     }
@@ -70,6 +75,11 @@ class UserMenuRepository {
 //                }
 //            }
 //        }.await()
+    }
+
+    suspend fun getHistoricDb(): MutableList<Order> {
+        val query = ordersDB.whereEqualTo("userId", auth?.uid).get().await()
+        return query.toObjects(Order::class.java)
     }
 
     suspend fun getProducers(deliveryArea: String, /*lastDate: String*/ context: Context, id: String): MutableList<Producer> {

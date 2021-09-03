@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_baseline_shopping_cart_20"
         android:title="@string/string_cart_title"/>
     <item
+        android:id="@+id/historic"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_receipt_20"
+        android:title="@string/string_my_orders_title"/>
+    <item
         android:id="@+id/profileUser"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_20"

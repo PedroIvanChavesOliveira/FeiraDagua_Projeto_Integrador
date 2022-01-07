@@ -83,6 +83,7 @@
     <string name="string_product_name_title">Nome do Produto</string>
     <string name="string_add_to_cart_button">Adicionar ao Carrinho</string>
     <string name="string_update_data">Atualizar Dados</string>
+    <string name="string_init_login">Entrar</string>
     <string name="string_client_title">Cliente</string>
     <string name="string_accept_order_button">Aceitar Pedido</string>
     <string name="string_decline_order_button">Recusar Pedido</string>

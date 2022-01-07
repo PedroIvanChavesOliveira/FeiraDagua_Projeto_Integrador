@@ -8,14 +8,41 @@
     tools:context=".view.activitys.both.LoginActivity"
     android:background="@color/backgroundColor">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
-        style="@style/CardDefault"
+    <ImageView
+        android:id="@+id/loginImage"
+        android:src="@drawable/logo_feira_dagua_remove"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNameTitleUpdate"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNameTitleUpdate"
+        style="@style/TextViewTitleDefault"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/logoGreen"
+        android:text="Bem vindo ao Feira D'água!!"
+        android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/loginImage"/>
 
-    </com.google.android.material.card.MaterialCardView>
+    <Button
+        android:id="@+id/btInitLogin"
+        style="@style/ButtonDefault"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/string_init_login"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

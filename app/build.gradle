@@ -15,6 +15,17 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    signingConfigs {
+        release {
+            storeFile file("/keystore/keystore_feira_dagua.jks")
+            storePassword "feiradaguakeystore"
+            keyAlias "key0"
+            keyPassword "feiradaguakeystore"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     defaultConfig {
         applicationId "com.feiradagua.feiradagua"
         minSdkVersion 21
@@ -32,8 +43,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+            debuggable true
         }
     }
     compileOptions {

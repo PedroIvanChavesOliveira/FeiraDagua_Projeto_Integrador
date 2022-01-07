@@ -23,9 +23,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModelLogin: LoginViewModel by viewModels()
     private val providers by lazy {
-        arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build())
+        listOf(AuthUI.IdpConfig.EmailBuilder().build())
     }
     private val startUI = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         result: ActivityResult ->
@@ -54,13 +52,15 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startUI.launch(AuthUI.getInstance()
+        binding.btInitLogin.setOnClickListener {
+            startUI.launch(AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .setIsSmartLockEnabled(false)
                 .setLogo(R.drawable.logo_feira_dagua_remove)
                 .setTheme(R.style.LoginTheme)
                 .build())
+        }
     }
 
     private fun setUpUserAndStartNavigation(user: FirebaseUser, photo: String, token: String) {

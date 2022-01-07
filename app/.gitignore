@@ -2,3 +2,5 @@
 google-services.json
 /app/src/main/java/com/feiradagua/feiradagua/utils/Constants.kt
 secrets.properties
+/app/release/app-release.apk
+app/keystore

@@ -11,6 +11,8 @@
 /build
 /app/src/main/java/com/feiradagua/feiradagua/utils/Constants.kt
 /app/google-services.json
+/app/keystore
+/app/release/app-release.apk
 /captures
 .externalNativeBuild
 .cxx

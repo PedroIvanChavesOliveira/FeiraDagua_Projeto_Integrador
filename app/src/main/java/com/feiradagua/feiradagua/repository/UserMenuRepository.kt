@@ -78,7 +78,7 @@ class UserMenuRepository {
     }
 
     suspend fun getHistoricDb(): MutableList<Order> {
-        val query = ordersDB.whereEqualTo("userId", auth?.uid).get().await()
+        val query = ordersDB.whereEqualTo("userId", auth?.uid).limit(10).get().await()
         return query.toObjects(Order::class.java)
     }
 
